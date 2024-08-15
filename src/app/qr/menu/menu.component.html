@@ -1,0 +1,110 @@
+<div>
+  <div class="header-grid">
+    <div class="flex">
+      <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
+      <h3 class="flex-item2"><i class="pi pi-user"></i></h3>
+    </div>
+  </div>
+  <div class="search-text-grid">
+    <div class="search-grid-properties">
+      <h6 style="font-weight: 600;">Hey there!</h6>
+      <h5 style="font-weight: 800;">Find your food now</h5>
+    </div>
+  </div>
+  <div class="search-grid">
+    <div class="d-flex justify-content-start">
+      <input class="inputText" type="text" pInputText formControlName="text" placeholder="Search your favorite food..." />
+    </div>
+  </div>
+  <!-- <div class="">
+  <h1></h1>
+</div> -->
+
+  <div style="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll;">
+    <p-card header="Burger" subheader="121.00">
+      <ng-template pTemplate="header">
+        <img alt="Card" class="card_img" src="../../../assets/burger.jpg" alt="Image not found" />
+      </ng-template>
+      <p class="item_content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-inplace>
+            <ng-template pTemplate="display">
+              <div class="additem_btn">
+                <p-button styleClass="primary_btn" label="Add" />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <div class="additem_btn">
+                <p-button (click)="ororderQtyDec()" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+                <input [(ngModel)]="orderQty" class="input_qty" type="text" [value]="orderQty" pInputText />
+                <p-button (click)="orderQtyInc()" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+              </div>
+            </ng-template>
+          </p-inplace>
+        </div>
+      </ng-template>
+    </p-card>
+    <p-card header="Burger" subheader="121.00">
+      <ng-template pTemplate="header">
+        <img alt="Card" class="card_img" src="../../../assets/burger.jpg" alt="Image not found" />
+      </ng-template>
+      <p class="item_content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-inplace>
+            <ng-template pTemplate="display">
+              <div class="additem_btn">
+                <p-button styleClass="primary_btn" label="Add" />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <div class="additem_btn">
+                <p-button (click)="ororderQtyDec()" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+                <input [(ngModel)]="orderQty" class="input_qty" type="text" [value]="orderQty" pInputText />
+                <p-button (click)="orderQtyInc()" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+              </div>
+            </ng-template>
+          </p-inplace>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <p-card header="Samosa" subheader="121.00">
+      <ng-template pTemplate="header">
+        <img alt="Card" class="card_img" src="../../../assets/samosa.jpg" alt="Image not found" />
+      </ng-template>
+      <p class="item_content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-inplace>
+            <ng-template pTemplate="display">
+              <div class="additem_btn">
+                <p-button styleClass="primary_btn" label="Add" />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <div class="additem_btn">
+                <p-button styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+                <input class="input_qty" readonly type="text" [value]="0" pInputText />
+                <p-button styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+              </div>
+            </ng-template>
+          </p-inplace>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <div class="footer-grid">
+    <div class="footer">
+      <button pButton pRipple label="Place order" (click)="redirectToPage()" class="p-button-success"></button>
+    </div>
+  </div>
+</div>

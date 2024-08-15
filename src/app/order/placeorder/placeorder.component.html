@@ -1,0 +1,85 @@
+<div>
+  <div class="header-grid">
+    <div class="flex">
+      <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
+      <h3 class="flex-item2"><i class="pi pi-user"></i></h3>
+    </div>
+  </div>
+
+  <div class="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll;">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="flex">
+          <img alt="Card" class="place_order_card_img" src="../../../assets/samosa.jpg" alt="Image not found" />
+          <div style="margin-left: 0.3rem;">
+            <p class="place_order_card place_order_product_titel">Burger</p>
+            <p class="place_order_card place_order_product_prize">78.99</p>
+            <p class="place_order_card place_order_product_content">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="fx_btn_left">
+            <p-button (click)="ororderQtyDec()" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+            <input [(ngModel)]="orderQty" class="input_qty" type="text" [value]="orderQty" pInputText />
+            <p-button (click)="orderQtyInc()" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+          </div>
+          <div class="fx_btn_right additem_btn_delete">
+            <p-button styleClass="qty_delete"><i class="pi pi-trash"></i> </p-button>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="flex">
+          <img alt="Card" class="place_order_card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />
+          <div style="margin-left: 0.3rem;">
+            <p class="place_order_card place_order_product_titel">Burger</p>
+            <p class="place_order_card place_order_product_prize">78.99</p>
+            <p class="place_order_card place_order_product_content">Lorem ipsum dolor sit amet,velit, animi illo! Perferendis, tempore!</p>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="fx_btn_left">
+            <p-button (click)="ororderQtyDec()" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+            <input [(ngModel)]="orderQty" class="input_qty" type="text" [value]="orderQty" pInputText />
+            <p-button (click)="orderQtyInc()" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+          </div>
+          <div class="fx_btn_right additem_btn_delete">
+            <p-button styleClass="qty_delete"><i class="pi pi-trash"></i> </p-button>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <p-divider type="dotted"></p-divider>
+  <div>
+    <div class="flex bill_section">
+      <p class="flex-item1 bill_content">Order Value:</p>
+      <p class="flex-item2 bill_content">123.00</p>
+    </div>
+    <div class="flex bill_section">
+      <p class="flex-item1 bill_content">GST(2%):</p>
+      <p class="flex-item2 bill_content">12.00</p>
+    </div>
+    <div class="flex bill_section">
+      <p class="flex-item1 bill_content">SGST(3%):</p>
+      <p class="flex-item2 bill_content">15.00</p>
+    </div>
+    <div class="flex bill_section">
+      <p class="flex-item1 bill_content total_amount">Total Amount:</p>
+      <p class="flex-item2 bill_content total_amount">174.89.00</p>
+    </div>
+  </div>
+  <p-divider type="dotted"></p-divider>
+
+  <div class="footer-grid">
+    <!-- <p style="margin-left: 1rem;">*Note:</p> -->
+    <div class="footer">
+      <button pButton pRipple label="Pay Online" class="p-button-success"></button>
+      <button pButton pRipple label="Pay Cash" class="p-button-success"></button>
+    </div>
+  </div>
+  <!-- <p-divider type="dotted"></p-divider> -->
+</div>
