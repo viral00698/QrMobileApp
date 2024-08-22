@@ -57,19 +57,19 @@
   <div>
     <div class="flex bill_section">
       <p class="flex-item1 bill_content">Order Value:</p>
-      <p class="flex-item2 bill_content">123.00</p>
+      <p class="flex-item2 bill_content prefix">123.00</p>
     </div>
     <div class="flex bill_section">
       <p class="flex-item1 bill_content">GST(2%):</p>
-      <p class="flex-item2 bill_content">12.00</p>
+      <p class="flex-item2 bill_content prefix">12.00</p>
     </div>
     <div class="flex bill_section">
       <p class="flex-item1 bill_content">SGST(3%):</p>
-      <p class="flex-item2 bill_content">15.00</p>
+      <p class="flex-item2 bill_content prefix">15.00</p>
     </div>
     <div class="flex bill_section">
       <p class="flex-item1 bill_content total_amount">Total Amount:</p>
-      <p class="flex-item2 bill_content total_amount">174.89.00</p>
+      <p class="flex-item2 bill_content total_amount prefix">174.89</p>
     </div>
   </div>
   <p-divider type="dotted"></p-divider>
@@ -78,6 +78,13 @@
     <!-- <p style="margin-left: 1rem;">*Note:</p> -->
     <div class="footer">
       <button pButton pRipple label="Pay Online" class="p-button-success"></button>
+
+
+      <!-- ------------------------------- -->
+
+      <!-- <button (click)="openRazorpay()">Pay with UPI/Card</button> -->
+<!-- ---------------------------------------- -->
+
       <button pButton pRipple label="Pay Cash" class="p-button-success"></button>
     </div>
   </div>

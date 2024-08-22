@@ -112,7 +112,6 @@
     .p-card {
         margin: .5rem;
         border-radius: 10px;
-        
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
 
@@ -232,11 +231,17 @@
     .bill_section{
         margin: .3rem;
     }
+
+    .prefix::before{
+        content: "₹";
+    }
+
     .bill_section .bill_content{
         margin: .3rem;
         font-size: medium;
-        font-weight: 500;
+        font-weight: 700;
     }
+
     .total_amount{
        font-size: large !important;
        font-weight: 800 !important;

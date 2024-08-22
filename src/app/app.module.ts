@@ -12,6 +12,7 @@ import { PlaceorderComponent } from './order/placeorder/placeorder.component';
 import { AppRoutingModule } from './app-routing.module'; // Import your routing module
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
+import { GooglePayButtonModule } from '@google-pay/button-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { DividerModule } from 'primeng/divider';
     ReactiveFormsModule,
     AppRoutingModule,
     DataViewModule,
-    DividerModule
+    DividerModule,
+    GooglePayButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
