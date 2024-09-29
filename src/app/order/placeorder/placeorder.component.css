@@ -1,0 +1,306 @@
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.custom_scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.flex {
+    display: flex;
+}
+
+
+.flex-item1 {
+    flex: 1;
+    text-align: left;
+    margin: 1rem;
+    /* font-size: x-large;
+    font-weight: 900; */
+}
+
+.flex-item2 {
+    flex: 1;
+    text-align: right;
+    margin: 1rem;
+   
+}
+
+
+.place_order_card{
+    margin-top: .3rem;
+    margin-bottom: .3rem;
+}
+
+.place_order_product_titel{
+    font-size: medium;
+    font-weight: 600;
+}
+
+.place_order_product_prize::before{
+    content: "₹";
+}
+.place_order_product_prize{
+    font-size: medium;
+    font-weight: 600;
+}
+.place_order_product_content{
+    font-size: small;
+    font-weight: 500;
+    text-overflow: clip;
+    text-wrap: wrap;
+    opacity: .8;
+}
+
+
+.search-grid .search-text-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.search-grid-properties {
+    margin: 1rem;
+    /* color: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+
+}
+
+.inputText {
+    width: 100%;
+    border-radius: 16px;
+    margin: 1rem;
+    /* border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0; */
+
+    padding: .5rem;
+    padding-left: 2rem !important;
+
+    background-image: url(../../../assets/search.svg);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    /* box-shadow: rgba(224, 227, 229, 0.2) 0px 8px 24px; */
+
+}
+
+.card_img {
+    height: 22vh;
+    width: 100%;
+    padding: .5rem;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.place_order_card_img {
+    height: 20vh;
+    width: 40%;
+    padding: .5rem;
+    align-items: center;
+    border-radius: 15px;
+}
+
+:host {
+    .p-card{
+        margin: .5rem;
+        border-radius: 10px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    .p-card-title {
+        /* padding-top: .5rem; */
+        font-size: medium;
+        font-weight: 600;
+        margin: .5rem;
+        
+    }
+    .p-card-subtitle::before {
+        /* content: "Prize: "; */
+        content: "₹";
+        margin: .5rem;
+    }
+    .p-card-subtitle{
+        font-size: medium;
+        font-weight: 500;  
+        /* margin: .5rem; */
+        /* margin-top: 0 !important; */
+        
+    }
+
+    .item_content {
+        margin: .5rem;
+        font-size: smaller;
+        font-weight: 400;
+        opacity: .8;
+    }
+
+    .fx_btn_left{
+        padding: .5rem;
+        flex: 1;
+        text-align: left;
+    }
+    .fx_btn_right{
+        padding: .5rem;
+        flex: 1;
+        text-align: right;
+    }
+   
+   
+
+    .primary_btn {
+        width: 6rem;
+        height: 2rem;
+        border: 0;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+
+    }
+
+
+    .qty_plus {
+        width: 2rem;
+        border: 0;
+        border-radius: 5px;
+        font-weight: 700;
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    }
+
+    .qty_minus {
+        width: 2rem;
+        border: 0;
+        border-radius: 5px;
+        align-items: center;
+        font-weight: 700;
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    }
+
+    .input_qty {
+        width: 2rem;
+        height: 1.5rem;
+        margin-left: .1rem;
+        margin-right: .1rem;
+        flex: 1;
+        text-align: center;
+    }
+
+    .qty_delete{
+        color: rgb(211, 34, 34);
+        
+        background:none;
+        /* border-radius: 50%; */
+        padding:.6rem;
+        
+        border: none;
+        font-size: medium;
+        font-weight: 200;
+        
+        /* margin-left: 1rem; */
+        /* padding-left: 8rem; */
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .p-button-success {
+        border: 0;
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        width: 40vw;
+        height: 80%;
+        margin: .5rem;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: medium;
+        font-weight: 500;
+    
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        z-index: 1000;
+        /* Ensures it stays above other elements */
+    }
+
+    .bill_section{
+        margin: .3rem;
+    }
+    .bill_section .bill_content{
+        margin: .3rem;
+        font-size: medium;
+        font-weight: 500;
+
+    }
+    .total_amount{
+       font-size: large !important;
+       font-weight: 800 !important;
+    }
+}
+
+.amountSuffix::after{
+    content: " ₹";
+}
+
+.input_box{
+    border-radius: 10px;
+    margin: .5rem;
+    padding-left: 1rem;
+    /* margin-right: .5rem; */
+    height: 6vh;
+    width: 100vw;
+ 
+}
+
+.Mobile_input{
+    display: flex;
+    justify-content: left;
+    margin: .5rem;
+}
+
+.p-button-success:disabled {
+    background-color: #ccc; /* Light grey background */
+    color: #666; /* Dark grey text */
+    cursor: not-allowed; /* Show a "not-allowed" cursor */
+    opacity: 0.7; /* Slight transparency */
+    border: 1px solid #999; /* Darker border */
+  }
+
+.billing-card{
+    padding: .5rem;
+}
+
+.emptyCartCard{
+ margin: 0;
+ padding: 0;
+}
+.emptyCart{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+   
+}
+.emptyCartText{
+    font-size: medium;
+    font-weight: 400;
+}
+
+.emptyCartItem{
+    flex:1;
+}
+
+.emptyCartImage{
+    width: 10vh;
+    justify-content: center;
+}

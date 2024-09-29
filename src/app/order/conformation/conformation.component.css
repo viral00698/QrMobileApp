@@ -1,0 +1,37 @@
+.contatiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;     /* Vertical centering */
+    height: 100vh;  
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%); 
+}
+
+.knob{
+    width: 100vw;
+}
+
+.list-item {
+    padding: 2%;
+    margin-bottom: .6rem; /* Apply margin between ite background-ms */
+ 
+}
+
+.list-item:nth-last-child(){
+    margin-bottom: 0;
+}
+
+.orderPlaced{
+    margin: 0;
+    text-align: center;
+    color: black;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.messageNote{
+    text-wrap: wrap;
+    text-align: center;
+    font-size: medium;
+    font-weight: 500;
+}

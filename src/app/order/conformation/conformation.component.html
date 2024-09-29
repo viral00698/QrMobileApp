@@ -1,0 +1,17 @@
+<div class="contatiner">
+    
+    <div class="list-item" *ngIf="countdown > 1">
+        <p-progressSpinner></p-progressSpinner>
+        <!-- <p-knob [(ngModel)]="countdown" [strokeWidth]="5" /> -->
+      </div>
+  <div class="list-item" *ngIf="countdown < 1">
+    <p class="orderPlaced">Order Placed...</p>
+    <p class="messageNote">*Note:Pay at the counter to complete your order. If not paid in 15 minutes, it will be canceled.</p>
+  </div>
+
+  <div class="list-item"  *ngIf="countdown > 1">
+   <p>Cancel Order {{countdown}}s:<a target="_blank" style="text-decoration: none;" class="p-button font-bold">
+        Cancel
+    </a> </p>
+  </div>
+</div>

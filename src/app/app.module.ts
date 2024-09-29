@@ -1,18 +1,64 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { MenuComponent } from './qr/menu/menu.component';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InplaceModule } from 'primeng/inplace';
+import { PanelModule } from 'primeng/panel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlaceorderComponent } from './order/placeorder/placeorder.component';
+import { AppRoutingModule } from './app-routing.module'; // Import your routing module
+import { DataViewModule } from 'primeng/dataview';
+import { DividerModule } from 'primeng/divider';
+import { ConformationComponent } from './order/conformation/conformation.component';
+import { DialogModule } from 'primeng/dialog';
+import { KnobModule } from 'primeng/knob';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UrlFilterInterceptor } from './filter/url-filter.interceptor';
+import { BadgeModule } from 'primeng/badge';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { RxStompService } from './services/rx-stomp.service';
+import { SocketConfigService } from './services/socket-config.service';
+import { OrderHistoryComponent } from './order/order-history/order-history.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    PlaceorderComponent,
+    ConformationComponent,
+    OrderHistoryComponent
+  
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
-    AppRoutingModule
+    CardModule,
+    ButtonModule,
+    InplaceModule,
+    PanelModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    DataViewModule,
+    DividerModule,
+    DialogModule,
+    KnobModule,
+    HttpClientModule,
+    BadgeModule,
+    ProgressSpinnerModule,
+    SpeedDialModule
+    
   ],
-  providers: [],
+  providers: [
+    RxStompService,
+    SocketConfigService,
+    {provide: HTTP_INTERCEPTORS,useClass: UrlFilterInterceptor,multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
