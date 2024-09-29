@@ -1,3 +1,4 @@
+
 import { ChangeDetectorRef, Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestStatus } from 'src/app/constent/request-status';
@@ -12,6 +13,7 @@ import { VendorService } from 'src/app/services/vendor.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
+
 export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   orderQty: number = 1;
   searchByItem: any;
@@ -190,10 +192,8 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     this.changeDetectorRef.detectChanges();
 
   }
-
   redirectToPage() {
     this.router.navigate(['placeorder']); // Replace with your target route
   }
-
 }
 
