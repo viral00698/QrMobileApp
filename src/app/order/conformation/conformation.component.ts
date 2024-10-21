@@ -12,6 +12,7 @@ import { PlaceOrderService } from 'src/app/services/place-order.service';
 })
 export class ConformationComponent {
   countdown: number = 10;  // Start from 60 seconds
+  orderMessage:any;
   private timerSubscription!: Subscription;  // To store the subscription
 
   constructor(private placed: PlaceOrderService, private router: Router) { }
@@ -25,12 +26,20 @@ export class ConformationComponent {
 
       if (this.countdown === 1) {
         const data = this.placed.getBillingObject();
-        if (data.order) {
-          this.placed.orderPlaced(data.order).subscribe((res: any) => {
-            if (res.status === RequestStatus.success) {
+        if (data?.order) {
+          this.placed.orderPlaced(data?.order).subscribe((res: any) => {
+            if (res?.status === RequestStatus.success) {
                localStorage.removeItem(StorageKey.ITEMS)
                localStorage.removeItem(StorageKey.MENU)
+               this.orderMessage = res.message
+               this.placed.setBillingObject(null)
+
               //  localStorage.removeItem(StorageKey.)
+            }else{
+               this.orderMessage = res.message;
+               localStorage.removeItem(StorageKey.ITEMS)
+               localStorage.removeItem(StorageKey.MENU)
+               this.placed.setBillingObject(null)
             }
           })
         }

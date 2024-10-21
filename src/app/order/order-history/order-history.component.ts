@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestStatus } from 'src/app/constent/request-status';
+import { StorageKey } from 'src/app/constent/storage-key';
+import { OrdersService } from 'src/app/services/orders.service';
 import { RxStompService } from 'src/app/services/rx-stomp.service';
+import { SecureLocalStorageService } from 'src/app/services/secure-local-storage.service';
 
 @Component({
   selector: 'app-order-history',
@@ -7,20 +11,49 @@ import { RxStompService } from 'src/app/services/rx-stomp.service';
   styleUrls: ['./order-history.component.css']
 })
 export class OrderHistoryComponent implements OnInit {
-  constructor(private stompService: RxStompService) { }
+
+  searchByItem: any;
+  customerId: any;
+  ordersList: any = []
+  constructor(private stompService: RxStompService,
+    private OrderService: OrdersService,
+    private localStorageSecureService: SecureLocalStorageService,) { }
   ngOnInit(): void {
     this.getCurrentOrderStatus()
+    this.getHistoryOrderFromDB()
+    
+    this.stompService.watch('/queue/' + JSON.parse(this.customerId)+ '/messages').subscribe((res: any) => {
+      this.updateStatus(JSON.parse(res.body))
+      // this.stompService.deactivate();
+  })
+
   }
 
   getHistoryOrderFromDB() {
+    this.customerId = this.localStorageSecureService.decryptAndGet(StorageKey.USERID);
+    if (this.customerId) {
+      this.OrderService.getOrdersByCustomerId(JSON.parse(this.customerId)).subscribe((res: any) => {
+        if (res?.status === RequestStatus.success) {
+          this.ordersList = res?.data;
+        }
+      })
+      
+    }
+  }
 
+
+  updateStatus(data: any) {
+
+    // const tmp =  this.userSelectItems.getItemsArray(); 
+    this.ordersList.forEach((obj: any, index: number) => {
+      if (obj?.orderId === data?.orderId) {
+        this.ordersList[index].orderStatus = data.orderStatus; // Replacing the object in the array
+      }
+    });
+  
   }
 
   getCurrentOrderStatus() {
-    this.stompService.watch('/queue/a1e68d9a-4d59-4f25-a579-2bb23e928686/messages').subscribe((res: any) => {
-      console.log(JSON.parse(res.body));
-      
-    debugger
-    })
+     
   }
 }

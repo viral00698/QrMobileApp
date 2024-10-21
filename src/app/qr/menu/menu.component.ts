@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, DoCheck, OnDestroy, OnInit } from '@angul
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestStatus } from 'src/app/constent/request-status';
 import { StorageKey } from 'src/app/constent/storage-key';
+import { Orders } from 'src/app/model/orders.model';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { SecureLocalStorageService } from 'src/app/services/secure-local-storage.service';
@@ -23,6 +24,7 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   palaceOrderBtnFlag = false;
   venderId:any;
   venderDetails:any;
+  customerUUId!:string
 
   constructor(private router: Router, private productService: MenuService, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
@@ -38,19 +40,30 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     // this.mapStoreOnDestory()
   }
   ngOnInit(): void {
-   
+    this.setCustomerUUID();
     this.getVendorDetails()
     this.getInlocalStorgae(StorageKey.MENU)
+
     // this.setItemsFromLocalStorage()
   }
+
+  setCustomerUUID(){
+    
+    this.customerUUId = this.localStorageSecureService.decryptAndGet(StorageKey.USERID);
+    if(!this.customerUUId){
+      this.customerUUId = this.generateCustomUUID();
+      this.localStorageSecureService.encriptAndSave(this.customerUUId , StorageKey.USERID);
+    }
+  }
+
+
 
   getVendorDetails() {
 
     this.route.params.subscribe(params => {
-      const userId = params['ugygewncuirhijd']; // Get the dynamic id parameter
-        if(userId){
-          this.venderId = userId
-          localStorage.setItem(StorageKey.USERID , userId);
+      const venderUUID = params['ugygewncuirhijd']; // Get the dynamic id parameter
+        if(venderUUID){
+          this.venderId = venderUUID
         }
      });
 
@@ -58,7 +71,6 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
       if (res?.status === RequestStatus.success) {
         this.venderDetails = res?.data;
         this.localStorageSecureService.encriptAndSave(res?.data , StorageKey.VENDER)
-    
       }else{
         // redirect error page or Home page
       }
@@ -134,8 +146,6 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
         this.tmpMenuList[index] = data; // Replacing the object in the array
       }
     });
-
-   
     this.changeDetectorRef.detectChanges(); // Trigger change detection
   }
 
@@ -192,8 +202,37 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     this.changeDetectorRef.detectChanges();
 
   }
+
+  generateCustomUUID(): string {
+    const segments = [
+      this.generateRandomHex(8), // 8 characters
+      this.generateRandomHex(4), // 4 characters
+      '4002',                     // fixed to indicate version
+      this.generateRandomHex(4),  // 4 characters
+      this.generateRandomHex(12)   // 12 characters
+    ];
+
+    return segments.join('-');
+  }
+
+  private generateRandomHex(length: number): string {
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      const randomHex = Math.floor(Math.random() * 16).toString(16);
+      result += randomHex;
+    }
+    return result;
+  }
+  
   redirectToPage() {
     this.router.navigate(['placeorder']); // Replace with your target route
   }
+
+  navigateOrderHistory(){
+    this.router.navigate(['OrderHistory']); 
+  }
 }
+
+
+
 

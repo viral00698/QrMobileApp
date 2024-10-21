@@ -1,0 +1,73 @@
+<!-- <div class=" ">
+    
+<p-card>
+    
+    <ng-template pTemplate="content">
+        <div class="card_content">
+            <div class="flex_item_1">
+                <div class="form_element">
+                    <p class="message_font_1">Welcome Back</p>
+                    <p class="message_font_2">Welcome Back! Please enter your details.</p>
+                </div>
+                <div class="form_element">
+                    <p class="label_fied">Username:</p>
+                    <input pInputText  class="formInput"   placeholder="Enter your username."/>
+                </div>
+                <div class="form_element">
+                    <p class="label_fied">Password:</p>
+                    <input pInputText class="formInput"  placeholder="Password"/>
+                </div>
+
+                <div class="form_element">
+                    <p class="label_fied">Forgot Password</p>
+                </div>
+
+                <div class="form_element">
+                    <p-button label="Login" styleClass="login_btn"></p-button>
+                </div>
+            </div>
+            <div class="flex_item_1">
+                B
+            </div>
+        </div>
+    </ng-template>
+</p-card>
+
+</div> -->
+
+<div class="login_container">
+    <p-card>
+      <ng-template pTemplate="content">
+        <div class="card_content">
+          <div class="flex_item_1">
+              <form [formGroup]="loginForm" (submit)="onSubmit()">
+              <div class="form_element">
+                  <p class="message_font_1">Welcome Back</p>
+                  <p class="message_font_2">Welcome Back! Please enter your details.</p>
+              </div>
+              <div class="form_element">
+                  <p class="label_fied">Username:</p>
+                  <input pInputText  class="formInput"  formControlName="username" placeholder="Enter your username."/>
+              </div>
+              <div class="form_element">
+                  <p class="label_fied">Password:</p>
+                  <input pInputText class="formInput"  type="password" formControlName="password" placeholder="Password"/>
+              </div>
+  
+              <div class="form_element">
+                  <p class="label_fied">Forgot Password</p>
+              </div>
+  
+              <div class="form_element">
+                  <p-button label="Login" type="submit" styleClass="login_btn" [disabled]="loginForm.invalid"></p-button>
+              </div>
+          </form>
+          </div>
+          <!-- <div class="flex_item_2">
+              B
+          </div> -->
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+  

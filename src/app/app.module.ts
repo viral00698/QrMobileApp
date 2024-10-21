@@ -23,13 +23,17 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { RxStompService } from './services/rx-stomp.service';
 import { SocketConfigService } from './services/socket-config.service';
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
+import { LoginComponent } from './table/login/login.component';
+import { VendorTableComponent } from './table/vendor-table/vendor-table.component';
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     PlaceorderComponent,
     ConformationComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    LoginComponent,
+    VendorTableComponent
   
   ],
   imports: [

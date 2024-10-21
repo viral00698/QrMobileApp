@@ -2,7 +2,7 @@
 
   <div class="header-grid">
     <div class="flex">
-      <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
+      <h3 class="flex-item1" (click)="navigateOrderHistory()"><i class="pi pi-align-left"></i></h3>
       <h3 class="flex-item2"><i class="pi pi-user"></i></h3>
     </div>
   </div>
@@ -51,6 +51,10 @@
     <div class="flex bill_section">
       <p class="flex-item1 bill_content">SGST({{bilingObject?.sgstCharge}}%):</p>
       <p class="flex-item2 bill_content amountSuffix"> {{bilingObject?.sgstValue||0.00 | number:'1.2-2'}}</p>
+    </div>
+    <div class="flex bill_section">
+      <p class="flex-item1 bill_content">Restaurant Charges ({{bilingObject?.restoCharge}}%):</p>
+      <p class="flex-item2 bill_content amountSuffix"> {{bilingObject?.restoChargeValue||0.00 | number:'1.2-2'}}</p>
     </div>
     <div class="flex bill_section">
       <p class="flex-item1 bill_content total_amount">Total Amount:</p>

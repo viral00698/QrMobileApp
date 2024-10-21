@@ -42,12 +42,12 @@ export class PlaceorderComponent implements OnInit, DoCheck {
     this.getItems();
     this.getVenderDetails()
     this.billGanaretor()
-  
+
   }
 
-  getVenderDetails(){
-      const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.VENDER);
-      this.vender = JSON.parse(tmp)
+  getVenderDetails() {
+    const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.VENDER);
+    this.vender = JSON.parse(tmp)
   }
 
   billGanaretor() {
@@ -56,12 +56,12 @@ export class PlaceorderComponent implements OnInit, DoCheck {
     if (this.vender && listofItems.length > 0) {
       // If vendor is not available, fetch it asynchronously
       // this.venderService.getVenderById().subscribe((res: any) => {
-        // this.vender = res.data; // Update vendor
-        this.bilingObject = this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
+      // this.vender = res.data; // Update vendor
+      this.bilingObject = this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
       // });
     } else {
       // If vendor already exists, generate the bill immediately
-      // this.bilingObject = this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
+      this.bilingObject = this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
       // redirect to home ppage
     }
   }
@@ -171,6 +171,12 @@ export class PlaceorderComponent implements OnInit, DoCheck {
 
     // customer uuid
     // order.orderDetails = this.items
+
+    const customerId = this.localStorageSecureService.decryptAndGet(StorageKey.USERID);
+    if (customerId) {
+      customerOrder.customerUUID = JSON.parse(customerId);
+    }
+
     customerOrder.orderStatus = OrderStatus.WaitForApprove
     customerOrder.customerMobileNo = this.userMobile
     customerOrder.payment_mode = PaymentMode.CASH
@@ -188,7 +194,7 @@ export class PlaceorderComponent implements OnInit, DoCheck {
       orderDetail.productId = item?.productId ?? null
       orderDetail.quntity = item?.itemQty ?? 0
       orderDetail.orderId = null
-      
+
       array.push(orderDetail)
     });
 
@@ -201,6 +207,10 @@ export class PlaceorderComponent implements OnInit, DoCheck {
       this.router.navigate(['conformation'])
     }
 
+  }
+
+  navigateOrderHistory() {
+    this.router.navigate(['OrderHistory']);
   }
 
 

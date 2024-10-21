@@ -35,8 +35,9 @@ export class BillingService {
       const sgst = (this.venderObject?.sgstCharge / 100) * this.totalAmount;
 
       // step:4 calculate ResturentCharge from total amount;
-      const restoCharge = (this.venderObject?.ResturentCharge / 100) * this.totalAmount;
-
+      const restoCharge = (this.venderObject?.resturentCharge / 100) * this.totalAmount;
+      console.log(restoCharge);
+      
       this.mainAmount = 0
 
       if (this.totalAmount > 0) {
@@ -60,7 +61,7 @@ export class BillingService {
         'gstValue': gst,
         'sgstCharge': this.venderObject?.sgstCharge,
         'sgstValue': sgst,
-        'restoCharge': this.venderObject?.ResturentCharge,
+        'restoCharge': this.venderObject?.resturentCharge,
         'restoChargeValue': restoCharge,
         'totalAmount': this.mainAmount
       }

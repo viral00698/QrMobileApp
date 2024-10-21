@@ -1,1 +1,28 @@
-<p>order-history works!</p>
+<div class="header-grid">
+  <div class="flex">
+    <h3 class="flex-item1"><i class="bi bi-arrow-left"></i> </h3>
+    <h5 class="flex-item1 titel">Order History</h5> 
+  </div>
+</div>
+<div class="search-grid">
+  <div class="d-flex justify-content-start">
+    <input class="inputText" [(ngModel)]="searchByItem" type="text"  pInputText placeholder="Search by Token,Mobile." />
+  </div>
+</div>
+
+<div class="m-0 p-0">  <!--for scrool bar-->
+  <p-card *ngFor="let item of ordersList">
+      <div class="order">
+        <p class="order_item">Token: {{item.token_no}}</p>
+        <p class="order_item_1">{{item.restroName}}</p>
+      </div>
+      <div class="order">
+        <p class="order_item">{{item.orderAt | date:'dd-MMM-yyyy hh:mm a'}}</p>
+        <p class="order_item_1">Payment: {{item.payment_mode}} </p>
+      </div>
+      <div class="order">
+        <p class="order_item_2" >Status: {{item.orderStatus}}</p>
+        <p class="order_item_1" >Order Details</p>
+      </div>
+  </p-card>
+</div>

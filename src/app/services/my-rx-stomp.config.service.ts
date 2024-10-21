@@ -4,12 +4,14 @@ import SockJS from 'sockjs-client';
 
 export const myRxStompConfig: RxStompConfig = {
   // Which server?
-  brokerURL: 'ws://192.168.1.16:8080/ws',
+  brokerURL: 'ws://192.168.90.204:8080/ws',
 
   // Headers
   // Typical keys: login, passcode, host
   // How often to heartbeat?
   // Interval in milliseconds, set to 0 to disable
+
+
   heartbeatIncoming: 0, // Typical value 0 - disabled
   heartbeatOutgoing: 20000, // Typical value 20000 - every 20 seconds
 
@@ -21,7 +23,7 @@ export const myRxStompConfig: RxStompConfig = {
   // Will log diagnostics on console
   // It can be quite verbose, not recommended in production
   // Skip this key to stop logging to console
-  webSocketFactory: () => new SockJS('http://192.168.1.16:8080/ws'),
+  webSocketFactory: () => new SockJS('http://192.168.90.204:8080/ws'),
   debug: (msg: string): void => {
     console.log(new Date(), msg);
   },
