@@ -1,0 +1,186 @@
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.flex {
+    display: flex;
+}
+
+
+.flex-item1 {
+    flex: 1;
+    text-align: left;
+    /* margin: 1rem; */
+    /* font-size: x-large;
+    font-weight: 900; */
+}
+
+.flex-item2 {
+    flex: 1;
+    text-align: right;
+    /* margin: 1rem; */
+    /* font-size: x-large;
+    font-weight: 900; */
+}
+
+.cust_details{
+
+    margin: .2rem .5rem .5rem .5rem;
+    margin-left:rem;
+    font-size: small;
+    font-weight: 700;
+}
+
+
+.orderDetailsCard{
+    /* margin:.3rem 1rem .3rem 1rem; */
+    /* background-color: #f4f4f4; */
+   
+}
+
+
+.table_heading {
+    padding: .5rem;
+    font-size: small;
+    font-weight: 700;
+
+    /* margin-left: 1rem; */
+    text-align: center;
+}
+.table_heading:first-child {
+    padding: .5rem;
+    font-size: small;
+    font-weight: 700;
+
+    /* margin-left: 1rem; */
+    text-align: left;
+}
+
+.table_value:first-child {
+    padding: .5rem;
+    font-weight: 500;
+    font-size: small;
+
+    /* margin-left: 1rem; */
+    text-align: left;
+}
+
+.table_value {
+    padding: .5rem;
+    font-weight: 500;
+    font-size: small;
+
+    /* margin-left: 1rem; */
+    text-align: center;
+}
+
+.amount::before{
+    content: "₹";
+}
+
+:host{
+  .p-card{
+    background-color: #f4f4f4;
+    /* background-color: #fdfdfd; */
+    margin: 1rem;
+    /* margin: .2rem; */
+    border-radius: 6px;
+  }
+}
+
+.titel_invoice{
+    margin:0;
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: large;
+}
+
+.restro_name{
+    margin-bottom: 1rem;
+    flex: 1;
+    text-align: center;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.invoiceHeading{
+    display: flex;
+    flex-direction: column;
+}
+
+.invoice_flex{
+    display: flex;
+    /* margin: 1rem; */
+}
+
+.customer_Detail{
+    flex:1 ;
+}
+.date{
+    flex: 1;
+}
+
+.billing-card{
+    padding: .5rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.p-button-success {
+    border: 0;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    width: 80vw;
+    height: 80%;
+    margin: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 500;
+
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    z-index: 1000;
+    /* Ensures it stays above other elements */
+}
+
+.bill_section .bill_content{
+    /* margin: .3rem; */
+    font-size: small;
+    font-weight: 700;
+
+}
+.total_amount{
+margin:.6rem;
+   font-size: large !important;
+   font-weight: 800 !important;
+}
+
+
+.amountSuffix::after{
+content: " ₹";
+}
+
+.qrImg{
+    flex: 1;
+    text-align: center;
+
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    /* position: sticky;
+    z-index: 2000;
+    top:0 */
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+

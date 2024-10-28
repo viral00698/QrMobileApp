@@ -1,0 +1,96 @@
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.grid-container {
+    display: grid;
+    gap: 5px; /* Adjust the gap between grid items */
+    padding: 10px;
+    margin: 0.5rem;
+    
+    /* Set up a 4x4 grid layout for small screens */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+}
+.grid-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    /* margin: 0.2rem; */
+  }
+
+.flex {
+    display: flex;
+}
+
+
+
+.flex-item1 {
+    flex: 1;
+    text-align: left;
+    margin: 1rem;
+    /* font-size: x-large;
+    font-weight: 900; */
+}
+
+
+.flex-item2 {
+    flex: 1;
+    text-align: right;
+    margin: 1rem;
+    /* font-size: x-large;
+    font-weight: 900; */
+}
+
+.tableContent{
+    font-weight: 800;
+    font-size: small;
+    margin-bottom: .1rem;
+}
+.tableStatus{
+    font-weight: 800;
+    font-size: small;
+    margin-bottom: .1rem;
+}
+
+.inputText {
+    width: 100%;
+    border-radius: 16px;
+    margin: 1rem;
+    /* border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0; */
+
+    padding: .5rem;
+    padding-left: 2rem !important;
+
+    background-image: url(../../../assets/search.svg);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    /* box-shadow: rgba(224, 227, 229, 0.2) 0px 8px 24px; */
+
+}
+
+.search-grid .search-text-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.hover-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .hover-card:hover {
+    transform: scale(1.05); /* Slightly increases the size on hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+  }
+
+:host{
+    p-card{
+        border-radius: 6px;
+    }
+}

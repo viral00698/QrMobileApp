@@ -1,0 +1,102 @@
+<div class="header-grid">
+  <div class="flex">
+    <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
+    <h3 class="flex-item2"><i class="bi bi-box-arrow-right"></i></h3>
+  </div>
+</div>
+
+<div class="header-grid">
+  <!-- <div class="flex">
+        <p class="flex-tableOrderDetails">Table:</p>
+        <p class="flex-tableOrderDetails">AC-8</p>
+    </div>
+    <div class="flex">
+        <p class="flex-tableOrderDetails">Customer Mobile:</p>
+        <p class="flex-tableOrderDetails">85789655789</p>
+    </div>
+    <div class="flex">
+        <p class="flex-tableOrderDetails">Name:</p>
+        <p class="flex-tableOrderDetails">Legion</p>
+    </div>
+    <div class="flex">
+        <p class="flex-tableOrderDetails">OrderAt:</p>
+        <p class="flex-tableOrderDetails">20/02/08 20:02:AM</p>
+    </div> -->
+
+  <p-card class="orderDetailsCard" *ngIf="table!==null && table?.tableStatus === 'BOOKED'">
+    <div class="flex">
+      <p class="flex-tableOrderDetails">Table:</p>
+      <p class="flex-tableOrderDetails">{{table.tableName}}</p>
+    </div>
+    <div class="flex">
+      <p class="flex-tableOrderDetails">Customer Mobile:</p>
+      <p class="flex-tableOrderDetails">85789655789</p>
+    </div>
+    <div class="flex">
+      <p class="flex-tableOrderDetails">Name:</p>
+      <p class="flex-tableOrderDetails">Legion</p>
+    </div>
+    <div class="flex">
+      <p class="flex-tableOrderDetails">OrderAt:</p>
+      <p class="flex-tableOrderDetails">20/02/08 20:02:AM</p>
+    </div>
+  </p-card>
+  <p-card class="orderDetailsCard" *ngIf="table !==null && table?.tableStatus === 'BOOKED'">
+    <p-table [value]="products">
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- <th scope="col" class="table_heading">Sr.</th> -->
+          <th scope="col" class="table_heading">Item Name</th>
+          <th scope="col" class="table_heading">Qty</th>
+          <th scope="col" class="table_heading">Amount</th>
+        </tr>
+        <tr>
+          <!-- <td  class="table_value">1</td> -->
+          <td class="table_value">palak Paneer</td>
+          <td class="table_value">2</td>
+          <td class="table_value amount">52.63</td>
+        </tr>
+        <tr>
+          <!-- <td  class="table_value">1</td> -->
+          <td class="table_value">Paneer</td>
+          <td class="table_value">2</td>
+          <td class="table_value amount">52.63</td>
+        </tr>
+        <tr>
+          <!-- <td  class="table_value">1</td> -->
+          <td class="table_value">Paneer</td>
+          <td class="table_value">2</td>
+          <td class="table_value amount">52.63</td>
+        </tr>
+      </ng-template>
+      <!-- <ng-template pTemplate="body" let-product> -->
+
+      <!-- </ng-template> -->
+    </p-table>
+  </p-card>
+
+  <p-card class="orderDetailsCard">
+    <div class="userInput">
+    
+      <input class="input_box" [(ngModel)]="custName" (ngModelChange)="validateCustName()" type="text" pInputText placeholder="Enter Customer name..." />
+
+      <div *ngIf="!isName && custName">
+        <small style="color: red; margin: 1rem; font-weight: 700;">Name is required. OR Only letters are allowed.</small>
+      </div>
+
+      <input class="input_box" [(ngModel)]="userMobile" (ngModelChange)="validateMobileNumber()" type="text" pInputText placeholder="Enter Mobile..." />
+
+      <div *ngIf="!isValid && userMobile">
+        <small style="color: red; margin: 1rem; font-weight: 700;">Invalid mobile number. Must be 10 digits.</small>
+      </div>
+      
+    </div>
+  </p-card>
+
+  <p-card class="orderDetailsCard">
+    <div class="flex">
+      <button class="flex-tableOrderDetails btn btn-primary" [disabled]="!isName || !isValid" (click)="redirectToMenu(table)"><i class="bi bi-plus-square-fill"></i> Add item</button>
+      <button *ngIf="table!==null && table?.tableStatus === 'BOOKED'" class="flex-tableOrderDetails btn btn-primary" (click)="ganrateInvoice()"><i class="bi bi-receipt"></i> Invoice</button>
+    </div>
+  </p-card>
+</div>

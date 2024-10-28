@@ -1,0 +1,86 @@
+<div>
+
+    <div class="header-grid">
+      <div class="flex">
+        <h3 class="flex-item1" (click)="navigateOrderHistory()"><i class="pi pi-align-left"></i></h3>
+        <h3 class="flex-item2"><i class="pi pi-user"></i></h3>
+      </div>
+    </div>
+  
+    <div class="custom_scroll">
+      <p-card >
+        <div class="emptyCart" *ngIf="items.length === 0 || items === undefined">
+          <img class="emptyCartItem emptyCartImage" src="../../../assets/cartImage.jpg" alt="Empty Cart">
+          <p class="emptyCartItem emptyCartText">Empty Cart</p>
+        </div>
+      </p-card>
+      <p-card *ngFor="let item of items">
+        <ng-template pTemplate="header">
+          <div class="flex">
+            <img alt="Card" class="place_order_card_img" src="../../../assets/samosa.jpg" alt="Image not found" />
+            <div style="margin-left: 0.3rem;">
+              <p class="place_order_card place_order_product_titel">{{item?.itemName}}</p>
+              <p class="place_order_card place_order_product_prize">{{item?.amount}}</p>
+              <p class="place_order_card place_order_product_content"> {{item?.description}}</p>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="fx_btn_left">
+              <p-button (click)="ororderQtyDec(item)" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+              <input [(ngModel)]="item.itemQty"  [min]="0" [readonly]="true" class="input_qty" type="text"  pInputText />
+              <p-button (click)="orderQtyInc(item)" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+            </div>
+            <div class="fx_btn_right additem_btn_delete">
+              <p-button  styleClass="qty_delete" (click)="deleteItem(item)" ><i class="pi pi-trash"></i> </p-button>
+            </div>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  
+    <!-- <p-divider *ngIf="bilingObject?.orderValue > 0" type="dotted"></p-divider>
+    <div class="billing-card" *ngIf="bilingObject?.orderValue > 0" >
+      <div class="flex bill_section">
+        <p class="flex-item1 bill_content">Order Value:</p>
+        <p class="flex-item2 bill_content amountSuffix">{{bilingObject?.orderValue | number:'1.2-2'}}</p>
+      </div>
+      <div class="flex bill_section">
+        <p class="flex-item1 bill_content">GST({{bilingObject?.gstCharge}}%):</p>
+        <p class="flex-item2 bill_content amountSuffix">{{bilingObject?.gstValue||0.00 | number:'1.2-2'}}</p>
+      </div>
+      <div class="flex bill_section">
+        <p class="flex-item1 bill_content">SGST({{bilingObject?.sgstCharge}}%):</p>
+        <p class="flex-item2 bill_content amountSuffix"> {{bilingObject?.sgstValue||0.00 | number:'1.2-2'}}</p>
+      </div>
+      <div class="flex bill_section">
+        <p class="flex-item1 bill_content">Restaurant Charges ({{bilingObject?.restoCharge}}%):</p>
+        <p class="flex-item2 bill_content amountSuffix"> {{bilingObject?.restoChargeValue||0.00 | number:'1.2-2'}}</p>
+      </div>
+      <div class="flex bill_section">
+        <p class="flex-item1 bill_content total_amount">Total Amount:</p>
+        <p class="flex-item2 bill_content total_amount amountSuffix">{{bilingObject?.totalAmount | number:'1.2-2'}}</p>
+      </div>
+    </div>
+    <p-divider *ngIf="bilingObject?.orderValue > 0" type="dotted"></p-divider>
+    <div class="Mobile_input" *ngIf="bilingObject?.orderValue > 0">
+      <input class="input_box" [(ngModel)]="userMobile" (ngModelChange)="validateMobileNumber()" type="text" pInputText placeholder="Enter Mobile..." />
+    </div> -->
+    <!-- <div *ngIf="!isValid && userMobile">
+      <small style="color: red; margin: 1rem;">Invalid mobile number. Must be 10 digits.</small>
+    </div> -->
+    <!-- <div class="footer-grid">
+      <div class="footer">
+        <button pButton pRipple label="Place Order" [disabled]="!isValid"  (click)="getInfo()" class="p-button-success"></button>
+      </div>
+    </div>  -->
+
+    <p-card class="orderDetailsCard">
+      <div class="flex">
+        <button (click)="getInfo()" class="p-button-success flex-tableOrderDetails">Place Order</button>
+      </div>
+    </p-card>
+  
+  </div>
+
+  
+  

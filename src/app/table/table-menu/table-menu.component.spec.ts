@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TableMenuComponent } from './table-menu.component';
+
+describe('TableMenuComponent', () => {
+  let component: TableMenuComponent;
+  let fixture: ComponentFixture<TableMenuComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [TableMenuComponent]
+    });
+    fixture = TestBed.createComponent(TableMenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

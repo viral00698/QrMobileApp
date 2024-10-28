@@ -3,5 +3,7 @@ export enum StorageKey {
      ITEMS = 'uyiunmfjk9minvpolrkdmjh,d,gh/.gf/j.,y',
      USERID = "khjskdjshmfnru90u9jyvu0k59uimkjhgn",
      MOBILE ="hhjkhdhjkf34&^89cnyyyyyn0hnu09tuh",
-     VENDER ="wcuikjerhlcgmie6g53re876gyrehkj4^^&&*9uihjkbedn"
+     VENDER ="wcuikjerhlcgmie6g53re876gyrehkj4^^&&*9uihjkbedn",
+     JWT_TOKEN="hiuyiunhnicuhkjfhgiu76987y456t465ev%$&^%^%$$",
+     USER="iurntkgdhfn5tnriughy89tohkjfffffffgghjdk",
 }

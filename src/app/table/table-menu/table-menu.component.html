@@ -1,0 +1,62 @@
+<div></div>
+  <div class="header-grid">
+    <div class="flex">
+      <h3 class="flex-item1" (click)="navigateOrderHistory()"><i class="pi pi-align-left"></i></h3>
+      <h3 class="flex-item2"><i class="pi pi-user"></i> </h3>
+    </div>
+  </div>
+  <div class="search-text-grid">
+    <div class="search-grid-properties">
+      <h6 style="font-weight: 600;">Hey there!</h6>
+      <h5 style="font-weight: 800;">Find your food now</h5>
+    </div>
+  </div>
+  <div class="search-grid">
+    <div class="d-flex justify-content-start">
+      <input class="inputText" [(ngModel)]="searchByItem" type="text" (input)="searchInmenu()" pInputText placeholder="Search your favorite food..." />
+    </div>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll; width: 100vw;">
+    
+    <p-card *ngFor="let item  of tmpMenuList" header="{{item.itemName}}" subheader={{item?.amount}}>
+      <!-- <div *ngIf="tmpMenuList.length == 0"> <h5>Item Not Available</h5> </div> -->
+      <ng-template pTemplate="header">
+        <img alt="Card" class="card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />
+      </ng-template>
+      <p class="item_content">
+       {{item?.description}}
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-inplace>
+            <ng-template pTemplate="display">
+              <div class="additem_btn"  *ngIf="!item?.itemQty || item?.itemQty === 0">
+                <p-button styleClass="primary_btn" (click)="itemAdd(item)" label="Add" /> 
+              </div>
+              <div class="additem_btn" *ngIf="item?.itemQty && item?.itemQty > 0">
+                <p-button (click)="ororderQtyDec(item)" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+                <input  [value]="item?.itemQty"  [min]="0" [readonly]="true"  class="input_qty" type="text"   pInputText />
+                <p-button (click)="orderQtyInc(item)" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <div class="additem_btn">
+                <p-button (click)="ororderQtyDec(item)" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+                <input  [value]="item?.itemQty"  [min]="0" [readonly]="true"  class="input_qty" type="text"   pInputText />
+                <p-button (click)="orderQtyInc(item)" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+              </div>
+            </ng-template>
+          </p-inplace>
+         
+        </div>
+      </ng-template>
+    </p-card>
+  
+  </div>
+
+  <div class="footer-grid">
+    <div class="footer">
+      <button pButton pRipple label="Place order" (click)="redirectToPage()" class="p-button-success"></button>
+    </div>
+  </div>

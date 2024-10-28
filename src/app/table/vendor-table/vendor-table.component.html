@@ -1,0 +1,31 @@
+<div class="header-grid">
+  <div class="flex">
+    <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
+    <h3 class="flex-item2"><i class="bi bi-box-arrow-right"></i></h3>
+  </div>
+</div>
+<div class="search-grid">
+    <div class="d-flex justify-content-start">
+      <input class="inputText" type="text" pInputText placeholder="Search by table..." />
+    </div>
+</div>
+<div>
+  <div class="grid-container">
+    <ng-container *ngFor="let table of tmpTables">
+      <p-card class="grid-item hover-card" styleClass="cursor: pointer;" *ngIf="hasPrefix(table.tableName , 'NOR')" (click)="onCardClick(table)">
+        <p class="tableContent">{{table.tableName}}</p>
+        <p class="tableStatus">{{table.tableStatus}}</p>
+      </p-card>
+    </ng-container>
+  </div>
+ 
+  <div class="grid-container">
+    <ng-container *ngFor="let table of tmpTables">
+        <p-card class="grid-item hover-card" styleClass="cursor: pointer;" *ngIf="hasPrefix(table.tableName , 'AC')" (click)="onCardClick(table)">
+          <p class="tableContent">{{table.tableName}}</p>
+          <p class="tableStatus">{{table.tableStatus}}</p>
+        </p-card>
+      </ng-container>
+  </div>
+ 
+</div>

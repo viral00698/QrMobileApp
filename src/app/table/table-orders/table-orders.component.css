@@ -1,0 +1,112 @@
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* background-color: #f4f4f4; */
+}
+
+
+.flex {
+    display: flex;
+}
+
+.flex-item1 {
+    flex: 1;
+    text-align: left;
+    margin: 1rem;
+    /* margin:0rem 1rem 0.3rem 1rem; */
+    /* font-size:small;
+    font-weight: 900; */
+}
+
+.flex-tableOrderDetails {
+    flex: 1;
+    /* text-align: left; */
+    margin: 1rem;
+    margin:.3rem 1rem .3rem 1rem;
+    font-size:small;
+    font-weight: 500;
+    
+}
+
+
+.flex-item2 {
+    flex: 1;
+    text-align: right;
+    margin: 1rem;
+    /* font-size:small;
+    font-weight: 900; */
+}
+
+
+.orderDetailsCard{
+    margin:.3rem 1rem .3rem 1rem;
+    background-color: #f4f4f4;
+}
+
+.table_heading {
+    padding: .5rem;
+    font-weight: 800;
+    font-size: small;
+
+    /* margin-left: 1rem; */
+    text-align: center;
+}
+.table_heading:first-child {
+    padding: .5rem;
+    font-weight: 800;
+    font-size: small;
+
+    /* margin-left: 1rem; */
+    text-align: left;
+}
+
+.table_value:first-child {
+    padding: .5rem;
+    font-weight: 500;
+    font-size: small;
+
+    /* margin-left: 1rem; */
+    text-align: left;
+}
+
+.table_value {
+    padding: .5rem;
+    font-weight: 500;
+    font-size: small;
+
+    /* margin-left: 1rem; */
+    text-align: center;
+}
+
+.amount::before{
+    content: "₹";
+}
+
+
+.userInput{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.input_box{
+
+    flex: 1;
+    border-radius: 10px;
+    margin: .5rem;
+    padding: .3rem .3rem .3rem .3rem;
+    /* margin-right: .5rem; */
+    /* height: 6; */
+    width: 85vw;
+ 
+}
+
+:host{
+  p-card{
+    
+    border-radius: 6px;
+    margin-bottom: .5rem;
+    /* background-color: black; */
+  }
+}
+

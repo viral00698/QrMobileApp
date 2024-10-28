@@ -9,7 +9,6 @@ import { SecureLocalStorageService } from './secure-local-storage.service';
 export class DataSharingService {
 
   constructor(private localStorageSecureService: SecureLocalStorageService) { }
-
   private map: Map<string, any> = new Map();
 
   addItem(item: any) {

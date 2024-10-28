@@ -23,8 +23,15 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { RxStompService } from './services/rx-stomp.service';
 import { SocketConfigService } from './services/socket-config.service';
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
-import { LoginComponent } from './table/login/login.component';
 import { VendorTableComponent } from './table/vendor-table/vendor-table.component';
+import { LoginComponent } from './table/login/login.component';
+import { TableOrdersComponent } from './table/table-orders/table-orders.component';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { TableMenuComponent } from './table/table-menu/table-menu.component';
+import { TablePlaceOrderComponent } from './table/table-place-order/table-place-order.component';
+import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invoice.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +39,12 @@ import { VendorTableComponent } from './table/vendor-table/vendor-table.componen
     PlaceorderComponent,
     ConformationComponent,
     OrderHistoryComponent,
+    VendorTableComponent,
     LoginComponent,
-    VendorTableComponent
+    TableOrdersComponent,
+    TableMenuComponent,
+    TablePlaceOrderComponent,
+    GanarateInvoiceComponent,
   
   ],
   imports: [
@@ -55,7 +66,10 @@ import { VendorTableComponent } from './table/vendor-table/vendor-table.componen
     HttpClientModule,
     BadgeModule,
     ProgressSpinnerModule,
-    SpeedDialModule
+    SpeedDialModule,
+    TableModule,
+    DropdownModule
+    
     
   ],
   providers: [

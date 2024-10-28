@@ -1,17 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>MobileQrApp</title>
-  <base href="/">
-  <script>
-    var global = window; // fix global is undefined in socketjs-client
-</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>MobileQrApp</title>
+    <base href="/" />
+    <script>
+      var global = window; // fix global is undefined in socketjs-client
+
+      var serverURL = "http://192.168.108.204:8080";
+      var serverWS = "ws://192.168.108.204:8080";
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

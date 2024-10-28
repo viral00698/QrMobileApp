@@ -20,4 +20,10 @@ export class VendorService {
   getVenderObject() {
     return this.vender
   }
+
+  getTables(vendorId:any){
+    return this.http.get('api/v1/tableOrder/getTableByVendor/'+vendorId)
+  }
+
+  
 }
