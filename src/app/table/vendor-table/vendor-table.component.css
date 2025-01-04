@@ -5,14 +5,16 @@
 
 .grid-container {
     display: grid;
-    gap: 5px; /* Adjust the gap between grid items */
+    gap: 5px;
+    /* Adjust the gap between grid items */
     padding: 10px;
     margin: 0.5rem;
-    
+
     /* Set up a 4x4 grid layout for small screens */
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, auto);
 }
+
 .grid-item {
     background-color: #f0f0f0;
     border: 1px solid #ddd;
@@ -20,7 +22,7 @@
     text-align: center;
     font-size: 1.2em;
     /* margin: 0.2rem; */
-  }
+}
 
 .flex {
     display: flex;
@@ -45,18 +47,19 @@
     font-weight: 900; */
 }
 
-.tableContent{
-    font-weight: 800;
-    font-size: small;
-    margin-bottom: .1rem;
-}
-.tableStatus{
+.tableContent {
     font-weight: 800;
     font-size: small;
     margin-bottom: .1rem;
 }
 
-.inputText {
+.tableStatus {
+    font-weight: 800;
+    font-size: small;
+    margin-bottom: .1rem;
+}
+
+#inputBox {
     width: 100%;
     border-radius: 16px;
     margin: 1rem;
@@ -82,15 +85,90 @@
 
 .hover-card {
     transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .hover-card:hover {
-    transform: scale(1.05); /* Slightly increases the size on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
-  }
+}
+
+.hover-card:hover {
+    transform: scale(1.05);
+    /* Slightly increases the size on hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Adds shadow on hover */
+}
+
+.form_grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_item_1 {
+    flex: 1;
+}
+
+#form_inputBox {
+    width: 90%;
+    border-radius: 5px;
+    margin: 1rem;
+
+    padding: .3rem;
+    /* padding-left: 1rem !important; */
+
+    /* background-image: url(../../../assets/search.svg); */
+    /* background-repeat: no-repeat; */
+    /* background-position: right 1rem center; */
+}
+
+.pdropdown {
+    width: 90%;
+    margin: 1rem;
+    position: relative;
+}
 
 :host{
-    p-card{
+
+    .floating-label {
+        position: absolute; /* Position the label absolutely */
+        left: 10px; /* Adjust left position */
+        top: 12px; /* Adjust top position for vertical alignment */
+        font-size: 12px; /* Smaller font size */
+        color: #999; /* Light gray color */
+        transition: all 0.2s ease; /* Transition for smooth effect */
+      }
+      
+      .p-dropdown:focus + .floating-label,
+      .p-dropdown .p-inputtext:focus + .floating-label,
+      .p-dropdown .p-inputtext:not(:placeholder-shown) + .floating-label {
+        top: -10px; /* Move label up when input is focused or not empty */
+        font-size: 10px; /* Smaller font size when floating */
+        color: #1976d2; /* Change color when focused */
+      }
+    .p-card {
         border-radius: 6px;
+    }
+
+    .p-dropdown-panel {
+        background-color: #000000;
+        /* Light blue background for the panel */
+    }
+
+    .p-dropdown-item {
+        background-color: #0e6dc1;
+        /* Match panel background */
+        color: #333;
+        /* Text color for better readability */
+    }
+
+    .p-dropdown-item:hover {
+        background-color: #12314d;
+        /* Hover color for options */
+    }
+
+    .p-dropdown-trigger {
+        position: absolute; /* Position the trigger absolutely */
+        right:13%; /* Adjust this value to move it inside the input */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust for exact centering */
+        border: none; /* Remove any border */
+        background: transparent; /* Transparent background */
+        cursor: pointer; /* Change cursor to pointer */
+        z-index: 1; /* Ensure it sits above other elements */
     }
 }

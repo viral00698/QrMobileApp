@@ -31,7 +31,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableMenuComponent } from './table/table-menu/table-menu.component';
 import { TablePlaceOrderComponent } from './table/table-place-order/table-place-order.component';
 import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invoice.component';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invo
     TableMenuComponent,
     TablePlaceOrderComponent,
     GanarateInvoiceComponent,
+    
   
   ],
   imports: [
@@ -68,11 +70,15 @@ import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invo
     ProgressSpinnerModule,
     SpeedDialModule,
     TableModule,
-    DropdownModule
+    DropdownModule,
+    ToastModule,
+    
+    
     
     
   ],
   providers: [
+    MessageService,
     RxStompService,
     SocketConfigService,
     {provide: HTTP_INTERCEPTORS,useClass: UrlFilterInterceptor,multi: true}

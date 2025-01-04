@@ -1,3 +1,80 @@
+:host{
+    .p-toast-message {
+        font-size: 1rem;
+        padding: 1rem;
+
+        background-color: #ffcc00;
+        color: #333 !important;
+
+    }
+
+    .p-toast {
+        width: 100vw !important;
+        border-radius: 5px;
+
+        /* Adjust width for mobile */
+
+    }
+
+    .p-toast-message-content {
+        background-color: #ffcc00 !important;
+        /* Same color for inner content */
+    }
+
+    /* Target the close icon in the toast */
+    .p-toast-icon-close {
+       border:none;
+       border-radius: 10px;
+       place-self: center;
+    }
+
+    /* Change background color on hover */
+    .p-toast-close:hover {
+        background-color: #c0392b;
+        /* Darker shade on hover */
+    }
+
+}
+
+@media (max-width: 768px) {
+    :host{
+        .p-toast-message {
+            font-size: 1rem;
+            padding: 1rem;
+
+            background-color: #ffcc00;
+            color: #333 !important;
+
+        }
+
+        .p-toast {
+            width: 100vw !important;
+            /* Adjust width for mobile */
+
+        }
+
+        .p-toast-message-content {
+            background-color: #ffcc00 !important;
+            /* Same color for inner content */
+        }
+
+        /* Target the close icon in the toast */
+        .p-toast-icon-close {
+           border:none;
+        }
+
+        /* Change background color on hover */
+        .p-toast-close:hover {
+            background-color: #c0392b;
+            /* Darker shade on hover */
+        }
+
+
+    }
+
+}
+
+
 .header-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -32,7 +109,7 @@
     flex: 1;
     text-align: right;
     margin: 1rem;
-   
+
 }
 
 
@@ -40,36 +117,38 @@
     flex: 1;
     /* text-align: left; */
     margin: 1rem;
-    margin:.3rem 1rem .3rem 1rem;
-    font-size:small;
+    margin: .3rem 1rem .3rem 1rem;
+    font-size: small;
     font-weight: 500;
     padding: .6rem;
-    
+
 }
 
-.orderDetailsCard{
-    margin:.3rem 1rem .3rem 1rem;
+.orderDetailsCard {
+    margin: .3rem 1rem .3rem 1rem;
     background-color: #f4f4f4;
 }
 
-.place_order_card{
+.place_order_card {
     margin-top: .3rem;
     margin-bottom: .3rem;
 }
 
-.place_order_product_titel{
+.place_order_product_titel {
     font-size: medium;
     font-weight: 600;
 }
 
-.place_order_product_prize::before{
+.place_order_product_prize::before {
     content: "₹";
 }
-.place_order_product_prize{
+
+.place_order_product_prize {
     font-size: medium;
     font-weight: 600;
 }
-.place_order_product_content{
+
+.place_order_product_content {
     font-size: small;
     font-weight: 500;
     text-overflow: clip;
@@ -86,7 +165,6 @@
 .search-grid-properties {
     margin: 1rem;
     /* color: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
-
 }
 
 .inputText {
@@ -124,8 +202,8 @@
     border-radius: 15px;
 }
 
-:host {
-    .p-card{
+:host{
+    .p-card {
         margin: 1rem;
         border-radius: 10px;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -136,19 +214,21 @@
         font-size: medium;
         font-weight: 600;
         margin: .5rem;
-        
+
     }
+
     .p-card-subtitle::before {
         /* content: "Prize: "; */
         content: "₹";
         margin: .5rem;
     }
-    .p-card-subtitle{
+
+    .p-card-subtitle {
         font-size: medium;
-        font-weight: 500;  
+        font-weight: 500;
         /* margin: .5rem; */
         /* margin-top: 0 !important; */
-        
+
     }
 
     .item_content {
@@ -158,18 +238,19 @@
         opacity: .8;
     }
 
-    .fx_btn_left{
+    .fx_btn_left {
         padding: .5rem;
         flex: 1;
         text-align: left;
     }
-    .fx_btn_right{
+
+    .fx_btn_right {
         padding: .5rem;
         flex: 1;
         text-align: right;
     }
-   
-   
+
+
 
     .primary_btn {
         width: 6rem;
@@ -211,17 +292,17 @@
         text-align: center;
     }
 
-    .qty_delete{
+    .qty_delete {
         color: rgb(211, 34, 34);
-        
-        background:none;
+
+        background: none;
         /* border-radius: 50%; */
-        padding:.6rem;
-        
+        padding: .6rem;
+
         border: none;
         font-size: medium;
         font-weight: 200;
-        
+
         /* margin-left: 1rem; */
         /* padding-left: 8rem; */
     }
@@ -242,81 +323,90 @@
         cursor: pointer;
         font-size: medium;
         font-weight: 500;
-    
+
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         z-index: 1000;
         /* Ensures it stays above other elements */
     }
 
-    .bill_section{
+    .bill_section {
         margin: .3rem;
     }
-    .bill_section .bill_content{
+
+    .bill_section .bill_content {
         margin: .3rem;
         font-size: medium;
         font-weight: 500;
 
     }
-    .total_amount{
-       font-size: large !important;
-       font-weight: 800 !important;
+
+    .total_amount {
+        font-size: large !important;
+        font-weight: 800 !important;
     }
 }
 
-.amountSuffix::after{
+.amountSuffix::after {
     content: " ₹";
 }
 
-.input_box{
+.input_box {
     border-radius: 10px;
     margin: .5rem;
     padding-left: 1rem;
     /* margin-right: .5rem; */
     height: 6vh;
     width: 100vw;
- 
+
 }
 
-.Mobile_input{
+.Mobile_input {
     display: flex;
     justify-content: left;
     margin: .5rem;
 }
 
 .p-button-success:disabled {
-    background-color: #ccc; /* Light grey background */
-    color: #666; /* Dark grey text */
-    cursor: not-allowed; /* Show a "not-allowed" cursor */
-    opacity: 0.7; /* Slight transparency */
-    border: 1px solid #999; /* Darker border */
-  }
+    background-color: #ccc;
+    /* Light grey background */
+    color: #666;
+    /* Dark grey text */
+    cursor: not-allowed;
+    /* Show a "not-allowed" cursor */
+    opacity: 0.7;
+    /* Slight transparency */
+    border: 1px solid #999;
+    /* Darker border */
+}
 
-.billing-card{
+.billing-card {
     padding: .5rem;
 }
 
-.emptyCartCard{
- margin: 0;
- padding: 0;
+.emptyCartCard {
+    margin: 0;
+    padding: 0;
 }
-.emptyCart{
+
+.emptyCart {
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
-   
+
 }
-.emptyCartText{
+
+.emptyCartText {
     font-size: medium;
     font-weight: 400;
 }
 
-.emptyCartItem{
-    flex:1;
+.emptyCartItem {
+    flex: 1;
 }
 
-.emptyCartImage{
+.emptyCartImage {
     width: 10vh;
     justify-content: center;
 }

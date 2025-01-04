@@ -23,26 +23,30 @@
         <p class="flex-tableOrderDetails">20/02/08 20:02:AM</p>
     </div> -->
 
-  <p-card class="orderDetailsCard" *ngIf="table!==null && table?.tableStatus === 'BOOKED'">
+  <ng-container *ngIf="table !== null && table?.tableStatus === 'BOOKED'">
+  <p-card class="orderDetailsCard">
+    
     <div class="flex">
       <p class="flex-tableOrderDetails">Table:</p>
-      <p class="flex-tableOrderDetails">{{table.tableName}}</p>
+      <p class="flex-tableOrderDetails">{{products?.tableOrder?.tableName}}</p>
     </div>
     <div class="flex">
       <p class="flex-tableOrderDetails">Customer Mobile:</p>
-      <p class="flex-tableOrderDetails">85789655789</p>
+      <p class="flex-tableOrderDetails">{{products?.customerMobileNo}}</p>
     </div>
     <div class="flex">
       <p class="flex-tableOrderDetails">Name:</p>
-      <p class="flex-tableOrderDetails">Legion</p>
+      <p class="flex-tableOrderDetails">{{products?.customerName}}</p>
     </div>
     <div class="flex">
       <p class="flex-tableOrderDetails">OrderAt:</p>
-      <p class="flex-tableOrderDetails">20/02/08 20:02:AM</p>
+      <p class="flex-tableOrderDetails">{{products?.orderAt | date:'dd/MMM/yy hh:mm:a'}}</p>
     </div>
   </p-card>
+  </ng-container>
   <p-card class="orderDetailsCard" *ngIf="table !==null && table?.tableStatus === 'BOOKED'">
-    <p-table [value]="products">
+    <div *ngIf="!products">Loading...</div>
+    <p-table  *ngIf="products?.orderDetails?.length > 0" [value]="products?.orderDetails">
       <ng-template pTemplate="header">
         <tr>
           <!-- <th scope="col" class="table_heading">Sr.</th> -->
@@ -50,31 +54,20 @@
           <th scope="col" class="table_heading">Qty</th>
           <th scope="col" class="table_heading">Amount</th>
         </tr>
-        <tr>
-          <!-- <td  class="table_value">1</td> -->
-          <td class="table_value">palak Paneer</td>
-          <td class="table_value">2</td>
-          <td class="table_value amount">52.63</td>
-        </tr>
-        <tr>
-          <!-- <td  class="table_value">1</td> -->
-          <td class="table_value">Paneer</td>
-          <td class="table_value">2</td>
-          <td class="table_value amount">52.63</td>
-        </tr>
-        <tr>
-          <!-- <td  class="table_value">1</td> -->
-          <td class="table_value">Paneer</td>
-          <td class="table_value">2</td>
-          <td class="table_value amount">52.63</td>
-        </tr>
       </ng-template>
-      <!-- <ng-template pTemplate="body" let-product> -->
-
-      <!-- </ng-template> -->
+       <ng-template pTemplate="body" let-product> 
+          <tr>
+            <td class="table_heading"> {{product.itemName}}</td>
+            <td class="table_heading"> {{product.quntity}}</td>
+            <td class="table_heading amount"> {{product.amount}}</td>
+          </tr>
+      </ng-template>
     </p-table>
   </p-card>
-
+   <p-card class="orderDetailsCard">
+    <h6 style="padding: .5rem; margin: 0;">Customer Details:</h6>
+   </p-card>
+   
   <p-card class="orderDetailsCard">
     <div class="userInput">
     
@@ -95,8 +88,9 @@
 
   <p-card class="orderDetailsCard">
     <div class="flex">
-      <button class="flex-tableOrderDetails btn btn-primary" [disabled]="!isName || !isValid" (click)="redirectToMenu(table)"><i class="bi bi-plus-square-fill"></i> Add item</button>
-      <button *ngIf="table!==null && table?.tableStatus === 'BOOKED'" class="flex-tableOrderDetails btn btn-primary" (click)="ganrateInvoice()"><i class="bi bi-receipt"></i> Invoice</button>
+      <!-- [disabled]="!isName || !isValid"  -->
+      <button class="flex-tableOrderDetails btn btn-primary"(click)="redirectToMenu(table)"><i class="bi bi-plus-square-fill"></i> Add item</button>
+      <button *ngIf="table!==null && table?.tableStatus === 'BOOKED'" class="flex-tableOrderDetails btn btn-primary" (click)="ganrateInvoice()"><img src="../../../assets/invoice.png" alt="Icon" class="icon" /></button>
     </div>
   </p-card>
 </div>

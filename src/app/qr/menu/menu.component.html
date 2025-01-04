@@ -19,7 +19,7 @@
 
   <div style="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll; width: 100vw;">
     
-    <p-card *ngFor="let item  of tmpMenuList" header="{{item.itemName}}" subheader={{item?.amount}}>
+    <p-card  *ngFor="let item  of tmpMenuList" header="{{item.itemName}}" subheader={{item?.amount}}>
       <!-- <div *ngIf="tmpMenuList.length == 0"> <h5>Item Not Available</h5> </div> -->
       <ng-template pTemplate="header">
         <img alt="Card" class="card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />

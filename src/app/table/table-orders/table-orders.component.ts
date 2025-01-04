@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RequestStatus } from 'src/app/constent/request-status';
+import { StorageKey } from 'src/app/constent/storage-key';
+import { SecureLocalStorageService } from 'src/app/services/secure-local-storage.service';
 import { TableDataSharingService } from 'src/app/services/table-data-sharing.service';
+import { TableOrderService } from 'src/app/services/table-order.service';
 
 
 @Component({
   selector: 'app-table-orders',
   templateUrl: './table-orders.component.html',
-  styleUrls: ['./table-orders.component.css']
+  styleUrls: ['./table-orders.component.css'],
 })
 export class TableOrdersComponent implements OnInit {
   custName: any = null;
@@ -21,23 +25,55 @@ export class TableOrdersComponent implements OnInit {
   userMobile: any = null;
   isName!: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private tableDataSharing: TableDataSharingService) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+     private tableDataSharing: TableDataSharingService,
+     private secureStoregeSerive:SecureLocalStorageService,
+     private tableService:TableOrderService) { }
 
   ngOnInit(): void {
     this.getTableDetails();
+    this.getTableOrdes();
   }
 
   getTableDetails() {
     this.table = this.tableDataSharing.getTable();
+    this.secureStoregeSerive.encriptAndSave(this.products,StorageKey.TABLE_ORDER)
 
+  }
+  getTableOrdes(){
+    if(this.table){
+      this.tableService.getbyTableOrders(this.table.vendorId , this.table.tableId).subscribe((res:any)=>{
+        if(res.status === RequestStatus.success){
+          this.products = res.data[0]
+          this.secureStoregeSerive.encriptAndSave(this.products,StorageKey.TABLE_ORDER)
+        }
+      })
+    }
   }
 
   redirectToMenu(table: any) {
-    this.router.navigate(['tableMenu']);
+
+    if(this.custName && this.userMobile){
+      const data = {
+        'custName':this.custName,
+        'custMobile':this.userMobile,
+        'custTable':this.table
+      }
+      this.secureStoregeSerive.encriptAndSave(data,StorageKey.CUST_DETAILS)
+      this.router.navigate(['tableMenu']);
+    }
+
+    if(this.products){
+      this.router.navigate(['tableMenu']);
+    }
   }
 
   ganrateInvoice() {
-    this.router.navigate(['ganrateInvoice']);
+
+    if(this.products){
+      this.router.navigate(['ganrateInvoice'] , { queryParams: { data: this.products?.orderId } });
+    }
+   
   }
 
   validateCustName() {
@@ -51,5 +87,5 @@ export class TableOrdersComponent implements OnInit {
     this.isValid = pattern.test(this.userMobile);
   }
 
-  
+
 }

@@ -8,6 +8,7 @@ export class Orders {
     orderId?: string;  // UUID represented as a string
     customerUUID?: string;  // UUID represented as a string
     customerMobileNo?: string;
+    customerName?:string;
     token_no?: string;
     txid?: string;
     orderDetails?: OrderDetails[];  // PrimeNG Table or List Model
@@ -19,8 +20,10 @@ export class Orders {
     sgst?: number;
     restaurantsCharge?: number;
     orderStatus?: OrderStatus;
-    appType?:AppType
-    restroName!:string
+    appType?:AppType;
+    restroName!:string;
+    tableId?:string;
+    tableOrder:any
   }
   
   

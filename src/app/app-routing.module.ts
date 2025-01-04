@@ -12,6 +12,7 @@ import { TablePlaceOrderComponent } from './table/table-place-order/table-place-
 import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invoice.component';
 
 const routes: Routes = [
+{path:'',component:MenuComponent},
 {path:'menu/:ugygewncuirhijd', component:MenuComponent}, // vender id pass here
 {path:'placeorder' , component:PlaceorderComponent},
 {path:'conformation',component:ConformationComponent},

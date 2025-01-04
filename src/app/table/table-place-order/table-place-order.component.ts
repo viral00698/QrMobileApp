@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AppType } from 'src/app/constent/app-type';
 import { OrderStatus } from 'src/app/constent/order-status';
 import { PaymentMode } from 'src/app/constent/payment-mode';
+import { RequestStatus } from 'src/app/constent/request-status';
 import { StorageKey } from 'src/app/constent/storage-key';
 import { OrderDetails } from 'src/app/model/order-details';
 import { Orders } from 'src/app/model/orders.model';
@@ -15,7 +17,7 @@ import { VendorService } from 'src/app/services/vendor.service';
 @Component({
   selector: 'app-table-place-order',
   templateUrl: './table-place-order.component.html',
-  styleUrls: ['./table-place-order.component.css']
+  styleUrls: ['./table-place-order.component.css'],
 })
 export class TablePlaceOrderComponent {
 
@@ -25,13 +27,17 @@ export class TablePlaceOrderComponent {
   userMobile!: string
   isValid!: boolean;
   vender: any;
-
+  custName:any
+  custMobile:any
+  custTable:any;
+  tableOrder:any
   constructor(private router: Router, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
     private changeDetectorRef: ChangeDetectorRef,
     private billingService: BillingService,
     private venderService: VendorService,
-    private placeOrder: PlaceOrderService
+    private placeOrder: PlaceOrderService,
+    private messageService: MessageService,
   ) { }
 
   ngDoCheck() {
@@ -43,8 +49,29 @@ export class TablePlaceOrderComponent {
     this.getItems();
     this.getVenderDetails()
     this.billGanaretor()
+    this.getCustDetails()
+    this.getTableOrder()
 
   }
+
+  getTableOrder(){
+   const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.TABLE_ORDER);
+   if(tmp){
+    this.tableOrder = JSON.parse(tmp)
+   }
+  }
+
+getCustDetails(){
+  const data = this.localStorageSecureService.decryptAndGet(StorageKey.CUST_DETAILS);
+  if(data){
+    const tmp = JSON.parse(data)
+    this.custMobile = tmp.custMobile
+    this.custName = tmp.custName
+    this.custTable = tmp.custTable
+  }else{
+    // logout 
+  }
+}
 
   getVenderDetails() {
     const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.VENDER);
@@ -130,40 +157,42 @@ export class TablePlaceOrderComponent {
       return obj.productId !== item.productId
     })
     this.items = tmp
-
     this.billGanaretor()
 
   }
 
-  inputchange() {
-    this.validateMobileNumber()
-    if (this.isValid) {
-    } else {
-      console.log('Invalid mobile number');
-    }
-  }
+  // inputchange() {
+  //   this.validateMobileNumber()
+  //   if (this.isValid) {
+  //   } else {
+  //     console.log('Invalid mobile number');
+  //   }
+  // }
 
-  validateMobileNumber() {
-    const pattern = /^\d{10}$/; // Adjust the regex as needed
-    this.isValid = pattern.test(this.userMobile);
-  }
+  // validateMobileNumber() {
+  //   const pattern = /^\d{10}$/; // Adjust the regex as needed
+  //   this.isValid = pattern.test(this.userMobile);
+  // }
 
-  getInfo() {
+  CreateOrder() {
 
     // let orderDetail : OrderDetails = new OrderDetails();
 
+   
+
     if (!this.items || this.items.length === 0) {
       console.error('No items selected.');
+      this.messageService.add({ key: 'tl', severity: 'error', summary: 'Info', detail: 'Invalid Request' });
+      return;
+    }
+    if (!this.custMobile || !this.custName) {
+      this.messageService.add({ key: 'tl', severity: 'error', summary: 'Info', detail: 'Invalid Mobile Number' });
       return;
     }
 
-    if (!this.userMobile || !this.isValid) {
-      console.error('Invalid mobile number.');
-      return;
-    }
-
-    if (!this.bilingObject || !this.vender) {
+    if (!this.vender) {
       console.error('Billing object or vendor information is missing.');
+      this.messageService.add({ key: 'tl', severity: 'error', summary: 'Info', detail: 'Invalid Vendor Details' });
       return;
     }
 
@@ -178,14 +207,23 @@ export class TablePlaceOrderComponent {
       customerOrder.customerUUID = JSON.parse(customerId);
     }
 
-    customerOrder.orderStatus = OrderStatus.WaitForApprove
-    customerOrder.customerMobileNo = this.userMobile
+    if(this.tableOrder){
+      customerOrder.orderId = this.tableOrder.orderId
+    }
+    customerOrder.orderStatus = OrderStatus.Ongoing 
+    customerOrder.customerMobileNo = this.custMobile
+    customerOrder.customerName = this.custName
     customerOrder.payment_mode = PaymentMode.CASH
-    customerOrder.totelAmount = this.bilingObject?.totalAmount
+    // customerOrder.totelAmount = this.bilingObject?.totalAmount
     customerOrder.vendorId = this.vender?.vendorId
-    customerOrder.appType = AppType.QR
+    customerOrder.appType = AppType.TABLE
     customerOrder.restroName = this.vender?.storeName
 
+    const tableOrder = {
+      'tableId':this.custTable.tableId
+    }
+   
+    customerOrder.tableOrder = tableOrder
 
     this.items.forEach((item: any) => {
       let orderDetail: OrderDetails = new OrderDetails();
@@ -201,12 +239,31 @@ export class TablePlaceOrderComponent {
 
     customerOrder.orderDetails = array ?? [];
 
-    const data = { 'order': customerOrder, 'bill': this.bilingObject }
+    this.placeOrder.tableOrderPlace(customerOrder).subscribe((res:any)=>{
+      if(res.status === RequestStatus.success){
+      
+        localStorage.removeItem(StorageKey.MENU);
+        localStorage.removeItem(StorageKey.ITEMS);
+        localStorage.removeItem(StorageKey.TABLE_ORDER)
+        this.messageService.add({life:8000, key: 'tl', severity: 'success', summary: 'success', detail: res.message });
+        this.router.navigate(['vendorTable']);
+      }else{
+         
+        localStorage.removeItem(StorageKey.MENU);
+        localStorage.removeItem(StorageKey.ITEMS);
+        localStorage.removeItem(StorageKey.TABLE_ORDER)
+        this.messageService.add({ key: 'tl', severity: 'error', summary: 'error', detail: res.message });
+      }
+    })
 
-    if (data) {
-      this.placeOrder.setBillingObject(data);
-      this.router.navigate(['conformation'])
-    }
+   
+    // const data = { 'order': customerOrder, 'bill': this.bilingObject }
+
+    // if (data) {
+
+    //   this.placeOrder.setBillingObject(data);
+    //   this.router.navigate(['conformation'])
+    // }
 
   }
 

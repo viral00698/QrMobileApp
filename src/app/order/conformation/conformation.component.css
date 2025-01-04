@@ -17,7 +17,7 @@
  
 }
 
-.list-item:nth-last-child(){
+.list-item:nth-last-child{
     margin-bottom: 0;
 }
 

@@ -13,12 +13,12 @@ export class SocketConfigService {
  
   getRxStompConfig(): RxStompConfig {
     return {
-      brokerURL: 'ws://192.168.108.204:8080/ws',
+      brokerURL: 'ws://15.207.112.139:8080/ws',
 
       heartbeatIncoming: 0,
       heartbeatOutgoing: 20000,
       reconnectDelay: 200,
-      webSocketFactory: () => new SockJS('http://192.168.108.204:8080/ws'),
+      webSocketFactory: () => new SockJS('http://15.207.112.139:8080/ws'),
       debug: (msg: string): void => {
         console.log(new Date(), msg);
       },

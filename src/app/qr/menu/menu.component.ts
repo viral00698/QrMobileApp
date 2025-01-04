@@ -12,7 +12,7 @@ import { VendorService } from 'src/app/services/vendor.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
 
 export class MenuComponent implements OnInit, OnDestroy, DoCheck {
@@ -22,9 +22,10 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   productList: any = [];
   tmpMenuList: any = []
   palaceOrderBtnFlag = false;
-  venderId:any;
-  venderDetails:any;
-  customerUUId!:string
+  venderId: any;
+  venderDetails: any;
+  customerUUId!: string
+  dynamicId: any;
 
   constructor(private router: Router, private productService: MenuService, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
@@ -40,38 +41,52 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     // this.mapStoreOnDestory()
   }
   ngOnInit(): void {
+
+
+    // Access the query parameters when the app loads
+    this.route.queryParams.subscribe(params => {
+      this.dynamicId = params['ugygewncuirhij']; // Get the 'id' parameter
+      // console.log('Dynamic ID:', this.dynamicId);
+      if (this.dynamicId) {
+        this.venderId = this.dynamicId
+      }
+
+    });
+
     this.setCustomerUUID();
     this.getVendorDetails()
     this.getInlocalStorgae(StorageKey.MENU)
-
     // this.setItemsFromLocalStorage()
   }
 
-  setCustomerUUID(){
-    
+  setCustomerUUID() {
+
     this.customerUUId = this.localStorageSecureService.decryptAndGet(StorageKey.USERID);
-    if(!this.customerUUId){
+    if (!this.customerUUId) {
       this.customerUUId = this.generateCustomUUID();
-      this.localStorageSecureService.encriptAndSave(this.customerUUId , StorageKey.USERID);
+      this.localStorageSecureService.encriptAndSave(this.customerUUId, StorageKey.USERID);
     }
+
   }
 
 
 
   getVendorDetails() {
 
-    this.route.params.subscribe(params => {
-      const venderUUID = params['ugygewncuirhijd']; // Get the dynamic id parameter
-        if(venderUUID){
+    if (!this.dynamicId) {
+
+      this.route.params.subscribe(params => {
+        const venderUUID = params['ugygewncuirhijd']; // Get the dynamic id parameter
+        if (venderUUID) {
           this.venderId = venderUUID
         }
-     });
-
+      });
+    }
     this.vendorService.getVenderById(this.venderId).subscribe((res: any) => {
       if (res?.status === RequestStatus.success) {
         this.venderDetails = res?.data;
-        this.localStorageSecureService.encriptAndSave(res?.data , StorageKey.VENDER)
-      }else{
+        this.localStorageSecureService.encriptAndSave(res?.data, StorageKey.VENDER)
+      } else {
         // redirect error page or Home page
       }
     })
@@ -83,20 +98,20 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
       this.localStorageSecureService.encriptAndSave(JSON.stringify(Array.from(tmp.entries())), StorageKey.ITEMS);
     }
   }
-  getMunuFromDatabase(id:any) {
-  
+  getMunuFromDatabase(id: any) {
+
     this.productService.getMenuList(id).subscribe((res: any) => {
       if (res.status === RequestStatus.success) {
         this.productList = res.data;
         this.tmpMenuList = res.data;
-  
+
         this.localStorageSecureService.encriptAndSave(this.productList, StorageKey.MENU)
         this.changeDetectorRef.detectChanges();
       }
     })
   }
 
- 
+
 
   getInlocalStorgae(key: any) {
 
@@ -223,13 +238,13 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     }
     return result;
   }
-  
+
   redirectToPage() {
     this.router.navigate(['placeorder']); // Replace with your target route
   }
 
-  navigateOrderHistory(){
-    this.router.navigate(['OrderHistory']); 
+  navigateOrderHistory() {
+    this.router.navigate(['OrderHistory']);
   }
 }
 

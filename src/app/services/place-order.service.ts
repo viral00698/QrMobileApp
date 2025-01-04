@@ -20,4 +20,16 @@ export class PlaceOrderService {
   getBillingObject(){
     return this.billObject
   }
+
+  tableOrderPlace(data:any){
+    return this.http.post('api/v1/tableOrder/place',data);
+  }
+
+  invoice(data:any){
+
+    const tmp = {
+      'orderId':data
+    }
+    return this.http.post('api/v1/tableOrder/invoce',tmp);
+  }
 }

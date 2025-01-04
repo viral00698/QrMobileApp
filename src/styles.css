@@ -34,3 +34,8 @@ body{
       
 
 }
+
+.icon {
+    width: 24px;       /* Set the icon width */
+    height: 24px;      /* Set the icon height */
+  }

@@ -6,13 +6,14 @@
 </div>
 <div class="search-grid">
     <div class="d-flex justify-content-start">
-      <input class="inputText" type="text" pInputText placeholder="Search by table..." />
+      <input id="inputBox" [(ngModel)]="searchTerm" (input)="searchInTable()" class="inputText" type="text" pInputText placeholder="Search by table..." />
     </div>
 </div>
 <div>
   <div class="grid-container">
     <ng-container *ngFor="let table of tmpTables">
       <p-card class="grid-item hover-card" styleClass="cursor: pointer;" *ngIf="hasPrefix(table.tableName , 'NOR')" (click)="onCardClick(table)">
+        <img src="../../../assets/chair (1).png" class="icon" style="margin: 0rem; padding: 0rem;" alt="">
         <p class="tableContent">{{table.tableName}}</p>
         <p class="tableStatus">{{table.tableStatus}}</p>
       </p-card>
@@ -22,10 +23,26 @@
   <div class="grid-container">
     <ng-container *ngFor="let table of tmpTables">
         <p-card class="grid-item hover-card" styleClass="cursor: pointer;" *ngIf="hasPrefix(table.tableName , 'AC')" (click)="onCardClick(table)">
+          <img src="../../../assets/air-conditioner.png" class="icon" style="margin: 0rem; padding: 0rem;" alt="">
           <p class="tableContent">{{table.tableName}}</p>
           <p class="tableStatus">{{table.tableStatus}}</p>
         </p-card>
       </ng-container>
   </div>
- 
+
+  <div class="grid-container">
+    <ng-container *ngFor="let table of tmpTables">
+        <p-card class="grid-item hover-card" styleClass="cursor: pointer;" *ngIf="hasPrefix(table.tableName , 'GRD')" (click)="onCardClick(table)">
+          <img src="../../../assets/patio-furniture.png" class="icon" style="margin: 0rem; padding: 0rem;" alt="">
+          <p class="tableContent">{{table.tableName}}</p>
+          <p class="tableStatus">{{table.tableStatus}}</p>
+        </p-card>
+      </ng-container>
+  </div>
+<!-- 
+  <p-card class="form_grid">
+    <input id="form_inputBox" class="inputText form_item_1 " type="text" pInputText placeholder="Enter Table Name..." />
+    <p-dropdown  #myDropdown class="pdropdown" (click)="showDropdownOptions()"  optionValue="value"  [(ngModel)]="selected_Type"  [options]="tableTypes" optionLabel="name" placeholder="Select a type" appendTo="body"></p-dropdown>
+  </p-card>
+  -->
 </div>

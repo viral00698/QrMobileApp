@@ -6,4 +6,6 @@ export enum StorageKey {
      VENDER ="wcuikjerhlcgmie6g53re876gyrehkj4^^&&*9uihjkbedn",
      JWT_TOKEN="hiuyiunhnicuhkjfhgiu76987y456t465ev%$&^%^%$$",
      USER="iurntkgdhfn5tnriughy89tohkjfffffffgghjdk",
+     CUST_DETAILS="hjf kjjnhjkfg",
+     TABLE_ORDER="jhdb vghjcfv"
 }
