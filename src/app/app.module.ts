@@ -33,6 +33,9 @@ import { TablePlaceOrderComponent } from './table/table-place-order/table-place-
 import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invoice.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { OnlinePayComponent } from './order/online-pay/online-pay.component';
+import { OrderSuccessComponent } from './order/order-success/order-success.component';
+import { OrderFaieldComponent } from './order/order-faield/order-faield.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,9 @@ import { MessageService } from 'primeng/api';
     TableMenuComponent,
     TablePlaceOrderComponent,
     GanarateInvoiceComponent,
+    OnlinePayComponent,
+    OrderSuccessComponent,
+    OrderFaieldComponent,
     
   
   ],

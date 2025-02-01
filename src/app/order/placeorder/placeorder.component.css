@@ -108,7 +108,7 @@
     border-radius: 15px;
 }
 
-:host {
+/* :host { */
     .p-card{
         margin: .5rem;
         border-radius: 10px;
@@ -245,7 +245,7 @@
        font-size: large !important;
        font-weight: 800 !important;
     }
-}
+/* } */
 
 .amountSuffix::after{
     content: " ₹";

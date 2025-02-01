@@ -8,9 +8,11 @@ import { OrderDetails } from 'src/app/model/order-details';
 import { Orders } from 'src/app/model/orders.model';
 import { BillingService } from 'src/app/services/billing.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { PaymentService } from 'src/app/services/payment.service';
 import { PlaceOrderService } from 'src/app/services/place-order.service';
 import { SecureLocalStorageService } from 'src/app/services/secure-local-storage.service';
 import { VendorService } from 'src/app/services/vendor.service';
+declare var Razorpay: any;
 
 @Component({
   selector: 'app-placeorder',
@@ -19,18 +21,36 @@ import { VendorService } from 'src/app/services/vendor.service';
 })
 export class PlaceorderComponent implements OnInit, DoCheck {
 
+
+  cardStyles = {
+    margin: "2rem",
+    padding:'0.5rem',
+    borderRadius: "10px",
+    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+   
+  };
+  
+
   items: any = []
   bilingObject: any;
   userMobile!: string
   isValid!: boolean;
   vender: any;
+  paymentOptions!: {
+    key: string; // Replace with your Razorpay key
+    amount: number; // Amount in paise (e.g., 10000 = ₹100)
+    currency: string; name: string; description: string; image: string; // Logo URL
+    handler: any; // Callback on payment success
+    prefill: { name: string; email: string; contact: string; }; theme: { color: string; };
+  };
 
   constructor(private router: Router, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
     private changeDetectorRef: ChangeDetectorRef,
     private billingService: BillingService,
     private venderService: VendorService,
-    private placeOrder: PlaceOrderService
+    private placeOrder: PlaceOrderService,
+    private paymentService:PaymentService,
   ) { }
 
   ngDoCheck() {
@@ -147,7 +167,7 @@ export class PlaceorderComponent implements OnInit, DoCheck {
     this.isValid = pattern.test(this.userMobile);
   }
 
-  getInfo() {
+  getInfo(paymentType:string) {
 
     // let orderDetail : OrderDetails = new OrderDetails();
 
@@ -177,14 +197,21 @@ export class PlaceorderComponent implements OnInit, DoCheck {
       customerOrder.customerUUID = JSON.parse(customerId);
     }
 
-    customerOrder.orderStatus = OrderStatus.WaitForApprove
+    if(paymentType === 'CASH'){
+      customerOrder.payment_mode = PaymentMode.CASH
+      customerOrder.orderStatus = OrderStatus.WaitForApprove
+    }
+
+    if(paymentType === 'ONLINE'){
+      customerOrder.payment_mode = PaymentMode.ONLINE
+      customerOrder.orderStatus = OrderStatus.Placed
+    }
+
     customerOrder.customerMobileNo = this.userMobile
-    customerOrder.payment_mode = PaymentMode.CASH
     customerOrder.totelAmount = this.bilingObject?.totalAmount
     customerOrder.vendorId = this.vender?.vendorId
     customerOrder.appType = AppType.QR
     customerOrder.restroName = this.vender?.storeName
-
 
     this.items.forEach((item: any) => {
       let orderDetail: OrderDetails = new OrderDetails();
@@ -202,7 +229,11 @@ export class PlaceorderComponent implements OnInit, DoCheck {
 
     const data = { 'order': customerOrder, 'bill': this.bilingObject }
 
-    if (data) {
+    if(data  && paymentType === 'ONLINE'){
+      this.placeOrder.setBillingObject(data);
+      this.router.navigate(['online_pay'])
+    }
+    if(data && paymentType === 'CASH') {
       this.placeOrder.setBillingObject(data);
       this.router.navigate(['conformation'])
     }
@@ -215,6 +246,3 @@ export class PlaceorderComponent implements OnInit, DoCheck {
 
 
 }
-
-
-

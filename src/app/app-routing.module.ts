@@ -10,9 +10,12 @@ import { TableOrdersComponent } from './table/table-orders/table-orders.componen
 import { TableMenuComponent } from './table/table-menu/table-menu.component';
 import { TablePlaceOrderComponent } from './table/table-place-order/table-place-order.component';
 import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invoice.component';
+import { OnlinePayComponent } from './order/online-pay/online-pay.component';
+import { OrderSuccessComponent } from './order/order-success/order-success.component';
+import { OrderFaieldComponent } from './order/order-faield/order-faield.component';
 
 const routes: Routes = [
-{path:'',component:MenuComponent},
+{path:'',component:LoginComponent},   //http://localhost/?ugygewncuirhijd=d3456789-abcd-ef01-2345-6789abcdef01 it is working
 {path:'menu/:ugygewncuirhijd', component:MenuComponent}, // vender id pass here
 {path:'placeorder' , component:PlaceorderComponent},
 {path:'conformation',component:ConformationComponent},
@@ -22,7 +25,10 @@ const routes: Routes = [
 {path:'tableOrders',component:TableOrdersComponent},
 {path:'tableMenu',component:TableMenuComponent},
 {path:'tablePlaceOrder',component:TablePlaceOrderComponent},
-{path:'ganrateInvoice',component:GanarateInvoiceComponent}
+{path:'ganrateInvoice',component:GanarateInvoiceComponent},
+{path:'online_pay',component:OnlinePayComponent},
+{path:'order_success' , component:OrderSuccessComponent},
+{path:'order_field',component:OrderFaieldComponent}
 ];
 
 @NgModule({

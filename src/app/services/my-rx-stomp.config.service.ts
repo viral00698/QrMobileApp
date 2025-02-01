@@ -4,7 +4,7 @@ import SockJS from 'sockjs-client';
 
 export const myRxStompConfig: RxStompConfig = {
   // Which server?
-  brokerURL: 'ws://192.168.108.204:8080/ws',
+  brokerURL: 'ws://13.232.231.237:8080/ws',
 
   // Headers
   // Typical keys: login, passcode, host
@@ -23,7 +23,7 @@ export const myRxStompConfig: RxStompConfig = {
   // Will log diagnostics on console
   // It can be quite verbose, not recommended in production
   // Skip this key to stop logging to console
-  webSocketFactory: () => new SockJS('http://192.168.108.204:8080/ws'),
+  webSocketFactory: () => new SockJS('http://13.232.231.237:8080/ws'),
   debug: (msg: string): void => {
     console.log(new Date(), msg);
   },

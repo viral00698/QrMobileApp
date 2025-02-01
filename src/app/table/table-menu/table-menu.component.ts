@@ -7,12 +7,22 @@ import { MenuService } from 'src/app/services/menu.service';
 import { SecureLocalStorageService } from 'src/app/services/secure-local-storage.service';
 import { VendorService } from 'src/app/services/vendor.service';
 
+
 @Component({
   selector: 'app-table-menu',
   templateUrl: './table-menu.component.html',
   styleUrls: ['./table-menu.component.css']
 })
 export class TableMenuComponent {
+
+  cardStyles = {
+    justifyContent: 'center',
+    width: '95vw',
+    margin: '0.5rem 0.5rem .2rem 0.5rem',
+    borderRadius: '10px',
+    boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+  };
+
   orderQty: number = 1;
   searchByItem: any;
 
@@ -61,7 +71,6 @@ export class TableMenuComponent {
       this.vendor = JSON.parse(tmp)
       this.venderId = this.vendor.vendorId
     }
-    debugger
   }
 
   getVendorDetails() {

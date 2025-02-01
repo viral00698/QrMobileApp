@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { zIndex } from 'html2canvas/dist/types/css/property-descriptors/z-index';
 import { MessageService } from 'primeng/api';
 import { AppType } from 'src/app/constent/app-type';
 import { OrderStatus } from 'src/app/constent/order-status';
@@ -21,6 +22,13 @@ import { VendorService } from 'src/app/services/vendor.service';
 })
 export class TablePlaceOrderComponent {
 
+  cardStyles = {
+    margin: "2rem",
+    padding:'0.5rem',
+    borderRadius: "10px",
+    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+   
+  };
   
   items: any = []
   bilingObject: any;

@@ -14,7 +14,7 @@
         <p class="emptyCartItem emptyCartText">Empty Cart</p>
       </div>
     </p-card>
-    <p-card *ngFor="let item  of items">
+    <p-card *ngFor="let item  of items" [ngStyle]="cardStyles">
       <ng-template pTemplate="header">
         <div class="flex">
           <img alt="Card" class="place_order_card_img" src="../../../assets/samosa.jpg" alt="Image not found" />
@@ -26,9 +26,9 @@
         </div>
         <div class="flex">
           <div class="fx_btn_left">
-            <p-button (click)="ororderQtyDec(item)" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
+            <button (click)="ororderQtyDec(item)" class="qty_minus"> <i class="pi pi-minus"></i> </button>
             <input [(ngModel)]="item.itemQty"  [min]="0" [readonly]="true" class="input_qty" type="text"  pInputText />
-            <p-button (click)="orderQtyInc(item)" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
+            <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i> </button>
           </div>
           <div class="fx_btn_right additem_btn_delete">
             <p-button  styleClass="qty_delete" (click)="deleteItem(item)" ><i class="pi pi-trash"></i> </p-button>
@@ -71,8 +71,8 @@
   <div class="footer-grid" *ngIf="bilingObject?.orderValue > 0">
 
     <div class="footer">
-      <button pButton pRipple label="Pay Online" [disabled]="!isValid" class="p-button-success"></button>
-      <button pButton pRipple label="Pay Cash" [disabled]="!isValid"  (click)="getInfo()" class="p-button-success"></button>
+      <button pButton pRipple (click)="getInfo('ONLINE')" label="Pay Online" [disabled]="!isValid" class="p-button-success"></button>
+      <button pButton pRipple label="Pay Cash" [disabled]="!isValid"  (click)="getInfo('CASH')" class="p-button-success"></button>
     </div>
   </div>
 

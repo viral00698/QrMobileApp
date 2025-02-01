@@ -17,22 +17,31 @@
     </div>
   </div>
 
-  <div style="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll; width: 100vw;">
+  <div  style="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll; width: 100vw;">
     
-    <p-card  *ngFor="let item  of tmpMenuList" header="{{item.itemName}}" subheader={{item?.amount}}>
+    <p-card  *ngFor="let item  of tmpMenuList" [ngStyle]="cardStyles">
       <!-- <div *ngIf="tmpMenuList.length == 0"> <h5>Item Not Available</h5> </div> -->
       <ng-template pTemplate="header">
         <img alt="Card" class="card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />
+          <div class="p-card-title">
+            {{item.itemName}}
+          </div>
       </ng-template>
-      <p class="item_content">
-       {{item?.description}}
-      </p>
+      <ng-template pTemplate="subheader">
+        <div class="p-card-subtitle">
+          {{item?.amount}}
+        </div>
+        <div class="item_content">
+          {{item?.description}}
+        </div> 
+      </ng-template>
+     
       <ng-template pTemplate="footer">
         <div class="flex gap-3 mt-1">
-          <p-inplace>
+          <!-- <p-inplace>
             <ng-template pTemplate="display">
               <div class="additem_btn"  *ngIf="!item?.itemQty || item?.itemQty === 0">
-                <p-button styleClass="primary_btn" (click)="itemAdd(item)" label="Add" /> 
+                <p-button styleClass="primary_btn"  (click)="itemAdd(item)" label="Add" /> 
               </div>
               <div class="additem_btn" *ngIf="item?.itemQty && item?.itemQty > 0">
                 <p-button (click)="ororderQtyDec(item)" styleClass="qty_minus"> <i class="pi pi-minus"></i> </p-button>
@@ -47,7 +56,27 @@
                 <p-button (click)="orderQtyInc(item)" styleClass="qty_plus"><i class="pi pi-plus"></i> </p-button>
               </div>
             </ng-template>
-          </p-inplace>
+          </p-inplace> -->
+
+          <p-inplace>
+            <ng-template pTemplate="display">
+              <div class="additem_btn"  *ngIf="!item?.itemQty || item?.itemQty === 0">
+                <button class="primary_btn"  (click)="itemAdd(item)"><i class="bi bi-plus-circle"></i></button>
+              </div>
+              <div class="additem_btn" *ngIf="item?.itemQty && item?.itemQty > 0">
+                <button (click)="ororderQtyDec(item)" class="qty_minus"> <i class="pi pi-minus"></i> </button>
+                <input  [value]="item?.itemQty"  [min]="0" [readonly]="true"  class="input_qty" type="text"   pInputText />
+                <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i> </button>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <div class="additem_btn">
+                <button (click)="ororderQtyDec(item)" class="qty_minus"> <i class="pi pi-minus"></i> </button>
+                <input  [value]="item?.itemQty"  [min]="0" [readonly]="true"  class="input_qty" type="text"   pInputText />
+                <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i> </button>
+              </div>
+            </ng-template>
+        </p-inplace>
          
         </div>
       </ng-template>

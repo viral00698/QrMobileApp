@@ -27,6 +27,15 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   customerUUId!: string
   dynamicId: any;
 
+
+  cardStyles = {
+    justifyContent: 'center',
+    width: '95vw',
+    margin: '0.5rem 0.5rem .2rem 0.5rem',
+    borderRadius: '10px',
+    boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+  };
+
   constructor(private router: Router, private productService: MenuService, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -45,12 +54,11 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
 
     // Access the query parameters when the app loads
     this.route.queryParams.subscribe(params => {
-      this.dynamicId = params['ugygewncuirhij']; // Get the 'id' parameter
+      this.dynamicId = params['ugygewncuirhijd']; // Get the 'id' parameter
       // console.log('Dynamic ID:', this.dynamicId);
       if (this.dynamicId) {
         this.venderId = this.dynamicId
       }
-
     });
 
     this.setCustomerUUID();
@@ -68,8 +76,6 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     }
 
   }
-
-
 
   getVendorDetails() {
 
@@ -246,6 +252,9 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   navigateOrderHistory() {
     this.router.navigate(['OrderHistory']);
   }
+
+
+  
 }
 
 

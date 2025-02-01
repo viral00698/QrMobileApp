@@ -101,12 +101,15 @@
  
 }
 
-:host{
+/* :host{
   p-card{
-    
     border-radius: 6px;
     margin-bottom: .5rem;
-    /* background-color: black; */
   }
-}
+} */
 
+    p-card{
+      border-radius: 6px;
+      margin-bottom: .5rem;
+      /* background-color: black; */
+    }
