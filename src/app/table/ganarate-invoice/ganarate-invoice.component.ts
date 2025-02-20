@@ -34,7 +34,6 @@ export class GanarateInvoiceComponent implements OnInit {
   getVendorDetail(){
     if(!this.vendorDetails){
       const tmp = this.localSecureService.decryptAndGet(StorageKey.VENDER)
-      debugger
     }
   }
   getOrderBill(data:any){

@@ -42,9 +42,9 @@ export class TableOrdersComponent implements OnInit {
   }
   getTableOrdes(){
     if(this.table){
-      this.tableService.getbyTableOrders(this.table.vendorId , this.table.tableId).subscribe((res:any)=>{
+      this.tableService.getbyTableOrders(this.table?.vendorId , this.table?.tableId).subscribe((res:any)=>{
         if(res.status === RequestStatus.success){
-          this.products = res.data[0]
+          this.products = res?.data?.[0]
           this.secureStoregeSerive.encriptAndSave(this.products,StorageKey.TABLE_ORDER)
         }
       })

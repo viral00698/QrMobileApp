@@ -49,7 +49,6 @@
     <p-table  *ngIf="products?.orderDetails?.length > 0" [value]="products?.orderDetails">
       <ng-template pTemplate="header">
         <tr>
-          <!-- <th scope="col" class="table_heading">Sr.</th> -->
           <th scope="col" class="table_heading">Item Name</th>
           <th scope="col" class="table_heading">Qty</th>
           <th scope="col" class="table_heading">Amount</th>
@@ -57,18 +56,18 @@
       </ng-template>
        <ng-template pTemplate="body" let-product> 
           <tr>
-            <td class="table_heading"> {{product.itemName}}</td>
-            <td class="table_heading"> {{product.quntity}}</td>
-            <td class="table_heading amount"> {{product.amount}}</td>
+            <td class="table_heading"> {{product?.itemName}}</td>
+            <td class="table_heading"> {{product?.quntity}}</td>
+            <td class="table_heading amount"> {{product?.amount}}</td>
           </tr>
       </ng-template>
     </p-table>
   </p-card>
-   <p-card class="orderDetailsCard">
+   <p-card class="orderDetailsCard" *ngIf="table?.tableStatus === 'AVAILABLE' " >
     <h6 style="padding: .5rem; margin: 0;">Customer Details:</h6>
    </p-card>
    
-  <p-card class="orderDetailsCard">
+  <p-card class="orderDetailsCard" *ngIf="table?.tableStatus === 'AVAILABLE' " >
     <div class="userInput">
     
       <input class="input_box" [(ngModel)]="custName" (ngModelChange)="validateCustName()" type="text" pInputText placeholder="Enter Customer name..." />
@@ -88,7 +87,6 @@
 
   <p-card class="orderDetailsCard">
     <div class="flex">
-      <!-- [disabled]="!isName || !isValid"  -->
       <button class="flex-tableOrderDetails btn btn-primary"(click)="redirectToMenu(table)"><i class="bi bi-plus-square-fill"></i> Add item</button>
       <button *ngIf="table!==null && table?.tableStatus === 'BOOKED'" class="flex-tableOrderDetails btn btn-primary" (click)="ganrateInvoice()"><img src="../../../assets/invoice.png" alt="Icon" class="icon" /></button>
     </div>

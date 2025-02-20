@@ -7,20 +7,20 @@
 <div id="invoice">
   <div class="invoiceHeading">
     <p class="titel_invoice">Invoice</p>
-    <p class="restro_name">{{products.restroName}}</p>
+    <p class="restro_name">{{products?.restroName}}</p>
   </div>
   <div class="invoice_flex">
     <div class="customer_Detail">
       <p-card [style]="{'margin-bottom':0 , 'padding':'.2rem'}">
-        <p class="cust_details">OrderId:{{products.orderId |  slice:0:7}}</p>
-        <p class="cust_details">Name:{{products.customerName}}</p>
-        <p class="cust_details">Mobile:{{products.customerMobileNo}}</p>
+        <p class="cust_details">OrderId:{{products?.orderId |  slice:0:7}}</p>
+        <p class="cust_details">Name:{{products?.customerName}}</p>
+        <p class="cust_details">Mobile:{{products?.customerMobileNo}}</p>
       </p-card>
     </div>
     <div class="date">
       <p-card [style]="{'margin-bottom':0 , 'padding':'.2rem'}">
-        <p class="cust_details">Date:{{products.orderAt |  date:'dd/MMM/yy hh:mm:a'}}</p>
-        <p class="cust_details">Table:{{products.tableOrder.tableName}}</p>
+        <p class="cust_details">Date:{{products?.orderAt |  date:'dd/MMM/yy hh:mm:a'}}</p>
+        <p class="cust_details">Table:{{products?.tableOrder?.tableName}}</p>
       </p-card>
     </div>
   </div>
@@ -37,10 +37,10 @@
         </tr>
         <tr *ngFor="let item of products?.orderDetails">
           <!-- <td  class="table_value">1</td> -->
-          <td class="table_value">{{item.itemName}}</td>
-          <td class="table_value">{{item.quntity}}</td>
-          <td class="table_value amount">{{item.amount}}</td>
-          <td class="table_value amount">{{item.amount*item.quntity}}</td>
+          <td class="table_value">{{item?.itemName}}</td>
+          <td class="table_value">{{item?.quntity}}</td>
+          <td class="table_value amount">{{item?.amount}}</td>
+          <td class="table_value amount">{{item?.amount*item?.quntity}}</td>
         </tr>
    
       </ng-template>
@@ -58,15 +58,15 @@
       </div>
       <div class="flex bill_section">
         <p class="flex-item1 bill_content">GST</p>
-        <p class="flex-item2 bill_content amountSuffix">{{products.gst}}</p>
+        <p class="flex-item2 bill_content amountSuffix">{{products?.gst}}</p>
       </div>
       <div class="flex bill_section">
         <p class="flex-item1 bill_content">SGST</p>
-        <p class="flex-item2 bill_content amountSuffix">{{products.sgst}}</p>
+        <p class="flex-item2 bill_content amountSuffix">{{products?.sgst}}</p>
       </div>
       <div class="flex bill_section">
         <p class="flex-item1 bill_content">Restaurant Charges:</p>
-        <p class="flex-item2 bill_content amountSuffix">{{products.restaurantsCharge}}</p>
+        <p class="flex-item2 bill_content amountSuffix">{{products?.restaurantsCharge}}</p>
       </div>
       <!-- <div class="flex bill_section">
         <p class="flex-item1 bill_content total_amount">Total Amount:</p>
