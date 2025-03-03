@@ -1,4 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-order-success',
@@ -6,6 +9,40 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./order-success.component.css']
 })
 export class OrderSuccessComponent {
+  @ViewChild('receipt', { static: false }) receiptElement!: ElementRef;
+
+  
+  qrData: string = 'http://192.168.81.204:4201/order_success';
+  responseData:any;
+
+  constructor(private router: Router , private dataSharing:DataSharingService) { }
+
+  ngOnInit() {
+     this.responseData =  this.dataSharing.getResponse();
+     this.qrData = this.responseData?.token
+  }
+
+  downloadReceipt() {
+    const receipt = this.receiptElement.nativeElement;
+
+    // Hide download button before capturing
+    const downloadBtn = receipt.querySelector('.ignore-btn');
+    downloadBtn.style.display = 'none';
+
+    // Capture screenshot
+    html2canvas(receipt, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+
+      // Restore button visibility
+      downloadBtn.style.display = 'block';
+
+      // Create a download link
+      const link = document.createElement('a');
+      link.href = imgData;
+      link.download = 'order-receipt.png';
+      link.click();
+    });
+  }
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event: any): void {
@@ -13,6 +50,5 @@ export class OrderSuccessComponent {
     console.log('Back button pressed');
     history.pushState(null, '', window.location.href);
   }
-
 
 }

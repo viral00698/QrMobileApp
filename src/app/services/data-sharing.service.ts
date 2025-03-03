@@ -11,6 +11,8 @@ export class DataSharingService {
   constructor(private localStorageSecureService: SecureLocalStorageService) { }
   private map: Map<string, any> = new Map();
 
+  private responseData:any;
+
   addItem(item: any) {
     this.map.set(item.productId, item);
     this.localStorageSecureService.encriptAndSave(JSON.stringify(Array.from(this.map.entries())), StorageKey.ITEMS);
@@ -81,6 +83,14 @@ export class DataSharingService {
 
   getMap(): Map<string, any> {
     return this.map;
+  }
+
+  setResponse(data:any){
+    this.responseData = data
+  }
+
+  getResponse(){
+    return this.responseData;
   }
 
 }

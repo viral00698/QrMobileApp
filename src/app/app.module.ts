@@ -36,6 +36,7 @@ import { MessageService } from 'primeng/api';
 import { OnlinePayComponent } from './order/online-pay/online-pay.component';
 import { OrderSuccessComponent } from './order/order-success/order-success.component';
 import { OrderFaieldComponent } from './order/order-faield/order-faield.component';
+import { QrcodeDirective } from './directive/qrcode.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { OrderFaieldComponent } from './order/order-faield/order-faield.componen
     OnlinePayComponent,
     OrderSuccessComponent,
     OrderFaieldComponent,
+    QrcodeDirective,
     
   
   ],
