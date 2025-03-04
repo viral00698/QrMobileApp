@@ -37,6 +37,7 @@ import { OnlinePayComponent } from './order/online-pay/online-pay.component';
 import { OrderSuccessComponent } from './order/order-success/order-success.component';
 import { OrderFaieldComponent } from './order/order-faield/order-faield.component';
 import { QrcodeDirective } from './directive/qrcode.directive';
+import { ErrorPageComponent } from './error-page/error-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,7 @@ import { QrcodeDirective } from './directive/qrcode.directive';
     OrderSuccessComponent,
     OrderFaieldComponent,
     QrcodeDirective,
-    
+    ErrorPageComponent,
   
   ],
   imports: [
