@@ -35,9 +35,12 @@ export class PaymentService {
 
             data['razorpayResponse'] = response
             this.postVerificationObject(data).subscribe((res:any)=>{
+             
               if(res.status === RequestStatus.success && res.data){
-                this.router.navigate(['order_success']);
+                data['paymentStatus'] = true
+                this.router.navigate(['order_success'] ,{ state: { orderData: (res?.data as any) } });
               }else{
+                data['paymentStatus'] = false
                 this.router.navigate(['order_field']);
               }
             })

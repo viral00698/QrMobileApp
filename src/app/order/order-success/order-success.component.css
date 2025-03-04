@@ -1,0 +1,109 @@
+.main-container{
+   padding: 1rem;
+   background-color: #fafafa;
+}
+
+.card{
+    background-color:white;
+    border-radius: 8px;
+    border: none;
+    margin: 3px;
+}
+.flex-card{
+    display: flex;
+}
+.item-a{
+    flex: 1;
+    padding: .5rem;
+    text-align: start;
+}
+
+.heading{
+    opacity: 0.6;
+    font-size: x-small;
+    font-weight: 500;
+}
+
+.note{
+    margin: 0;
+    font-size: small;
+    font-weight: 700;
+    margin-bottom: .5rem;
+
+}
+.content{
+    font-size: medium;
+    font-weight: 500;
+}
+
+.amount{
+    font-size: medium;
+    font-weight: 500;
+}
+
+.amount-price::before{
+    content: "₹";
+}
+
+.titel{
+    flex: 1;
+}
+
+.main-titel{
+    font-size: medium;
+    font-weight: 700;
+    padding: .5rem;
+    place-self: center;
+    margin: 0;
+    color: black;
+}
+
+.token{
+    font-size: x-large;
+    font-weight: 800;
+    margin: 0;
+    place-self: center;
+    margin-bottom: .5rem;
+
+}
+
+.btn-download{
+    text-align: center;
+    font-size: medium;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #1f0e32;
+    /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+}
+
+.btn-download:hover{
+    background-color:white;
+    border: 2px solid black;
+    color: black;
+    border-radius: 5px;
+}
+
+.btn-Order:hover{
+    background-color:white;
+    border: 2px solid black;
+    color: black;
+    border-radius: 5
+}
+.btn-Order{
+    margin-right: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    background-color: #1f0e32;
+    /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+}
+
+.restaurant-titel{
+    font-size: medium;
+    font-weight: 700;
+    /* padding: .6rem; */
+}
+
