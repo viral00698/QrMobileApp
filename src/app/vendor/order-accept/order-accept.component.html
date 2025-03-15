@@ -1,0 +1,113 @@
+<div class="header-grid">
+  <div class="flex">
+    <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
+    <h3 class="flex-item2"><i class="pi pi-user"></i></h3>
+  </div>
+</div>
+<div class="main-container">
+  <div class="nav-btn" *ngIf="!isScan">
+    <p class="btn-1" (click)="scanQr()">Scan Qr</p>
+    <p class="btn-2" (click)="getOrders()">View Orders</p>
+  </div>
+  <div *ngIf="!isScan" id="reader" #readerRef [style.display]="!this.toggleBtn ? 'none' : 'block'"></div>
+  <ng-container *ngIf="this.toggleBtn">
+    <div *ngIf="isScan">
+      <div class="details-container">
+        <div class="details-container-item">
+          <p class="card-heading">Accept & Proceed</p>
+        </div>
+
+        <div class="details-container-item">
+          <p class="token">{{Order?.token_no}}</p>
+          <p class="heading-status"><i class="order-status">{{Order?.orderStatus}}</i></p>
+        </div>
+
+        <div class="details-container-item">
+          <p class="orderId"><i class="heading">OrderId:</i> {{Order?.orderId | slice:0:6 }}</p>
+
+          <p class="orderId"><i class="heading">Date:</i> {{Order?.orderAt | date:'dd-MMM-yyyy hh:mm a'}}</p>
+          <p class="orderId"><i class="heading">Mobile:</i> {{Order?.customerMobileNo}}</p>
+          <!-- <p class="orderId"><i class="heading">status:</i> <i class="order-status">CLOSE</i></p> -->
+          <p class="orderId"><i class="heading">Payment Mode: </i> <i class="order-status"> {{Order?.payment_mode}}</i></p>
+          <p class="orderId"><i class="heading">Payment Status: </i> <i class="order-status"> {{Order?.paymentStatus}}</i></p>
+          <p class="orderId" *ngIf="Order?.txid"><i class="heading">Txn ID: </i> {{Order?.txid}}</p>
+          <p class="orderId" *ngIf="!Order?.txid"><i class="heading">Txn ID: </i>-</p>
+        </div>
+
+        <div class="details-container-item" *ngFor="let item of Order?.orderDetails">
+          <div>
+            <p class="item-titel">{{item?.itemName}}</p>
+            <p class="item-qty">Qty: {{item?.quntity}}</p>
+            <p class="item-price">Amount: <i class="rupee">{{item?.amount}}</i></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="details-container-item">
+        <p class="gst-sgst-charge" *ngIf="Order?.restaurantsCharge > 0">Restaurant Charge: <i class="rupee">{{Order?.restaurantsCharge}}</i></p>
+        <p class="gst-sgst-charge" *ngIf="Order?.gst > 0">Gst: <i class="rupee">{{Order?.gst}}</i></p>
+        <p class="gst-sgst-charge" *ngIf="Order?.sgst > 0">Gst: <i class="rupee">{{Order?.sgst}}</i></p>
+        <p class="total-amount">Total Amount: <i class="rupee">{{Order?.totelAmount}}</i></p>
+      </div>
+
+      <div class="details-container-item">
+        <div class="btn-accept">
+          <button class="btn-download" (click)="acceptRequest()">Close Order</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!this.toggleBtn">
+    <div class="orders-list" *ngFor="let item of  this.last24HourOrders">
+      <div class="card-header" *ngIf="!this.viewOn" (click)="selectedOrderPrview(item)">
+        <div class="orders-card">
+          <p class="card-heading"><i class="Orders-heading">OrderId:</i> <i class="card-heading-content"> {{item?.orderId | slice:0:6 }} </i></p>
+          <p class="card-heading"><i class="Orders-heading">Status:</i><i class="card-heading-content">{{item?.orderStatus }}</i></p>
+        </div>
+        <div class="orders-card">
+          <p class="card-heading"><i class="Orders-heading">Date:</i><i class="card-heading-content">{{item?.orderAt | date:'dd-MMM-yyy HH:mm:a' }}</i></p>
+          <p class="card-heading"><i class="Orders-heading">Mobile:</i><i class="card-heading-content"> {{item?.customerMobileNo }} </i></p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="this.viewOn" >
+    <div class="card-details" >
+      <div class="details-container">
+        <div class="details-container-item">
+          <p class="token">{{selectedOrder?.token_no}}</p>
+          <p class="heading-status"><i class="order-status">{{selectedOrder?.orderStatus}}</i></p>
+        </div>
+
+        <div class="details-container-item">
+          <p class="orderId"><i class="heading">OrderId:</i> {{selectedOrder?.orderId | slice:0:6}}</p>
+
+          <p class="orderId"><i class="heading">Date:</i> {{selectedOrder?.orderAt | date:'dd-MMM-yyyy hh:mm a'}}</p>
+          <p class="orderId"><i class="heading">Mobile:</i> {{selectedOrder?.customerMobileNo}}</p>
+          <!-- <p class="orderId"><i class="heading">status:</i> <i class="order-status">CLOSE</i></p> -->
+          <p class="orderId"><i class="heading">Payment Mode: </i> <i class="order-status"> {{selectedOrder?.payment_mode}}</i></p>
+          <p class="orderId"><i class="heading">Payment Status: </i> <i class="order-status"> {{selectedOrder?.paymentStatus}}</i></p>
+          <p class="orderId" *ngIf="selectedOrder?.txid"><i class="heading">Txn ID: </i> {{selectedOrder?.txid}}</p>
+          <p class="orderId" *ngIf="!selectedOrder?.txid"><i class="heading">Txn ID: </i>-</p>
+        </div>
+
+        <div class="details-container-item" *ngFor="let item of selectedOrder?.orderDetails">
+          <div>
+            <p class="item-titel">{{item?.itemName}}</p>
+            <p class="item-qty">Qty: {{item?.quntity}}</p>
+            <p class="item-price">Amount: <i class="rupee">{{item?.amount}}</i></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="details-container-item">
+        <p class="gst-sgst-charge" *ngIf="selectedOrder?.restaurantsCharge > 0">Restaurant Charge: <i class="rupee">{{selectedOrder?.restaurantsCharge}}</i></p>
+        <p class="gst-sgst-charge" *ngIf="selectedOrder?.gst > 0">Gst: <i class="rupee">{{selectedOrder?.gst}}</i></p>
+        <p class="gst-sgst-charge" *ngIf="selectedOrder?.sgst > 0">Gst: <i class="rupee">{{selectedOrder?.sgst}}</i></p>
+        <p class="total-amount">Total Amount: <i class="rupee">{{selectedOrder?.totelAmount}}</i></p>
+      </div>
+    </div>
+  </ng-container>
+</div>

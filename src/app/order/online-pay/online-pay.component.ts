@@ -19,10 +19,10 @@ export class OnlinePayComponent implements OnInit {
       this.placed.orderPlaced(data?.order).subscribe((res: any) => {
         if (res?.status === RequestStatus.success) {
 
-          const order_id = res?.data?.razorpayOrder.orderId;
+          const order_id = res?.data?.razorpayOrder?.orderId;
           if (order_id) {
-            this.dataShraing.setResponse(res.data);
-            this.paymentService.makePayment(res.data);
+            this.dataShraing.setResponse(res?.data);
+            this.paymentService.makePayment(res?.data);
           }else{
             //throw erorr page
           }

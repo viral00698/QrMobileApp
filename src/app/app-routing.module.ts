@@ -13,6 +13,7 @@ import { GanarateInvoiceComponent } from './table/ganarate-invoice/ganarate-invo
 import { OnlinePayComponent } from './order/online-pay/online-pay.component';
 import { OrderSuccessComponent } from './order/order-success/order-success.component';
 import { OrderFaieldComponent } from './order/order-faield/order-faield.component';
+import { OrderAcceptComponent } from './vendor/order-accept/order-accept.component';
 
 const routes: Routes = [
 {path:'',component:LoginComponent},   //http://localhost/?ugygewncuirhijd=d3456789-abcd-ef01-2345-6789abcdef01 it is working
@@ -28,7 +29,9 @@ const routes: Routes = [
 {path:'ganrateInvoice',component:GanarateInvoiceComponent},
 {path:'online_pay',component:OnlinePayComponent},
 {path:'order_success' , component:OrderSuccessComponent},
-{path:'order_field',component:OrderFaieldComponent}
+{path:'order_field',component:OrderFaieldComponent},
+{path:'order_accept',component:OrderAcceptComponent}
+
 ];
 
 @NgModule({

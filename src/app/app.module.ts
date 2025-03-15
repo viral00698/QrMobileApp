@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './qr/menu/menu.component';
@@ -38,6 +38,8 @@ import { OrderSuccessComponent } from './order/order-success/order-success.compo
 import { OrderFaieldComponent } from './order/order-faield/order-faield.component';
 import { QrcodeDirective } from './directive/qrcode.directive';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { CommonModule } from '@angular/common';
+import { OrderAcceptComponent } from './vendor/order-accept/order-accept.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     OrderFaieldComponent,
     QrcodeDirective,
     ErrorPageComponent,
+    OrderAcceptComponent
   
   ],
   imports: [
@@ -81,9 +84,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     TableModule,
     DropdownModule,
     ToastModule,
-    
-    
-    
+    CommonModule,
     
   ],
   providers: [
