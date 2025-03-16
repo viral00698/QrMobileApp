@@ -10,4 +10,12 @@ export class OrdersService {
   getOrdersByCustomerId(id:any){
     return this.http.get('product/getByOrderBy/'+id);
   }
+
+  getOrdersByTokenAndVendor(vendorId:string , token:string){
+    return this.http.get('Orders/getOrdersByTokenAndVendor/'+vendorId+'/'+token)
+  }
+
+  getOrders(vendorId:string): any {
+    return this.http.get('Orders/getLastTwoDayOrder/' + vendorId);
+  }
 }

@@ -39,3 +39,38 @@ body{
     width: 24px;       /* Set the icon width */
     height: 24px;      /* Set the icon height */
   }
+
+#html5-qrcode-button-camera-start{
+    border: none;
+    padding: .5rem;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+#html5-qrcode-button-camera-stop{
+    border: none;
+    padding: .5rem;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+
+}
+
+#html5-qrcode-button-camera-start:hover{
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#html5-qrcode-button-camera-stop:hover{
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
