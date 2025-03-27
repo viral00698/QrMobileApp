@@ -60,18 +60,18 @@ export class TableOrdersComponent implements OnInit {
         'custTable':this.table
       }
       this.secureStoregeSerive.encriptAndSave(data,StorageKey.CUST_DETAILS)
-      this.router.navigate(['tableMenu']);
+      this.router.navigate(['md','tableMenu']);
     }
 
     if(this.products){
-      this.router.navigate(['tableMenu']);
+      this.router.navigate(['md','tableMenu']);
     }
   }
 
   ganrateInvoice() {
 
     if(this.products){
-      this.router.navigate(['ganrateInvoice'] , { queryParams: { data: this.products?.orderId } });
+      this.router.navigate(['md','ganrateInvoice'] , { queryParams: { data: this.products?.orderId } });
     }
    
   }
