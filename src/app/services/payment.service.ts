@@ -14,15 +14,16 @@ export class PaymentService {
   makePayment(data:any) {
     this.loadRazorpayScript().then(() => {
       const options = {
-        key: 'rzp_test_Ega5AUS7osq9QI', // Replace with Razorpay key
+        key: 'rzp_test_gD5uJZvpUqS4ka', // Replace with Razorpay key
         // amount: 50000, // Example: 500.00 INR in paise
         currency: 'INR',
         name: 'Vitts.in',
-        description: 'Testing Razorpay',
+        description: 'Enjoy a hassle-free dining experience with secure online payments at Vitts.in – Order, Pay, and Savor!',
+        // description: 'Testing Razorpay',
         order_id: data?.razorpayOrder?.orderId,
         method: {
            // Enable UPI as a payment option
-          card: true, // Enable card payments
+          card: false, // Enable card payments
           wallet: false, // Enable wallets
           emi:false,
           netbanking:false,

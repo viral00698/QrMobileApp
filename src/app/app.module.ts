@@ -40,6 +40,8 @@ import { QrcodeDirective } from './directive/qrcode.directive';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { CommonModule } from '@angular/common';
 import { OrderAcceptComponent } from './vendor/order-accept/order-accept.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +87,7 @@ import { OrderAcceptComponent } from './vendor/order-accept/order-accept.compone
     DropdownModule,
     ToastModule,
     CommonModule,
+    InputSwitchModule,
     
   ],
   providers: [

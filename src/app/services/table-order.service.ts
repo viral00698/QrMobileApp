@@ -24,4 +24,12 @@ export class TableOrderService {
   getbyTableOrders(vid:any,tid:any){
     return this.http.get('Orders/getbyTableOrder/' + vid+ '/' +tid)
   }
+
+  createRozerpayOrderForTable(order:any){
+    return this.http.post('api/v1/tableOrder/createRozerPayOrder' ,order)
+  }
+
+  updateTableStatus(table:any){
+    return this.http.post('api/v1/tableOrder/updateTableStatus' , table);
+  }
 }

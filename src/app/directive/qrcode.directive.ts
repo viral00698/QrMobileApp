@@ -21,12 +21,10 @@ export class QrcodeDirective implements OnChanges {
     try {
       this.el.nativeElement.innerHTML = ''; // Clear previous QR code
       const canvas = document.createElement('canvas');
-      debugger
       await QRCode.toCanvas(canvas, this.qrData, { width: 200 });
       this.el.nativeElement.appendChild(canvas);
     } catch (error) {
-      console.error('QR Code generation failed:', error);
-      debugger
+      // console.error('QR Code generation failed:', error);
     }
   }
 }

@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {  Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { zIndex } from 'html2canvas/dist/types/css/property-descriptors/z-index';
 import { MessageService } from 'primeng/api';
 import { AppType } from 'src/app/constent/app-type';
 import { OrderStatus } from 'src/app/constent/order-status';
@@ -21,14 +20,6 @@ import { VendorService } from 'src/app/services/vendor.service';
   styleUrls: ['./table-place-order.component.css'],
 })
 export class TablePlaceOrderComponent {
-
-  cardStyles = {
-    margin: "2rem",
-    padding:'0.5rem',
-    borderRadius: "10px",
-    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-   
-  };
   
   items: any = []
   bilingObject: any;
@@ -41,17 +32,16 @@ export class TablePlaceOrderComponent {
   tableOrder:any
   constructor(private router: Router, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
-    private changeDetectorRef: ChangeDetectorRef,
     private billingService: BillingService,
     private venderService: VendorService,
     private placeOrder: PlaceOrderService,
     private messageService: MessageService,
   ) { }
 
-  ngDoCheck() {
-    // this.mapStoreOnDestory()
-    // this.billGanaretor()
-  }
+  // ngDoCheck() {
+  //   // this.mapStoreOnDestory()
+  //   // this.billGanaretor()
+  // }
 
   ngOnInit(): void {
     this.getItems();
@@ -169,24 +159,12 @@ getCustDetails(){
 
   }
 
-  // inputchange() {
-  //   this.validateMobileNumber()
-  //   if (this.isValid) {
-  //   } else {
-  //     console.log('Invalid mobile number');
-  //   }
-  // }
-
-  // validateMobileNumber() {
-  //   const pattern = /^\d{10}$/; // Adjust the regex as needed
-  //   this.isValid = pattern.test(this.userMobile);
-  // }
+ 
 
   CreateOrder() {
 
     // let orderDetail : OrderDetails = new OrderDetails();
 
-   
 
     if (!this.items || this.items.length === 0) {
       console.error('No items selected.');
@@ -247,19 +225,24 @@ getCustDetails(){
 
     customerOrder.orderDetails = array ?? [];
 
-    this.placeOrder.tableOrderPlace(customerOrder).subscribe((res:any)=>{
+    this.placeOrder.tableOrderPlace(customerOrder).subscribe((res:any)=>{ 
       if(res.status === RequestStatus.success){
-      
+ 
         localStorage.removeItem(StorageKey.MENU);
         localStorage.removeItem(StorageKey.ITEMS);
         localStorage.removeItem(StorageKey.TABLE_ORDER)
+        this.userSelectItems.clearItem();
+
         this.messageService.add({life:8000, key: 'tl', severity: 'success', summary: 'success', detail: res.message });
         this.router.navigate(['vendorTable']);
       }else{
-         
+
         localStorage.removeItem(StorageKey.MENU);
         localStorage.removeItem(StorageKey.ITEMS);
         localStorage.removeItem(StorageKey.TABLE_ORDER)
+        this.userSelectItems.clearItem();
+
+
         this.messageService.add({ key: 'tl', severity: 'error', summary: 'error', detail: res.message });
       }
     })

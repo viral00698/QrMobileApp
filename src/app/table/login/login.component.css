@@ -57,26 +57,21 @@
 }
 
 
-
 :host{
     .p-card{
         border-radius: 10px;
         background-color: white;
     }
-
-    /* .login_btn {
-        width: 20%;
-        margin-bottom: .2rem;
-        border:none;
-        font-size: medium;
-        font-weight: 500;
-        border-radius: 10px;
-        
-    } */
-
+    .p-button:hover{
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+    }
     .p-button {
         border: 0;
-        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        background-color: black;
+        color: white;
+    
         width: 80vw;
         height: 2.5rem;
         margin: 1rem;
@@ -84,9 +79,7 @@
         cursor: pointer;
         font-size: larger;
         font-weight: 500;
-    
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         z-index: 1000;
-        /* Ensures it stays above other elements */
     }
 }

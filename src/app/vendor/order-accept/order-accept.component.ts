@@ -46,7 +46,7 @@ export class OrderAcceptComponent implements OnInit, AfterViewInit {
     this.isScan = false;
     this.viewOn = false;
     this.toggleBtn = true
-debugger
+
     setTimeout(() => {
       scanner.render(
         (decodedText: string) => {

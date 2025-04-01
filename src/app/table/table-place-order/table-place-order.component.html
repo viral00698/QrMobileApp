@@ -1,5 +1,5 @@
 <p-toast key="tl" position="top-center"></p-toast>
-<div>
+<!-- <div>
 
     <div class="header-grid">
       <div class="flex">
@@ -39,41 +39,6 @@
       </p-card>
     </div>
   
-    <!-- <p-divider *ngIf="bilingObject?.orderValue > 0" type="dotted"></p-divider>
-    <div class="billing-card" *ngIf="bilingObject?.orderValue > 0" >
-      <div class="flex bill_section">
-        <p class="flex-item1 bill_content">Order Value:</p>
-        <p class="flex-item2 bill_content amountSuffix">{{bilingObject?.orderValue | number:'1.2-2'}}</p>
-      </div>
-      <div class="flex bill_section">
-        <p class="flex-item1 bill_content">GST({{bilingObject?.gstCharge}}%):</p>
-        <p class="flex-item2 bill_content amountSuffix">{{bilingObject?.gstValue||0.00 | number:'1.2-2'}}</p>
-      </div>
-      <div class="flex bill_section">
-        <p class="flex-item1 bill_content">SGST({{bilingObject?.sgstCharge}}%):</p>
-        <p class="flex-item2 bill_content amountSuffix"> {{bilingObject?.sgstValue||0.00 | number:'1.2-2'}}</p>
-      </div>
-      <div class="flex bill_section">
-        <p class="flex-item1 bill_content">Restaurant Charges ({{bilingObject?.restoCharge}}%):</p>
-        <p class="flex-item2 bill_content amountSuffix"> {{bilingObject?.restoChargeValue||0.00 | number:'1.2-2'}}</p>
-      </div>
-      <div class="flex bill_section">
-        <p class="flex-item1 bill_content total_amount">Total Amount:</p>
-        <p class="flex-item2 bill_content total_amount amountSuffix">{{bilingObject?.totalAmount | number:'1.2-2'}}</p>
-      </div>
-    </div>
-    <p-divider *ngIf="bilingObject?.orderValue > 0" type="dotted"></p-divider>
-    <div class="Mobile_input" *ngIf="bilingObject?.orderValue > 0">
-      <input class="input_box" [(ngModel)]="userMobile" (ngModelChange)="validateMobileNumber()" type="text" pInputText placeholder="Enter Mobile..." />
-    </div> -->
-    <!-- <div *ngIf="!isValid && userMobile">
-      <small style="color: red; margin: 1rem;">Invalid mobile number. Must be 10 digits.</small>
-    </div> -->
-    <!-- <div class="footer-grid">
-      <div class="footer">
-        <button pButton pRipple label="Place Order" [disabled]="!isValid"  (click)="getInfo()" class="p-button-success"></button>
-      </div>
-    </div>  -->
 
     <p-card class="orderDetailsCard">
       <div class="flex">
@@ -84,4 +49,44 @@
   </div>
 
   
-  
+   -->
+
+   <div class="nav-bar">
+    <div class="nav-item">
+      <i class="pi pi-align-left"></i>
+    </div>
+    <div class="nav-item">
+      <i class="bi bi-box-arrow-right"></i>
+    </div>
+  </div>
+
+  <div class="main-container">
+
+    <div class="card-empty" *ngIf="items.length <= 0">
+        <p class="emptyCart">Empty Cart</p>
+    </div>
+
+    <div *ngFor="let item of items">
+    <div class="card-order" >
+      <div class="card-item">
+        <img src="../../../assets/burger.jpg" class="item-image" alt="">
+        <div class="btn-group">
+          <button (click)="ororderQtyDec(item)" class="qty-btn"> <i class="pi pi-minus"></i> </button>
+          <input   [min]="0" [(ngModel)]="item.itemQty" [readonly]="true" class="input_qty" type="text"  pInputText />
+          <button (click)="orderQtyInc(item)" class="qty-btn"><i class="pi pi-plus"></i> </button>
+        </div>
+      </div>
+      <div class="card-item card-content">
+        <p class="item-titel">{{item?.itemName}}</p>
+        <p class="item-descripstion">{{item?.description}}</p>
+        <p class="item-price">{{item?.amount}}</p>
+
+        <button class="delete-btn" (click)="deleteItem(item)"><i class="pi pi-trash"></i></button>
+      </div>
+    </div>
+    </div>
+
+    <div class="card-order"  *ngIf="items.length > 0" >
+      <button (click)="CreateOrder()" class="place-order-btn">Place Order</button>
+    </div>
+  </div>
