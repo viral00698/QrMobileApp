@@ -108,12 +108,6 @@ export class TableOrdersComponent implements OnInit {
 
   OpenPaymentGateway() {
 
-    const randomStr = Math.random().toString(36).substring(2, 12); // Generates a 10-char random string
-    const txnRef = `Ref_${randomStr}`; // Transaction Reference
-    const txnId = `TXN_${randomStr}`; // Transaction ID
-    this.products.txnNo = txnId;
-    this.products.refNo = txnRef
-
     let upiID = this.vendor?.upa // Replace with actual UPI ID
     let amount = "10.00"; // Change as needed
     let name = this.products?.restroName;
@@ -122,26 +116,36 @@ export class TableOrdersComponent implements OnInit {
     // let txnRef = "Ref123456"; // Transaction Reference ID
     let currency = "INR";
 
-    this.upiURL = `upi://pay?pa=${upiID}&pn=${name}&tr=${txnRef}&tn=Payment&am=${amount}&cu=${currency}`;
+    this.upiURL = `upi://pay?pa=${upiID}&pn=${name}&tn=Payment&am=${amount}&cu=${currency}`;
 
   }
 
   closeOrder(){
 
     if (this.products && this.vendor) {
-      this.tableService.createRozerpayOrderForTable(this.products).subscribe((res: any) => {
+      this.table.tableStatus = TableStatus.AVAILABLE
+      this.products.tableOrder = this.table
+      this.tableService.createRozerpayOrderForTable(this.products , this.vendor).subscribe((res: any) => {
         if (res?.status == RequestStatus.success) {
-    
+          this.router.navigate(['vendorTable']);
         }
       })
     }
 
-    if(this.table){
-      this.table.tableStatus = TableStatus.AVAILABLE
-      this.tableService.updateTableStatus(this.table).subscribe((res:any)=>{
-        this.router.navigate(['vendorTable']);
-      })
-    }
+    // if (this.products && this.vendor) {
+    //   this.tableService.genrateInvoice(this.products , this.vendor).subscribe((res: any) => {
+    //     if (res?.status == RequestStatus.success) {
+  
+    //     }
+    //   })
+    // }
+
+    // if(this.table){
+    //   this.table.tableStatus = TableStatus.AVAILABLE
+    //   this.tableService.updateTableStatus(this.table).subscribe((res:any)=>{
+    //     this.router.navigate(['vendorTable']);
+    //   })
+    // }
   
   }
 

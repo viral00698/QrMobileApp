@@ -25,11 +25,24 @@ export class TableOrderService {
     return this.http.get('Orders/getbyTableOrder/' + vid+ '/' +tid)
   }
 
-  createRozerpayOrderForTable(order:any){
-    return this.http.post('api/v1/tableOrder/createRozerPayOrder' ,order)
+  createRozerpayOrderForTable(order:any , vendor:any){
+
+    const json = {
+      vendor:vendor,
+      order:order,
+    }
+    return this.http.post('api/v1/tableOrder/createRozerPayOrder' ,json)
   }
 
   updateTableStatus(table:any){
     return this.http.post('api/v1/tableOrder/updateTableStatus' , table);
+  }
+
+  genrateInvoice(order:any ,vendor:any ){
+    const json = {
+      order:order,
+      vendor:vendor
+    }
+    return this.http.post('api/v1/tableOrder/genrateInvoice' , json);
   }
 }
