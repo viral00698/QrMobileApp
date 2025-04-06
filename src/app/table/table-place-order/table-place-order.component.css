@@ -1,4 +1,4 @@
-:host{
+/* :host{
     .p-toast-message {
         font-size: 1rem;
         padding: 1rem;
@@ -12,26 +12,21 @@
         width: 100vw !important;
         border-radius: 5px;
 
-        /* Adjust width for mobile */
 
     }
 
     .p-toast-message-content {
         background-color: #ffcc00 !important;
-        /* Same color for inner content */
     }
 
-    /* Target the close icon in the toast */
     .p-toast-icon-close {
        border:none;
        border-radius: 10px;
        place-self: center;
     }
 
-    /* Change background color on hover */
     .p-toast-close:hover {
         background-color: #c0392b;
-        /* Darker shade on hover */
     }
 
 }
@@ -49,24 +44,19 @@
 
         .p-toast {
             width: 100vw !important;
-            /* Adjust width for mobile */
 
         }
 
         .p-toast-message-content {
             background-color: #ffcc00 !important;
-            /* Same color for inner content */
         }
 
-        /* Target the close icon in the toast */
         .p-toast-icon-close {
            border:none;
         }
 
-        /* Change background color on hover */
         .p-toast-close:hover {
             background-color: #c0392b;
-            /* Darker shade on hover */
         }
 
 
@@ -101,8 +91,7 @@
     flex: 2;
     text-align: left;
     margin: 1rem;
-    /* font-size: x-large;
-    font-weight: 900; */
+
 }
 
 .flex-item2 {
@@ -115,7 +104,7 @@
 
 .flex-tableOrderDetails {
     flex: 1;
-    /* text-align: left; */
+
     margin: 1rem;
     margin: .3rem 1rem .3rem 1rem;
     font-size: small;
@@ -164,17 +153,13 @@
 
 .search-grid-properties {
     margin: 1rem;
-    /* color: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
 }
 
 .inputText {
     width: 100%;
     border-radius: 16px;
     margin: 1rem;
-    /* border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0; */
+  
 
     padding: .5rem;
     padding-left: 2rem !important;
@@ -182,7 +167,7 @@
     background-image: url(../../../assets/search.svg);
     background-repeat: no-repeat;
     background-position: right 1rem center;
-    /* box-shadow: rgba(224, 227, 229, 0.2) 0px 8px 24px; */
+
 
 }
 
@@ -202,22 +187,15 @@
     border-radius: 15px;
 }
 
-/* :host{ */
-    /* .p-card {
-        margin: 1rem;
-        border-radius: 10px;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    } */
 
     .p-card-title {
-        /* padding-top: .5rem; */
+  
         font-size: medium;
         font-weight: 600;
         margin: .5rem;
     }
 
     .p-card-subtitle::before {
-        /* content: "Prize: "; */
         content: "₹";
         margin: .5rem;
     }
@@ -225,8 +203,6 @@
     .p-card-subtitle {
         font-size: medium;
         font-weight: 500;
-        /* margin: .5rem; */
-        /* margin-top: 0 !important; */
 
     }
 
@@ -295,15 +271,12 @@
         color: rgb(211, 34, 34);
 
         background: none;
-        /* border-radius: 50%; */
         padding: .6rem;
 
         border: none;
         font-size: medium;
         font-weight: 200;
 
-        /* margin-left: 1rem; */
-        /* padding-left: 8rem; */
     }
 
     .footer {
@@ -325,7 +298,6 @@
 
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         z-index: 1000;
-        /* Ensures it stays above other elements */
     }
 
     .bill_section {
@@ -343,7 +315,6 @@
         font-size: large !important;
         font-weight: 800 !important;
     }
-/* } */
 
 .amountSuffix::after {
     content: " ₹";
@@ -353,7 +324,6 @@
     border-radius: 10px;
     margin: .5rem;
     padding-left: 1rem;
-    /* margin-right: .5rem; */
     height: 6vh;
     width: 100vw;
 
@@ -367,15 +337,10 @@
 
 .p-button-success:disabled {
     background-color: #ccc;
-    /* Light grey background */
     color: #666;
-    /* Dark grey text */
     cursor: not-allowed;
-    /* Show a "not-allowed" cursor */
     opacity: 0.7;
-    /* Slight transparency */
     border: 1px solid #999;
-    /* Darker border */
 }
 
 .billing-card {
@@ -408,4 +373,161 @@
 .emptyCartImage {
     width: 10vh;
     justify-content: center;
+} */
+
+
+.nav-bar{
+    display: flex;
+    padding: .5rem;
+    margin: .5rem;
+    font-weight: 700;
+    font-size: x-large;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+}
+.nav-item:first-child{
+    flex: 1;
+    text-align: start;
+}.nav-item:last-child{
+    flex: 1;
+    text-align: end;
+}
+.main-container{
+    background-color:#fafafa
+}
+
+.card-order{
+    display: flex;
+    /* flex-direction: column; */
+    padding: .5rem;
+    margin: .5rem; 
+    margin-top: 0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+}
+
+.card-item{
+    flex: 1;
+}
+
+.item-image{
+    height: 70%;
+    width: 70%;
+    margin: .2rem;
+}
+
+.item-price::before {
+    content: " ₹";
+}
+.item-price{
+    flex: 1;
+    font-size: small;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: .1rem;
+  
+}
+.item-descripstion{
+    font-size: small;
+    font-weight: 500;
+    margin: 0;
+    opacity: 0.7;
+    word-wrap: break-word;  /* Ensures long words break properly */
+    overflow-wrap: break-word;
+    white-space: normal; /* Allows text to wrap */
+}
+.item-titel{
+    font-size: medium;
+    font-weight:500;
+    margin: 0;
+}
+
+.input_qty{
+    width: 2rem;
+    height: 1.9rem;
+    border: 1px solid black;
+    user-select: none;
+    text-align: center;
+}
+
+.qty-btn:hover{
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 2px;
+}
+.qty-btn:first-child{
+    border-radius:5px 0px 0px 5px;
+}
+
+.qty-btn:last-child{
+    border-radius:0px 5px 5px 1px;
+}
+.qty-btn{
+    border: 1px solid black;
+    background-color:white;
+    color: black;
+    cursor: pointer;
+
+}
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+}
+.card-content > *:last-child {
+    align-self: flex-end; /* Aligns only the last child to the right */
+}
+.delete-btn{
+    
+    width: 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+
+}
+
+.delete-btn:hover{
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    
+}
+.btn-group{
+    margin-left: 1rem;
+}
+.place-order-btn:hover{
+    background: white;
+    color: black;
+    border: 2px  black;
+}
+.place-order-btn{
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    padding: .5rem;
+    border-radius: 5px;
+    background: black;
+    color: white;
+    user-select: none;
+    font-weight: 400;
+}
+.card-empty{
+    padding: .5rem;
+    margin: .5rem; 
+    margin-top: 0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+  text-align: center;
+}
+.emptyCart{
+    font-size: large;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
 }

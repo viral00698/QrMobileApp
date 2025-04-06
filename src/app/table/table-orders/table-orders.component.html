@@ -1,29 +1,13 @@
-<div class="header-grid">
+<!-- <div class="header-grid">
   <div class="flex">
     <h3 class="flex-item1"><i class="pi pi-align-left"></i></h3>
     <h3 class="flex-item2"><i class="bi bi-box-arrow-right"></i></h3>
   </div>
-</div>
+</div> -->
 
-<div class="header-grid">
-  <!-- <div class="flex">
-        <p class="flex-tableOrderDetails">Table:</p>
-        <p class="flex-tableOrderDetails">AC-8</p>
-    </div>
-    <div class="flex">
-        <p class="flex-tableOrderDetails">Customer Mobile:</p>
-        <p class="flex-tableOrderDetails">85789655789</p>
-    </div>
-    <div class="flex">
-        <p class="flex-tableOrderDetails">Name:</p>
-        <p class="flex-tableOrderDetails">Legion</p>
-    </div>
-    <div class="flex">
-        <p class="flex-tableOrderDetails">OrderAt:</p>
-        <p class="flex-tableOrderDetails">20/02/08 20:02:AM</p>
-    </div> -->
+<!-- <div class="header-grid"> -->
 
-  <ng-container *ngIf="table !== null && table?.tableStatus === 'BOOKED'">
+<!-- <ng-container *ngIf="table !== null && table?.tableStatus === 'BOOKED'">
   <p-card class="orderDetailsCard">
     
     <div class="flex">
@@ -77,7 +61,6 @@
       </div>
 
       <input class="input_box" [(ngModel)]="userMobile" (ngModelChange)="validateMobileNumber()" type="text" pInputText placeholder="Enter Mobile..." />
-
       <div *ngIf="!isValid && userMobile">
         <small style="color: red; margin: 1rem; font-weight: 700;">Invalid mobile number. Must be 10 digits.</small>
       </div>
@@ -90,5 +73,96 @@
       <button class="flex-tableOrderDetails btn btn-primary"(click)="redirectToMenu(table)"><i class="bi bi-plus-square-fill"></i> Add item</button>
       <button *ngIf="table!==null && table?.tableStatus === 'BOOKED'" class="flex-tableOrderDetails btn btn-primary" (click)="ganrateInvoice()"><img src="../../../assets/invoice.png" alt="Icon" class="icon" /></button>
     </div>
-  </p-card>
+  </p-card> -->
+<!-- </div> -->
+
+<div class="nav-bar">
+  <div class="nav-item">
+    <i class="pi pi-align-left"></i>
+  </div>
+  <div class="nav-item">
+    <i class="bi bi-box-arrow-right"></i>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="card-order" *ngIf="table !== null && table?.tableStatus === 'BOOKED'">
+    <p class="card-order-item"><i class="card-order-heading">Table: </i> <i class="card-order-content">{{products?.tableOrder?.tableName}} </i></p>
+    <p class="card-order-item"><i class="card-order-heading">Mobile: </i> <i class="card-order-content">{{products?.customerMobileNo}} </i></p>
+    <p class="card-order-item"><i class="card-order-heading">Name: </i> <i class="card-order-content">{{products?.customerName}}</i></p>
+
+    <p class="card-order-item"><i class="card-order-heading">Order At: </i><i class="card-order-content">{{products?.orderAt | date:'dd, MMM yyyy hh:mm:a'}}</i></p>
+  </div>
+
+  <div class="card-order" *ngIf="table !== null && table?.tableStatus === 'BOOKED' && this.products?.orderStatus !=='COMPLETE'">
+    <button class="add-item-btn" (click)="redirectToMenu(table)">Add item</button>
+  </div>
+
+  <div class="card-qrCode" *ngIf="this.selectPaymentUPI">
+    <div class="qrCode" appQrcode [qrData]="upiURL"></div>
+    <div class="qrCode"><p  class="scan-pay">Scan & Pay</p></div>
+
+  </div>
+
+  <div class="card-order" *ngIf="table !==null && table?.tableStatus === 'BOOKED' && !this.selectPaymentUPI">
+    <div class="orderd-items">
+      <p class="orderd-items-heading">Item</p>
+      <p class="orderd-items-heading">Qty</p>
+      <p class="orderd-items-heading">Amount</p>
+    </div>
+    <div class="orderd-items" *ngFor="let item of products?.orderDetails">
+      <p class="item-titel">{{item?.itemName}}</p>
+      <p class="item-qty">{{item?.quntity}}</p>
+      <p class="item-price"><i class="amount">{{item?.amount}}</i></p>
+    </div>
+  </div>
+
+  <div class="card-order" *ngIf="table !==null && table?.tableStatus === 'BOOKED'">
+    <div class="details-container-item">
+      <p class="gst-sgst-charge" *ngIf="this.products?.billingDtos?.resturentCharge > 0">Restaurant Charge: <i class="amount">{{this.products?.billingDtos?.resturentCharge}}</i></p>
+      <p class="gst-sgst-charge" *ngIf="this.products?.billingDtos?.gst > 0">GST: <i class="amount">{{this.products?.billingDtos?.gst}}</i></p>
+      <p class="gst-sgst-charge" *ngIf="this.products?.billingDtos?.sgst > 0">SGST: <i class="amount">{{this.products?.billingDtos?.sgst}}</i></p>
+      <p class="total-amount">Total Amount: <i class="amount">{{this.products?.billingDtos?.totalAmount}}</i></p>
+    </div>
+  </div>
+
+  <div class="card-order" *ngIf="table !== null && table?.tableStatus === 'BOOKED'">
+    <i class="selectPaymetMethod" style="opacity: 0.8;"> <p-inputSwitch [(ngModel)]="sendInvoiceByWhatsapp" /> Send Invoice by <i class="bi bi-whatsapp" style="color: rgb(13, 105, 13);"></i> </i>
+    <i class="selectPaymetMethod" style="opacity: 0.8;"> <p-inputSwitch [(ngModel)]="sendInvoiceBySMS" /> Send Invoice by <i class="bi bi-chat-dots" style="color: grey;"></i> </i>
+  </div>
+  <div class="card-order" *ngIf="sendInvoiceByWhatsapp || sendInvoiceBySMS">
+    <p class="selectPaymetMethod" style="opacity: 0.6;">Select Payment Method:</p>
+    <label class="selectPaymentMethod"> <p-inputSwitch [(ngModel)]="selectPaymentUPI" (onChange)="OpenPaymentGateway()"></p-inputSwitch> UPI </label>
+
+    <!-- <i class="selectPaymetMethod">  <p-inputSwitch [(ngModel)]="selectPaymentUPI" (change)="OpenPaymentGateway()" /> UPI</i> -->
+    <!-- <i class="selectPaymetMethod">  <p-inputSwitch [(ngModel)]="selectPaymentCard" /> CREDIT/DEBIT CARD</i>   -->
+    <i class="selectPaymetMethod"> <p-inputSwitch [(ngModel)]="selectPaymentCASH" /> CASH</i>
+  </div>
+
+  <div class="card-order" *ngIf="selectPaymentUPI || selectPaymentCASH">
+    <button class="add-item-btn" (click)="closeOrder()">Close Order</button>
+  </div>
+
+
+  <div class="card-order" *ngIf="table?.tableStatus === 'AVAILABLE' ">
+    <div class="form-item">
+      <label for="custName" class="fomr-lable">Customer Name:</label>
+      <input id="custName" class="input_box" [(ngModel)]="custName" (ngModelChange)="validateCustName()" type="text" pInputText placeholder="Enter Customer name..." />
+      <div *ngIf="!isName && custName">
+        <small style="color: red; margin: 2px; font-weight: 500; font-size: small;">Name is required. OR Only letters are allowed.</small>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <label for="mobile" class="fomr-lable">Mobile No:</label>
+      <input id="mobile" class="input_box" [(ngModel)]="userMobile" (ngModelChange)="validateMobileNumber()" type="text" pInputText placeholder="Enter Mobile..." />
+      <div *ngIf="!isValid && userMobile">
+        <small style="color: red; margin: 2px; font-weight: 500; font-size: small;">Invalid mobile number. Must be 10 digits.</small>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <button class="add-item-btn" (click)="redirectToMenu(table)">Add item</button>
+    </div>
+  </div>
 </div>

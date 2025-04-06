@@ -1,115 +1,235 @@
-.header-grid {
+/* .header-grid {
     display: grid;
     grid-template-columns: 1fr;
-    /* background-color: #f4f4f4; */
-}
+} */
 
 
-.flex {
+/* .flex {
     display: flex;
-}
+} */
 
-.flex-item1 {
+/* .flex-item1 {
     flex: 1;
     text-align: left;
     margin: 1rem;
-    /* margin:0rem 1rem 0.3rem 1rem; */
-    /* font-size:small;
-    font-weight: 900; */
-}
+} */
 
-.flex-tableOrderDetails {
+/* .flex-tableOrderDetails {
     flex: 1;
-    /* text-align: left; */
     margin: 1rem;
     margin:.3rem 1rem .3rem 1rem;
     font-size:small;
     font-weight: 500;
     
-}
+} */
 
 
-.flex-item2 {
+/* .flex-item2 {
     flex: 1;
     text-align: right;
     margin: 1rem;
-    /* font-size:small;
-    font-weight: 900; */
-}
+} */
 
 
-.orderDetailsCard{
+/* .orderDetailsCard{
     margin:.3rem 1rem .3rem 1rem;
     background-color: #f4f4f4;
-}
+} */
 
-.table_heading {
+/* .table_heading {
     padding: .5rem;
     font-weight: 800;
     font-size: small;
-
-    /* margin-left: 1rem; */
     text-align: center;
-}
-.table_heading:first-child {
+} */
+/* .table_heading:first-child {
     padding: .5rem;
     font-weight: 800;
     font-size: small;
-
-    /* margin-left: 1rem; */
     text-align: left;
-}
+} */
 
-.table_value:first-child {
+/* .table_value:first-child {
     padding: .5rem;
     font-weight: 500;
     font-size: small;
-
-    /* margin-left: 1rem; */
     text-align: left;
-}
+} */
 
-.table_value {
+/* .table_value {
     padding: .5rem;
     font-weight: 500;
     font-size: small;
-
-    /* margin-left: 1rem; */
     text-align: center;
-}
+} */
 
 .amount::before{
     content: "₹";
 }
 
-
+/* 
 .userInput{
     display: flex;
     flex-direction: column;
-}
+} */
 
 
-.input_box{
+/* .input_box{
 
     flex: 1;
     border-radius: 10px;
     margin: .5rem;
     padding: .3rem .3rem .3rem .3rem;
-    /* margin-right: .5rem; */
-    /* height: 6; */
     width: 85vw;
- 
-}
-
-/* :host{
-  p-card{
-    border-radius: 6px;
-    margin-bottom: .5rem;
-  }
 } */
 
-    p-card{
-      border-radius: 6px;
-      margin-bottom: .5rem;
-      /* background-color: black; */
-    }
+
+
+.nav-bar{
+    display: flex;
+    padding: .5rem;
+    margin: .5rem;
+    font-weight: 700;
+    font-size: x-large;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    /* background-color:#fafafa */
+
+}
+.nav-item:first-child{
+    flex: 1;
+    text-align: start;
+}.nav-item:last-child{
+    flex: 1;
+    text-align: end;
+}
+.main-container{
+    background-color:#fafafa
+}
+.card-order{
+    display: flex;
+    flex-direction: column;
+    padding: .8rem;
+    margin: .8rem; 
+    margin-top: 0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+}
+
+.card-order-item{
+    padding: .1rem;
+    margin: 0;
+}
+
+.card-order-heading{
+    font-size: small;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.card-order-content{
+    font-size: small;
+    font-weight: 500;
+}
+.orderd-items{
+    display: flex;
+}
+
+.orderd-items-heading{
+    font-weight: 500;
+    font-size: medium;
+    opacity: 0.8;
+    flex: 1;
+}
+
+.item-price{
+    flex: 1;
+    font-size: small;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: .5rem;
+  
+}
+.item-qty{
+    flex: 1;
+    font-size: small;
+    font-weight: 600;
+    margin: 0;
+    /* opacity: 0.7; */
+}
+.item-titel{
+    flex: 1;
+    font-size: small;
+    font-weight:600;
+    margin: 0;
+}
+
+.total-amount{
+    font-size: medium;
+    font-weight: 600;
+    margin: 0;
+    margin-left: 2px;
+}
+.gst-sgst-charge{
+    font-size: small;
+    font-weight: 400;
+    margin: 0;
+    margin-left: 2px;
+}
+
+.add-item-btn{
+    background-color: black;
+    color: white;
+    font-size: small;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 100%;
+    border: none;
+    padding: .5rem;
+}
+
+.add-item-btn:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+.fomr-lable{
+    font-size: small;
+    font-weight: 500;
+    opacity: 0.6;
+    margin-bottom: 2px;
+    position: relative;
+}
+.input_box{
+    width: 100%;
+    border: solid;
+    padding: .4rem;
+    border-radius: 5px;
+}
+.form-item{
+margin: .3rem;
+}
+
+.selectPaymetMethod{
+    font-size: small;
+    font-weight: 500;
+}
+
+.cart-qrCode{
+    display: flex;
+    padding: .8rem;
+    flex-direction: column;
+    margin: .8rem; 
+    margin-top: 0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+}
+.qrCode{
+   place-self: center;
+}
+.scan-pay{
+    font-size: larger;
+    font-weight: 700;    
+}
