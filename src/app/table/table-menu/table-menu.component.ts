@@ -235,7 +235,7 @@ export class TableMenuComponent {
   }
   
   redirectToPage() {
-    this.router.navigate(['tablePlaceOrder']); // Replace with your target route
+    this.router.navigate(['md','tablePlaceOrder']); // Replace with your target route
   }
 
   navigateOrderHistory(){

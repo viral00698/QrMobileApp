@@ -41,7 +41,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { CommonModule } from '@angular/common';
 import { OrderAcceptComponent } from './vendor/order-accept/order-accept.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
- 
+import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,8 +61,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     OrderFaieldComponent,
     QrcodeDirective,
     ErrorPageComponent,
-    OrderAcceptComponent
-  
+    OrderAcceptComponent,
+    ManagerDashboardComponent,
+    UnauthorizedComponent
+ 
   ],
   imports: [
     FormsModule,
@@ -87,8 +90,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     DropdownModule,
     ToastModule,
     CommonModule,
-    InputSwitchModule,
-    
+    InputSwitchModule
   ],
   providers: [
     MessageService,

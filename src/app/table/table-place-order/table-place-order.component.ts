@@ -234,7 +234,7 @@ getCustDetails(){
         this.userSelectItems.clearItem();
 
         this.messageService.add({life:8000, key: 'tl', severity: 'success', summary: 'success', detail: res.message });
-        this.router.navigate(['vendorTable']);
+        this.router.navigate(['md','vendorTable']);
       }else{
 
         localStorage.removeItem(StorageKey.MENU);
