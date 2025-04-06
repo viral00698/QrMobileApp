@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Dropdown } from 'primeng/dropdown';
 import { RequestStatus } from 'src/app/constent/request-status';
@@ -37,6 +37,7 @@ export class VendorTableComponent implements OnInit {
     private rxStompService: RxStompService,
     private tableOrderService:TableOrderService,
     private messageService:MessageService,
+    private route: ActivatedRoute,
     private changeDetectorRef:ChangeDetectorRef) { 
 
       this.tableTypes = [
@@ -117,7 +118,7 @@ export class VendorTableComponent implements OnInit {
   onCardClick(table:any){
 
     this.tableDataSharing.setTable(table)
-    this.router.navigate(['tableOrders']);
+    this.router.navigate(['md','tableOrders']);
 
   }
 

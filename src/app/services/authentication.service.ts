@@ -16,7 +16,7 @@ export class AuthenticationService {
   private isSocketSecure:boolean = false
   private jwtToken: string | undefined
   private isLogedIn: boolean = true;
-
+  private rollArray:any=[]
   private loginResponse: any;
   xsrfToken: any;
   constructor(private http: HttpClient, private router: Router , private localStrorage:SecureLocalStorageService) { }
@@ -30,15 +30,22 @@ export class AuthenticationService {
         if (authToken) {
           this.localStrorage.encriptAndSave(authToken,StorageKey.JWT_TOKEN)
           this.jwtToken = authToken;
-
           this.isLogedIn = true;
-          this.router.navigate(['vendorTable'])
+          // this.router.navigate(['vendorTable'])
         }
 
         if(response?.body && response.status === 200){
           const tmp = response?.body as { data: any };
           if(tmp){
-            this.localStrorage.encriptAndSave(tmp?.data?.vendorDetails , StorageKey.USER);
+            for(let role of tmp?.data?.role){
+              this.rollArray.push(role?.userType)
+            }
+
+            this.localStrorage.setRole(this.rollArray);
+            let updateValu = tmp?.data?.vendorDetails
+            updateValu['role'] = this.rollArray;
+            this.localStrorage.encriptAndSave(updateValu , StorageKey.USER);
+            this.router.navigate(['md/vendorTable'])
           } else{
             this.logout()
           }
