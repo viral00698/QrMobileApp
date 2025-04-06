@@ -1,33 +1,31 @@
 <div class="login_container">
-    <p-card>
-      <ng-template pTemplate="content">
+    <div class="login-card">
         <div class="card_content">
           <div class="flex_item_1">
               <form [formGroup]="loginForm" (submit)="onSubmit()">
+         
               <div class="form_element">
+                  
                   <p class="message_font_1">Welcome Back</p>
                   <p class="message_font_2">Welcome Back! Please enter your details.</p>
               </div>
               <div class="form_element">
                   <p class="label_fied">Username:</p>
-                  <input pInputText  class="formInput"  formControlName="username" placeholder="Enter your username."/>
+                  <input  class="formInput"  formControlName="username" placeholder="Enter your username."/>
               </div>
               <div class="form_element">
                   <p class="label_fied">Password:</p>
-                  <input pInputText class="formInput"  type="password" formControlName="password" placeholder="Password"/>
+                  <input  class="formInput"  type="password" formControlName="password" placeholder="Password"/>
               </div>
-  
-              <!-- <div class="form_element">
-                  <p class="label_fied">Forgot Password</p>
-              </div>
-   -->
               <div class="form_element">
-                  <p-button label="Login" type="submit" class="login_btn" [disabled]="loginForm.invalid"></p-button>
+                  <button  type="submit" class="login_btn" [disabled]="loginForm.invalid">Login</button>
+                  <p class="powerdMsg">Powered by: <a href="https://vitts.in" target="_blank" style="text-decoration: none; color: #390dec;">vitts.in</a></p>
               </div>
+              
           </form>
         </div>
         </div>
-      </ng-template>
-    </p-card>
+    
+    </div>
   </div>
   

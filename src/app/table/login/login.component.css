@@ -57,29 +57,34 @@
 }
 
 
-:host{
-    .p-card{
-        border-radius: 10px;
-        background-color: white;
-    }
-    .p-button:hover{
-        background-color: white;
-        color: black;
-        border: 2px solid black;
-    }
-    .p-button {
-        border: 0;
-        background-color: black;
-        color: white;
-    
-        width: 80vw;
-        height: 2.5rem;
-        margin: 1rem;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: larger;
-        font-weight: 500;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        z-index: 1000;
-    }
+.login-card {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.login_btn {
+    border: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 2.5rem;
+    /* margin: 1rem; */
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: larger;
+    font-weight: 500;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    z-index: 1000;
+}
+
+.login_btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+ 
+.powerdMsg{
+    margin-top:10px;
+    text-align: center;
 }
