@@ -87,13 +87,7 @@ export class TableOrdersComponent implements OnInit {
     }
   }
 
-  ganrateInvoice() {
 
-    if(this.products){
-      this.router.navigate(['md','ganrateInvoice'] , { queryParams: { data: this.products?.orderId } });
-    }
-
-  }
 
   validateCustName() {
     // Regex pattern to allow only alphabetic characters and ensure custName is not empty
@@ -127,26 +121,12 @@ export class TableOrdersComponent implements OnInit {
       this.products.tableOrder = this.table
       this.tableService.createRozerpayOrderForTable(this.products , this.vendor).subscribe((res: any) => {
         if (res?.status == RequestStatus.success) {
-          this.router.navigate(['vendorTable']);
+          this.router.navigate(['md','vendorTable']);
         }
       })
     }
 
-    // if (this.products && this.vendor) {
-    //   this.tableService.genrateInvoice(this.products , this.vendor).subscribe((res: any) => {
-    //     if (res?.status == RequestStatus.success) {
-  
-    //     }
-    //   })
-    // }
 
-    // if(this.table){
-    //   this.table.tableStatus = TableStatus.AVAILABLE
-    //   this.tableService.updateTableStatus(this.table).subscribe((res:any)=>{
-    //     this.router.navigate(['vendorTable']);
-    //   })
-    // }
-  
   }
 
 }
