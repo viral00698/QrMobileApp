@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   venderDetails: any;
   customerUUId!: string
   dynamicId: any;
+  showA:boolean = true;
 
 
   cardStyles = {
@@ -253,6 +254,11 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     this.router.navigate(['OrderHistory']);
   }
 
+  
+  onScroll(event: Event): void {
+    const target = event.target as HTMLElement;
+    this.showA = target.scrollTop === 0;
+  }
 
   
 }

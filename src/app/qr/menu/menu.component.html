@@ -1,44 +1,89 @@
 <div></div>
-  <div class="header-grid">
+<!-- <div class="header-grid" *ngIf="showA">
     <div class="flex">
       <h3 class="flex-item1" (click)="navigateOrderHistory()"><i class="pi pi-align-left"></i></h3>
       <h3 class="flex-item2"><i class="pi pi-user"></i> </h3>
     </div>
+  </div> -->
+<div class="nav-bar">
+  <div class="nav-item" (click)="navigateOrderHistory()">
+    <i class="pi pi-align-left"></i>
   </div>
-  <div class="search-text-grid">
+  <div class="nav-item">
+    <!-- <i class="bi bi-box-arrow-right"></i> -->
+  </div>
+</div>
+
+<!-- <div class="search-text-grid" *ngIf="showA">
     <div class="search-grid-properties">
       <h6 style="font-weight: 600;">Hey there!</h6>
       <h5 style="font-weight: 800;">Find your food now</h5>
     </div>
-  </div>
-  <div class="search-grid">
-    <div class="d-flex justify-content-start">
-      <input class="inputText" [(ngModel)]="searchByItem" type="text" (input)="searchInmenu()" pInputText placeholder="Search your favorite food..." />
-    </div>
-  </div>
+  </div> -->
 
-  <div  style="display: flex; flex-wrap: wrap; height: 75vh; overflow-y: scroll; width: 100vw;">
-    
-    <p-card  *ngFor="let item  of tmpMenuList" [ngStyle]="cardStyles">
-      <!-- <div *ngIf="tmpMenuList.length == 0"> <h5>Item Not Available</h5> </div> -->
-      <ng-template pTemplate="header">
-        <img alt="Card" class="card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />
-          <div class="p-card-title">
-            {{item.itemName}}
-          </div>
-      </ng-template>
-      <ng-template pTemplate="subheader">
-        <div class="p-card-subtitle">
-          {{item?.amount}}
-        </div>
-        <div class="item_content">
-          {{item?.description}}
-        </div> 
-      </ng-template>
-     
-      <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
-          <!-- <p-inplace>
+<div class="search-grid">
+  <div class="d-flex justify-content-start">
+    <input class="inputText" [(ngModel)]="searchByItem" type="text" (input)="searchInmenu()" pInputText placeholder="Search your favorite food..." />
+  </div>
+</div>
+
+<div class="offer-card" *ngIf="showA">
+  <div class="offer-item" style="background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);">
+    <p class="offer-content-1">On Pizzas</p>
+    <p class="offer-content-2">30% OFF</p>
+    <p class="offer-content-3"></p>
+  </div>
+  <div class="offer-item" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
+    <p class="offer-content-1">Sandwiches</p>
+    <p class="offer-content-2">By 1 Get 1 Free</p>
+    <p class="offer-content-3"></p>
+  </div>
+  <div class="offer-item" style="background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);">
+    <p class="offer-content-1">up to</p>
+    <p class="offer-content-2">30% OFF</p>
+    <p class="offer-content-3"></p>
+  </div>
+  <div class="offer-item" style="background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);">
+    <p class="offer-content-1">up to</p>
+    <p class="offer-content-2">Navratri special</p>
+    <p class="offer-content-3"></p>
+  </div>
+</div>
+
+<div class="search-catogory">
+  <button class="category-btn">Pizzas</button>
+  <button class="category-btn">Beverages</button>
+  <button class="category-btn">Desserts</button>
+  <button class="category-btn">Wraps & Rolls</button>
+  <button class="category-btn">Fries & Sides</button>
+  <button class="category-btn">Noodles</button>
+  <button class="category-btn">Burgers</button>
+  <button class="category-btn">Sandwiches</button>
+  <button class="category-btn">Pastas</button>
+  <button class="category-btn">Salads</button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; height: 62vh; overflow-y: scroll; width: 100vw;" (scroll)="onScroll($event)">
+  <p-card *ngFor="let item  of tmpMenuList" [ngStyle]="cardStyles">
+    <!-- <div *ngIf="tmpMenuList.length == 0"> <h5>Item Not Available</h5> </div> -->
+    <ng-template pTemplate="header">
+      <img alt="Card" class="card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />
+      <div class="p-card-title">
+        {{item.itemName}}
+      </div>
+    </ng-template>
+    <ng-template pTemplate="subheader">
+      <div class="p-card-subtitle">
+        {{item?.amount}}
+      </div>
+      <div class="item_content">
+        {{item?.description}}
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3 mt-1">
+        <!-- <p-inplace>
             <ng-template pTemplate="display">
               <div class="additem_btn"  *ngIf="!item?.itemQty || item?.itemQty === 0">
                 <p-button styleClass="primary_btn"  (click)="itemAdd(item)" label="Add" /> 
@@ -58,34 +103,32 @@
             </ng-template>
           </p-inplace> -->
 
-          <p-inplace>
-            <ng-template pTemplate="display">
-              <div class="additem_btn"  *ngIf="!item?.itemQty || item?.itemQty === 0">
-                <button class="primary_btn"  (click)="itemAdd(item)"><i class="bi bi-plus-circle"></i></button>
-              </div>
-              <div class="additem_btn" *ngIf="item?.itemQty && item?.itemQty > 0">
-                <button (click)="ororderQtyDec(item)" class="qty_minus"> <i class="pi pi-minus"></i> </button>
-                <input  [value]="item?.itemQty"  [min]="0" [readonly]="true"  class="input_qty" type="text"   pInputText />
-                <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i> </button>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-              <div class="additem_btn">
-                <button (click)="ororderQtyDec(item)" class="qty_minus"> <i class="pi pi-minus"></i> </button>
-                <input  [value]="item?.itemQty"  [min]="0" [readonly]="true"  class="input_qty" type="text"   pInputText />
-                <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i> </button>
-              </div>
-            </ng-template>
+        <p-inplace>
+          <ng-template pTemplate="display">
+            <div class="additem_btn" *ngIf="!item?.itemQty || item?.itemQty === 0">
+              <button class="primary_btn" (click)="itemAdd(item)"><i class="bi bi-plus-circle"></i></button>
+            </div>
+            <div class="additem_btn" *ngIf="item?.itemQty && item?.itemQty > 0">
+              <button (click)="ororderQtyDec(item)" class="qty_minus"><i class="pi pi-minus"></i></button>
+              <input [value]="item?.itemQty" [min]="0" [readonly]="true" class="input_qty" type="text" pInputText />
+              <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i></button>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <div class="additem_btn">
+              <button (click)="ororderQtyDec(item)" class="qty_minus"><i class="pi pi-minus"></i></button>
+              <input [value]="item?.itemQty" [min]="0" [readonly]="true" class="input_qty" type="text" pInputText />
+              <button (click)="orderQtyInc(item)" class="qty_plus"><i class="pi pi-plus"></i></button>
+            </div>
+          </ng-template>
         </p-inplace>
-         
-        </div>
-      </ng-template>
-    </p-card>
-  
-  </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
 
-  <div class="footer-grid">
-    <div class="footer">
-      <button pButton pRipple label="Place order" (click)="redirectToPage()" class="p-button-success"></button>
-    </div>
-  </div>
+<div class="footer-grid">
+  <!-- <div class="footer"> -->
+  <button pButton pRipple label="Place order" (click)="redirectToPage()" class="p-button-success"></button>
+  <!-- </div> -->
+</div>

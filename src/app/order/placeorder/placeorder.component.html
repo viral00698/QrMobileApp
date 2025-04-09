@@ -84,7 +84,7 @@
     <i class="pi pi-align-left"></i>
   </div>
   <div class="nav-item">
-    <i class="bi bi-box-arrow-right"></i>
+    <!-- <i class="bi bi-box-arrow-right"></i> -->
   </div>
 </div>
 
@@ -136,7 +136,7 @@
     </div>
 
   </div>
-  <div class="card-order-bill" *ngIf="bilingObject?.orderValue > 0">
+  <div class="card-order-bill total" *ngIf="bilingObject?.orderValue > 0">
     <div class="bill-item">
       <p class="bill-item-1">Total Amount:</p>
       <p class="bill-item-2 item-price">{{bilingObject?.totalAmount | number:'1.2-2'}}</p>

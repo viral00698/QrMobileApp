@@ -497,14 +497,15 @@
     font-weight: 500;
     text-align: end;
 }
-.bill-item-1:last-child{
+
+.total .bill-item-1{
     font-size: medium;
-    font-weight: 500;
+    font-weight: 900;
 }
 
-.bill-item-2:last-child{
+.total .bill-item-2{
     font-size: medium;
-    font-weight: 500;
+    font-weight: 900;
 }
 
 .card-order-btn{
