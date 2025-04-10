@@ -275,15 +275,18 @@
 
 .offer-content-1{
     font-size: small;
-    font-weight: 400;
+    font-weight: 500;
+    color: #555;
 }
 .offer-content-2{
     font-size: medium;
-    font-weight: 600;
+    font-weight: 700;
+    color: #cc7977;
 }
 .offer-content-3{
     font-size: small;
     font-weight: 400;
+    color: #777;
 }
 
 .p-button-success {
