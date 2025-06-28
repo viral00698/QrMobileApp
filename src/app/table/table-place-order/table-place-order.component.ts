@@ -218,8 +218,11 @@ getCustDetails(){
       orderDetail.isJain = item?.isJain ?? false
       orderDetail.productId = item?.productId ?? null
       orderDetail.quntity = item?.itemQty ?? 0
-      orderDetail.orderId = null
-
+      orderDetail.orderId = null;
+      orderDetail.foodCategory = item?.foodCategory;
+      orderDetail.offerId = item?.offer?.offerId,
+      orderDetail.offerType = item?.offer?.offerType,
+      orderDetail.OfferApplied = false;
       array.push(orderDetail)
     });
 
