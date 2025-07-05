@@ -1,0 +1,39 @@
+<div class="main-container">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+  <div class="feedback">
+    <div class="feedback-card">
+        <p class="titel">Share your feedback</p>
+    </div>
+    <div class="feedback-card" *ngIf="Questions && Questions[0]?.text">
+      <div class="card-item"><p class="qustion">1.{{Questions[0]?.text}}</p></div>
+      <div class="card-item"><p-rating formControlName="q1" /></div>
+    </div>
+
+     <div class="feedback-card" *ngIf="Questions && Questions[1]?.text">
+      <div class="card-item"><p class="qustion">2.{{Questions[1]?.text}}</p></div>
+      <div class="card-item"><p-rating formControlName="q2" /></div>
+    </div>
+
+     <div class="feedback-card" *ngIf="Questions && Questions[2]?.text">
+      <div class="card-item"><p class="qustion">3.{{Questions[2]?.text}}</p></div>
+      <div class="card-item"><p-rating formControlName="q3"/></div>
+    </div>
+
+     <div class="feedback-card" *ngIf="Questions && Questions[3]?.text">
+      <div class="card-item"><p class="qustion">4.{{Questions[3]?.text}}</p></div>
+      <div class="card-item"><p-rating formControlName="q4" /></div>
+    </div>
+
+     <div class="feedback-card" *ngIf="Questions && Questions[4]?.text">
+      <div class="card-item"><p class="qustion">5.{{Questions[4]?.text}}</p></div>
+      <div class="card-item"><p-rating formControlName="q5" /></div>
+    </div>
+  
+  </div>
+  <div class="feedback-btn">
+    <button class="submit-btn" type="submit" [disabled]="!formGroup.valid" >Submit</button>
+    <button class="cancel-btn" (click)="cancel()">Cancel</button>
+  </div>
+    </form>
+</div>

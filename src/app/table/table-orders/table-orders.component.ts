@@ -125,7 +125,11 @@ export class TableOrdersComponent implements OnInit {
       this.products.tableOrder = this.table
       this.tableService.createRozerpayOrderForTable(this.products, this.vendor).subscribe((res: any) => {
         if (res?.status == RequestStatus.success) {
-          this.router.navigate(['md', 'vendorTable']);
+          // this.router.navigate(['feedback'] ,);
+          // this.router.navigate(['md', 'vendorTable']);
+          this.router.navigate(['feedback'], {
+                state: { orderId: this.products?.orderId, }
+          });
         }
       })
     }
@@ -139,10 +143,7 @@ export class TableOrdersComponent implements OnInit {
               this.offerMap.set(item?.offerId , item);
           }
         }
-      })
-
-      console.log(this.offerMap);
-      
+      })      
     }
   }
 

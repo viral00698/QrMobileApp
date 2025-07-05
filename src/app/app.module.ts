@@ -43,6 +43,8 @@ import { OrderAcceptComponent } from './vendor/order-accept/order-accept.compone
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { RatingModule } from 'primeng/rating';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +65,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     ErrorPageComponent,
     OrderAcceptComponent,
     ManagerDashboardComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    FeedbackComponent
  
   ],
   imports: [
@@ -90,7 +93,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     DropdownModule,
     ToastModule,
     CommonModule,
-    InputSwitchModule
+    InputSwitchModule,
+    RatingModule
   ],
   providers: [
     MessageService,
