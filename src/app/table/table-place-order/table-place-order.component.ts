@@ -262,5 +262,13 @@ getCustDetails(){
     this.router.navigate(['OrderHistory']);
   }
 
+  getImageSrc(image: string | null | undefined): string {
+    return image ? image : 'assets/samosa1.jpg';
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/samosa1.jpg';
+  }
+
 
 }

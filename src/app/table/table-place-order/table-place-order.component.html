@@ -69,7 +69,8 @@
     <div *ngFor="let item of items">
     <div class="card-order" >
       <div class="card-item">
-        <img src="../../../assets/burger.jpg" class="item-image" alt="">
+         <img alt="Card" class="card_img" [src]="getImageSrc(item?.image)" (error)="onImageError($event)" />
+        <!-- <img src="../../../assets/burger.jpg" class="item-image" alt=""> -->
         <div class="btn-group">
           <button (click)="ororderQtyDec(item)" class="qty-btn"> <i class="pi pi-minus"></i> </button>
           <input   [min]="0" [(ngModel)]="item.itemQty" [readonly]="true" class="input_qty" type="text"  pInputText />
