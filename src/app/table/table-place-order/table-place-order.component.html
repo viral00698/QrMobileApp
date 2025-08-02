@@ -69,7 +69,8 @@
     <div *ngFor="let item of items">
     <div class="card-order" >
       <div class="card-item">
-        <img src="../../../assets/burger.jpg" class="item-image" alt="">
+         <img alt="Card" class="card_img" [src]="getImageSrc(item?.image)" (error)="onImageError($event)" />
+        <!-- <img src="../../../assets/burger.jpg" class="item-image" alt=""> -->
         <div class="btn-group">
           <button (click)="ororderQtyDec(item)" class="qty-btn"> <i class="pi pi-minus"></i> </button>
           <input   [min]="0" [(ngModel)]="item.itemQty" [readonly]="true" class="input_qty" type="text"  pInputText />
@@ -81,8 +82,16 @@
         <p class="item-descripstion">{{item?.description}}</p>
         <p class="item-price">{{item?.amount}}</p>
 
+        <div class="offer" [class.hidden]="!hasOffer(item)">
+        <img src="../../../assets/discount.png" alt="Image">
+        <p *ngIf="item?.offer?.offerType === 'FLAT_DISCOUNT'">{{'₹'+item?.offer?.flatDiscount}}  {{item?.offer?.offerType}}</p>
+        <p *ngIf="item?.offer?.offerType === 'BOGO'">Buy 1, Get 1 Free</p>
+        <p *ngIf="item?.offer?.offerType === 'BUY_X_GET_Y'">Buy 1, Get Free {{menuMap.get(item?.offer?.freeItem)}}</p>
+      </div>
+
         <button class="delete-btn" (click)="deleteItem(item)"><i class="pi pi-trash"></i></button>
       </div>
+      
     </div>
     </div>
 

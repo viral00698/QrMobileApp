@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 
   <div class="header-grid">
     <div class="flex">
@@ -76,4 +76,81 @@
     </div>
   </div>
 
+</div> -->
+
+
+<div class="nav-bar">
+  <div class="nav-item"  (click)="navigateOrderHistory()">
+    <i class="pi pi-align-left"></i>
+  </div>
+  <div class="nav-item">
+    <!-- <i class="bi bi-box-arrow-right"></i> -->
+  </div>
+</div>
+
+<div class="main-container">
+
+  <div class="card-empty" *ngIf="items.length <= 0">
+      <p class="emptyCart">Empty Cart</p>
+  </div>
+
+  <div *ngFor="let item of items">
+  <div class="card-order" >
+    <div class="card-item">
+      <img src="../../../assets/burger.jpg" class="item-image" alt="">
+      <div class="btn-group">
+        <button (click)="ororderQtyDec(item)" class="qty-btn"> <i class="pi pi-minus"></i> </button>
+        <input   [min]="0" [(ngModel)]="item.itemQty" [readonly]="true" class="input_qty" type="text"  pInputText />
+        <button (click)="orderQtyInc(item)" class="qty-btn"><i class="pi pi-plus"></i> </button>
+      </div>
+    </div>
+    <div class="card-item card-content">
+      <p class="item-titel">{{item?.itemName}}</p>
+      <p class="item-descripstion">{{item?.description}}</p>
+      <p class="item-price">{{item?.amount}}</p>
+
+      <button class="delete-btn" (click)="deleteItem(item)"><i class="pi pi-trash"></i></button>
+    </div>
+  </div>
+  </div>
+
+  <div class="card-order-bill" *ngIf="bilingObject?.orderValue > 0">
+    <div class="bill-item">
+      <p class="bill-item-1">Order Value:</p>
+      <p class="bill-item-2 item-price">{{bilingObject?.orderValue | number:'1.2-2'}}</p>
+    </div>
+
+    <div class="bill-item">
+      <p class="bill-item-1">GST({{bilingObject?.gstCharge}}%):</p>
+      <p class="bill-item-2 item-price">{{bilingObject?.gstValue||0.00 | number:'1.2-2'}}</p>
+    </div>
+
+    <div class="bill-item">
+      <p class="bill-item-1">SGST({{bilingObject?.sgstCharge}}%):</p>
+      <p class="bill-item-2 item-price">{{bilingObject?.sgstValue||0.00 | number:'1.2-2'}}</p>
+    </div>
+
+    <div class="bill-item">
+      <p class="bill-item-1">Restaurant Charges ({{bilingObject?.restoCharge}}%):</p>
+      <p class="bill-item-2 item-price">{{bilingObject?.restoChargeValue||0.00 | number:'1.2-2'}}</p>
+    </div>
+
+  </div>
+  <div class="card-order-bill total" *ngIf="bilingObject?.orderValue > 0">
+    <div class="bill-item">
+      <p class="bill-item-1">Total Amount:</p>
+      <p class="bill-item-2 item-price">{{bilingObject?.totalAmount | number:'1.2-2'}}</p>
+    </div>
+  </div>
+
+  <div class="card-order-bill" *ngIf="bilingObject?.orderValue > 0">
+    <label for="mobile">Mobile No:</label>
+    <input id="mobile" class="input_box" [(ngModel)]="userMobile" (ngModelChange)="validateMobileNumber()" type="text" pInputText placeholder="Enter Mobile..." />
+  </div>
+
+  <div class="card-order-btn" *ngIf="bilingObject?.orderValue > 0">
+    <button (click)="getInfo('CASH')" [disabled]="!isValid" class="place-order-btn">Pay Cash</button>
+    <button (click)="getInfo('ONLINE')" [disabled]="!isValid" class="place-order-btn">Pay Online</button>
+
+  </div>
 </div>

@@ -4,7 +4,7 @@
     justify-content: center; /* Horizontal centering */
     align-items: center;     /* Vertical centering */
     height: 100vh;  
-    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%); 
+    /* background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);  */
 }
 
 .list-item {
