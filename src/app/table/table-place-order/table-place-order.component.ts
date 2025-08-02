@@ -30,6 +30,8 @@ export class TablePlaceOrderComponent {
   custMobile:any
   custTable:any;
   tableOrder:any
+  menuMap: Map<any, any> = new Map()
+
   constructor(private router: Router, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
     private billingService: BillingService,
@@ -268,6 +270,22 @@ getCustDetails(){
 
   onImageError(event: any) {
     event.target.src = 'assets/samosa1.jpg';
+  }
+
+    hasOffer(item: any): boolean {
+
+    if (!item?.offer || !item?.offer?.isActive) {
+      return false;
+    }
+
+
+    const offerExpiry = item?.offer?.expireDate
+    const now = new Date();
+
+    const endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+    const endOfTodayMillis = endOfToday.getTime();
+
+    return offerExpiry > endOfTodayMillis;
   }
 
 

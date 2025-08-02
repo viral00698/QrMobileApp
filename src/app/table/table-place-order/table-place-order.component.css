@@ -539,3 +539,29 @@
     align-items: center;
     border-radius: 15px;
 }
+
+.hidden {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+.offer{
+    display: flex;
+    flex-direction:row
+}
+.offer p{
+    margin: 0;
+    color: rgb(156, 62, 31);
+    font-weight: 500;
+    padding: 0rem 0.3rem 0rem 0rem;
+      
+}
+
+.offer img{
+    height: 18px;
+    width: 30px;
+    padding: 0rem 0.3rem 0rem .3rem;
+    text-align: center;
+    place-self: center;
+
+}

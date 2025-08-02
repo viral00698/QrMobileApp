@@ -22,18 +22,21 @@ export class TableMenuComponent {
     borderRadius: '10px',
     boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
   };
-
+  menuMap: Map<any, any> = new Map()
+  today: any = new Date();
   orderQty: number = 1;
   searchByItem: any;
+
+  categoryList: Set<string> = new Set()
 
   productList: any = [];
   tmpMenuList: any = []
   palaceOrderBtnFlag = false;
-  venderId:any;
-  vendor:any
-  venderDetails:any;
-  customerUUId!:string
-
+  venderId: any;
+  vendor: any
+  venderDetails: any;
+  customerUUId!: string
+  showA: boolean = true;
   constructor(private router: Router, private productService: MenuService, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -55,12 +58,12 @@ export class TableMenuComponent {
     // this.setItemsFromLocalStorage()
   }
 
-  setCustomerUUID(){
-    
+  setCustomerUUID() {
+
     this.customerUUId = this.localStorageSecureService.decryptAndGet(StorageKey.USERID);
-    if(!this.customerUUId){
+    if (!this.customerUUId) {
       this.customerUUId = this.generateCustomUUID();
-      this.localStorageSecureService.encriptAndSave(this.customerUUId , StorageKey.USERID);
+      this.localStorageSecureService.encriptAndSave(this.customerUUId, StorageKey.USERID);
     }
   }
 
@@ -80,8 +83,8 @@ export class TableMenuComponent {
     this.vendorService.getVenderById(this.venderId).subscribe((res: any) => {
       if (res?.status === RequestStatus.success) {
         this.venderDetails = res?.data;
-        this.localStorageSecureService.encriptAndSave(res?.data , StorageKey.VENDER)
-      }else{
+        this.localStorageSecureService.encriptAndSave(res?.data, StorageKey.VENDER)
+      } else {
         // redirect error page or Home page
       }
     })
@@ -93,20 +96,25 @@ export class TableMenuComponent {
       this.localStorageSecureService.encriptAndSave(JSON.stringify(Array.from(tmp.entries())), StorageKey.ITEMS);
     }
   }
-  getMunuFromDatabase(id:any) {
-  
+  getMunuFromDatabase(id: any) {
+
     this.productService.getMenuList(id).subscribe((res: any) => {
       if (res.status === RequestStatus.success) {
         this.productList = res.data;
         this.tmpMenuList = res.data;
-  
+
+        for (let item of res.data) {
+          this.menuMap.set(item?.productId, item.itemName);
+          this.categoryList.add(item?.foodCategory);
+        }
+
         this.localStorageSecureService.encriptAndSave(this.productList, StorageKey.MENU)
         this.changeDetectorRef.detectChanges();
       }
     })
   }
 
- 
+
 
   getInlocalStorgae(key: any) {
 
@@ -132,9 +140,19 @@ export class TableMenuComponent {
 
         this.tmpMenuList = Array.from(tmpMap.values())
         this.productList = this.tmpMenuList;
+        for (let item of this.tmpMenuList) {
+          this.menuMap.set(item.productId, item.itemName);
+          this.categoryList.add(item?.foodCategory);
+
+        }
 
       } else {
         this.tmpMenuList = [...this.productList];
+        for (let item of this.tmpMenuList) {
+          this.menuMap.set(item.productId, item.itemName);
+          this.categoryList.add(item?.foodCategory);
+
+        }
       }
     }
   }
@@ -199,16 +217,24 @@ export class TableMenuComponent {
 
   }
 
-  searchInmenu() {
-    if (this.searchByItem) {
-      const searchByItem = this.searchByItem.toLowerCase();
-      this.tmpMenuList = this.productList.filter((item: any) =>
-        item.itemName.toLowerCase().includes(searchByItem)
-      );
+  searchInmenu(category: string) {
 
+    const searchByItem = this.searchByItem?.toLowerCase().trim();
+    const searchByCategory = category?.toLowerCase().trim();
+
+    if (searchByItem || searchByCategory) {
+      this.tmpMenuList = this.productList.filter((item: any) => {
+        const itemName = item.itemName?.toLowerCase();
+        const foodCategory = item.foodCategory?.toLowerCase();
+        return (
+          (searchByItem && itemName.includes(searchByItem)) ||
+          (searchByCategory && foodCategory.includes(searchByCategory))
+        );
+      });
     } else {
-      this.tmpMenuList = this.productList
+      this.tmpMenuList = this.productList;
     }
+
     this.changeDetectorRef.detectChanges();
 
   }
@@ -233,12 +259,41 @@ export class TableMenuComponent {
     }
     return result;
   }
-  
+
   redirectToPage() {
-    this.router.navigate(['md','tablePlaceOrder']); // Replace with your target route
+    this.router.navigate(['md', 'tablePlaceOrder']); // Replace with your target route
   }
 
-  navigateOrderHistory(){
+  navigateOrderHistory() {
     // this.router.navigate(['OrderHistory']); 
+  }
+
+  onScroll(event: Event): void {
+    const target = event.target as HTMLElement;
+    this.showA = target.scrollTop === 0;
+  }
+
+  getImageSrc(image: string | null | undefined): string {
+    return image ? image : 'assets/samosa1.jpg';
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/samosa1.jpg';
+  }
+
+  hasOffer(item: any): boolean {
+
+    if (!item?.offer || !item?.offer?.isActive) {
+      return false;
+    }
+
+
+    const offerExpiry = item?.offer?.expireDate
+    const now = new Date();
+
+    const endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+    const endOfTodayMillis = endOfToday.getTime();
+
+    return offerExpiry > endOfTodayMillis;
   }
 }
