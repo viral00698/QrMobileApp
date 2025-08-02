@@ -17,6 +17,7 @@ import { OrderAcceptComponent } from './vendor/order-accept/order-accept.compone
 import { authRollwiseChildGuard, authRollwiseGuard } from './guard/auth-rollwise.guard';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
 {path:'',component:LoginComponent},   //http://localhost/?ugygewncuirhijd=d3456789-abcd-ef01-2345-6789abcdef01 it is working
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path:'ganrateInvoice',component:GanarateInvoiceComponent , canActivate:[authRollwiseChildGuard] ,data: { roles: ['MANAGER'] }},
 ]},
 
+{path:'feedback' , component:FeedbackComponent},
 {path:'placeorder' , component:PlaceorderComponent},
 {path:'conformation',component:ConformationComponent},
 {path:'OrderHistory',component:OrderHistoryComponent},

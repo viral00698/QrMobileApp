@@ -8,7 +8,6 @@ export class TableOrderService {
 
   constructor(private http: HttpClient) { }
 
-
   addTable(data: any) {
     return this.http.post('api/v1/tableOrder/addTable', data);
   }
@@ -44,5 +43,9 @@ export class TableOrderService {
       vendor:vendor
     }
     return this.http.post('api/v1/tableOrder/genrateInvoice' , json);
+  }
+
+  getOfferByVendor(vendorId:any){
+    return this.http.get('offer/getOfferByVendor/'+vendorId);
   }
 }

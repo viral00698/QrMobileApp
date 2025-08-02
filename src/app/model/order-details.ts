@@ -7,4 +7,8 @@ export class OrderDetails {
     isJain!: boolean;
     quntity!: number;
     orderId?: any; // Reference to Orders object
+    foodCategory:any;
+    offerId:any;
+    offerType:any;
+    OfferApplied:any
 }

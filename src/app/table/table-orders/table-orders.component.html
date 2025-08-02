@@ -100,8 +100,7 @@
 
   <div class="card-qrCode" *ngIf="this.selectPaymentUPI">
     <div class="qrCode" appQrcode [qrData]="upiURL"></div>
-    <div class="qrCode"><p  class="scan-pay">Scan & Pay</p></div>
-
+    <div class="qrCode"><p class="scan-pay">Scan & Pay</p></div>
   </div>
 
   <div class="card-order" *ngIf="table !==null && table?.tableStatus === 'BOOKED' && !this.selectPaymentUPI">
@@ -111,9 +110,9 @@
       <p class="orderd-items-heading">Amount</p>
     </div>
     <div class="orderd-items" *ngFor="let item of products?.orderDetails">
-      <p class="item-titel">{{item?.itemName}}</p>
+      <p class="item-titel">{{item?.itemName}} <span style="font-size: xx-small; opacity: 0.7; font-weight: 600;" *ngIf="offerMap.get(item?.offerId)">{{offerMap.get(item?.offerId)?.flatDiscount}}₹ {{offerMap.get(item?.offerId)?.offerType}}</span></p>
       <p class="item-qty">{{item?.quntity}}</p>
-      <p class="item-price"><i class="amount">{{item?.amount}}</i></p>
+      <p class="item-price"> <i class="amount">{{item?.amount}}</i> </p>
     </div>
   </div>
 
@@ -142,7 +141,6 @@
   <div class="card-order" *ngIf="selectPaymentUPI || selectPaymentCASH">
     <button class="add-item-btn" (click)="closeOrder()">Close Order</button>
   </div>
-
 
   <div class="card-order" *ngIf="table?.tableStatus === 'AVAILABLE' ">
     <div class="form-item">
