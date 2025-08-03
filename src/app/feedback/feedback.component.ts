@@ -84,7 +84,7 @@ export class FeedbackComponent implements OnInit{
       }
 
       this.feedbackService.saveFeedBack(json).subscribe((res:any)=>{
-        
+          this.router.navigate(['md', 'vendorTable']); 
       })
     }
   }
