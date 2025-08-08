@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AppType } from 'src/app/constent/app-type';
@@ -12,6 +12,7 @@ import { BillingService } from 'src/app/services/billing.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PlaceOrderService } from 'src/app/services/place-order.service';
 import { SecureLocalStorageService } from 'src/app/services/secure-local-storage.service';
+import { TableDataSharingService } from 'src/app/services/table-data-sharing.service';
 import { VendorService } from 'src/app/services/vendor.service';
 
 @Component({
@@ -20,16 +21,16 @@ import { VendorService } from 'src/app/services/vendor.service';
   styleUrls: ['./table-place-order.component.css'],
 })
 export class TablePlaceOrderComponent {
-  
+
   items: any = []
   bilingObject: any;
   userMobile!: string
   isValid!: boolean;
   vender: any;
-  custName:any
-  custMobile:any
-  custTable:any;
-  tableOrder:any
+  custName: any
+  custMobile: any
+  custTable: any;
+  tableOrder: any
   menuMap: Map<any, any> = new Map()
 
   constructor(private router: Router, private userSelectItems: DataSharingService,
@@ -37,6 +38,7 @@ export class TablePlaceOrderComponent {
     private billingService: BillingService,
     private venderService: VendorService,
     private placeOrder: PlaceOrderService,
+    private tableDataSharing: TableDataSharingService,
     private messageService: MessageService,
   ) { }
 
@@ -54,24 +56,31 @@ export class TablePlaceOrderComponent {
 
   }
 
-  getTableOrder(){
-   const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.TABLE_ORDER);
-   if(tmp){
-    this.tableOrder = JSON.parse(tmp)
-   }
+  getTableOrder() {
+
+    this.tableOrder = this.tableDataSharing.getTableOrder();
+    
+    if (this.tableOrder === null) {
+      const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.TABLE_ORDER);
+      if (tmp) {
+        this.tableOrder = JSON.parse(tmp)
+       
+      }
+    }
+
   }
 
-getCustDetails(){
-  const data = this.localStorageSecureService.decryptAndGet(StorageKey.CUST_DETAILS);
-  if(data){
-    const tmp = JSON.parse(data)
-    this.custMobile = tmp.custMobile
-    this.custName = tmp.custName
-    this.custTable = tmp.custTable
-  }else{
-    // logout 
+  getCustDetails() {
+    const data = this.localStorageSecureService.decryptAndGet(StorageKey.CUST_DETAILS);
+    if (data) {
+      const tmp = JSON.parse(data)
+      this.custMobile = tmp.custMobile
+      this.custName = tmp.custName
+      this.custTable = tmp.custTable
+    } else {
+      // logout 
+    }
   }
-}
 
   getVenderDetails() {
     const tmp = this.localStorageSecureService.decryptAndGet(StorageKey.VENDER);
@@ -161,7 +170,7 @@ getCustDetails(){
 
   }
 
- 
+
 
   CreateOrder() {
 
@@ -195,10 +204,10 @@ getCustDetails(){
       customerOrder.customerUUID = JSON.parse(customerId);
     }
 
-    if(this.tableOrder){
+    if (this.tableOrder) {
       customerOrder.orderId = this.tableOrder.orderId
     }
-    customerOrder.orderStatus = OrderStatus.Ongoing 
+    customerOrder.orderStatus = OrderStatus.Ongoing
     customerOrder.customerMobileNo = this.custMobile
     customerOrder.customerName = this.custName
     customerOrder.payment_mode = PaymentMode.CASH
@@ -208,11 +217,11 @@ getCustDetails(){
     customerOrder.restroName = this.vender?.storeName
 
     const tableOrder = {
-      'tableId':this.custTable.tableId
+      'tableId': this.custTable.tableId
     }
-   
-    customerOrder.tableOrder = tableOrder
 
+    customerOrder.tableOrder = tableOrder
+    
     this.items.forEach((item: any) => {
       let orderDetail: OrderDetails = new OrderDetails();
       orderDetail.amount = item?.amount ?? 0
@@ -223,24 +232,25 @@ getCustDetails(){
       orderDetail.orderId = null;
       orderDetail.foodCategory = item?.foodCategory;
       orderDetail.offerId = item?.offer?.offerId,
-      orderDetail.offerType = item?.offer?.offerType,
-      orderDetail.OfferApplied = false;
+        orderDetail.offerType = item?.offer?.offerType,
+        orderDetail.OfferApplied = false;
+      orderDetail.isDelivered = false
       array.push(orderDetail)
     });
 
     customerOrder.orderDetails = array ?? [];
 
-    this.placeOrder.tableOrderPlace(customerOrder).subscribe((res:any)=>{ 
-      if(res.status === RequestStatus.success){
- 
+    this.placeOrder.tableOrderPlace(customerOrder).subscribe((res: any) => {
+      if (res.status === RequestStatus.success) {
+
         localStorage.removeItem(StorageKey.MENU);
         localStorage.removeItem(StorageKey.ITEMS);
         localStorage.removeItem(StorageKey.TABLE_ORDER)
         this.userSelectItems.clearItem();
 
-        this.messageService.add({life:8000, key: 'tl', severity: 'success', summary: 'success', detail: res.message });
-        this.router.navigate(['md','vendorTable']);
-      }else{
+        this.messageService.add({ life: 8000, key: 'tl', severity: 'success', summary: 'success', detail: res.message });
+        this.router.navigate(['md', 'vendorTable']);
+      } else {
 
         localStorage.removeItem(StorageKey.MENU);
         localStorage.removeItem(StorageKey.ITEMS);
@@ -252,7 +262,7 @@ getCustDetails(){
       }
     })
 
-   
+
     // const data = { 'order': customerOrder, 'bill': this.bilingObject }
 
     // if (data) {
@@ -275,7 +285,7 @@ getCustDetails(){
     event.target.src = 'assets/samosa1.jpg';
   }
 
-    hasOffer(item: any): boolean {
+  hasOffer(item: any): boolean {
 
     if (!item?.offer || !item?.offer?.isActive) {
       return false;

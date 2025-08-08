@@ -4,8 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TableDataSharingService {
+ 
 
   private table:any;
+  private order:any;
   constructor() { }
 
 
@@ -15,5 +17,12 @@ export class TableDataSharingService {
 
   getTable(){
     return this.table;
+  }
+
+  setTableOrder(products: any) {
+    this.order = products;
+  }
+  getTableOrder() {
+    return this.order
   }
 }

@@ -51,8 +51,7 @@
         {{item.itemName}}
       </div>
       <div class="offer" [class.hidden]="!hasOffer(item)">
-        <img src="../../../assets/discount.png" alt="No Image">
-        <p *ngIf="item?.offer?.offerType === 'FLAT_DISCOUNT'">{{'₹'+item?.offer?.flatDiscount}}  {{item?.offer?.offerType}}</p>
+        <p *ngIf="item?.offer?.offerType === 'FLAT_DISCOUNT'"> {{'₹'+item?.offer?.flatDiscount}}  {{item?.offer?.offerType}}</p>
         <p *ngIf="item?.offer?.offerType === 'BOGO'">Buy 1, Get 1 Free</p>
         <p *ngIf="item?.offer?.offerType === 'BUY_X_GET_Y'">Buy 1, Get Free {{menuMap.get(item?.offer?.freeItem)}}</p>
       </div>

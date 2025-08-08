@@ -10,5 +10,6 @@ export class OrderDetails {
     foodCategory:any;
     offerId:any;
     offerType:any;
-    OfferApplied:any
+    OfferApplied:any;
+    isDelivered!:boolean
 }
