@@ -45,6 +45,8 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RatingModule } from 'primeng/rating';
+import { CustomLoaderComponent } from './loader/custom-loader/custom-loader.component';
+import { LoaderInterceptor } from './guard/loader.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,8 @@ import { RatingModule } from 'primeng/rating';
     OrderAcceptComponent,
     ManagerDashboardComponent,
     UnauthorizedComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    CustomLoaderComponent
  
   ],
   imports: [
@@ -100,7 +103,9 @@ import { RatingModule } from 'primeng/rating';
     MessageService,
     RxStompService,
     SocketConfigService,
-    {provide: HTTP_INTERCEPTORS,useClass: UrlFilterInterceptor,multi: true}
+    {provide: HTTP_INTERCEPTORS,useClass: UrlFilterInterceptor,multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor,multi: true}
+
   ],
   bootstrap: [AppComponent]
 })
