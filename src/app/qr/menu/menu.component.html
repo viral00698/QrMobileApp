@@ -23,11 +23,11 @@
 
 <div class="search-grid">
   <div class="d-flex justify-content-start">
-    <input class="inputText" [(ngModel)]="searchByItem" type="text" (input)="searchInmenu()" pInputText placeholder="Search your favorite food..." />
+    <input class="inputText" [(ngModel)]="searchByItem" type="text" (input)="searchInmenu('')" pInputText placeholder="Search your favorite food..." />
   </div>
 </div>
 
-<div class="offer-card" *ngIf="showA">
+<!-- <div class="offer-card" *ngIf="showA">
   <div class="offer-item" style="background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);">
     <p class="offer-content-1">On Pizzas</p>
     <p class="offer-content-2">30% OFF</p>
@@ -50,9 +50,11 @@
     <p class="offer-content-2">50% OFF</p>
     <p class="offer-content-3">Navratri Specials</p>
   </div>
-</div>
+</div> -->
 
-<div class="search-catogory">
+<!-- <div class="search-catogory">
+
+
   <button class="category-btn">Pizzas</button>
   <button class="category-btn">Beverages</button>
   <button class="category-btn">Desserts</button>
@@ -63,15 +65,33 @@
   <button class="category-btn">Sandwiches</button>
   <button class="category-btn">Pastas</button>
   <button class="category-btn">Salads</button>
+</div> -->
+
+<div class="search-catogory">
+  <button class="category-btn" (click)="searchInmenu('all')" >All</button>
+  <ng-container  *ngFor="let category of this.categoryList">
+<button class="category-btn" (click)="searchInmenu(category)" >{{category}}</button>
+  </ng-container>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; height: 62vh; overflow-y: scroll; width: 100vw;" (scroll)="onScroll($event)">
+<div style="display: flex; flex-wrap: wrap; height: 62vh; overflow-y: scroll; width: 100vw;">
   <p-card *ngFor="let item  of tmpMenuList" [ngStyle]="cardStyles">
     <!-- <div *ngIf="tmpMenuList.length == 0"> <h5>Item Not Available</h5> </div> -->
-    <ng-template pTemplate="header">
+    <!-- <ng-template pTemplate="header">
       <img alt="Card" class="card_img" src="../../../assets/samosa1.jpg" alt="Image not found" />
       <div class="p-card-title">
         {{item.itemName}}
+      </div>
+    </ng-template> -->
+    <ng-template pTemplate="header">
+      <img alt="Card" class="card_img" [src]="getImageSrc(item?.image)" (error)="onImageError($event)" />
+      <div class="p-card-title">
+        {{item.itemName}}
+      </div>
+      <div class="offer" [class.hidden]="!hasOffer(item)">
+        <p *ngIf="item?.offer?.offerType === 'FLAT_DISCOUNT'"> {{'₹'+item?.offer?.flatDiscount}}  {{item?.offer?.offerType}}</p>
+        <p *ngIf="item?.offer?.offerType === 'BOGO'">Buy 1, Get 1 Free</p>
+        <p *ngIf="item?.offer?.offerType === 'BUY_X_GET_Y'">Buy 1, Get Free {{menuMap.get(item?.offer?.freeItem)}}</p>
       </div>
     </ng-template>
     <ng-template pTemplate="subheader">

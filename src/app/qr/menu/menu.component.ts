@@ -27,6 +27,7 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   customerUUId!: string
   dynamicId: any;
   showA:boolean = true;
+  menuMap: Map<any, any> = new Map()
 
 
   cardStyles = {
@@ -36,6 +37,7 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
     borderRadius: '10px',
     boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
   };
+ categoryList: Set<string> = new Set()
 
   constructor(private router: Router, private productService: MenuService, private userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
@@ -111,7 +113,10 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
       if (res.status === RequestStatus.success) {
         this.productList = res.data;
         this.tmpMenuList = res.data;
-
+          for (let item of res.data) {
+          this.menuMap.set(item?.productId, item.itemName);
+          this.categoryList.add(item?.foodCategory);
+        }
         this.localStorageSecureService.encriptAndSave(this.productList, StorageKey.MENU)
         this.changeDetectorRef.detectChanges();
       }
@@ -145,8 +150,19 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
         this.tmpMenuList = Array.from(tmpMap.values())
         this.productList = this.tmpMenuList;
 
+         for (let item of this.productList) {
+          this.menuMap.set(item?.productId, item.itemName);
+          this.categoryList.add(item?.foodCategory);
+          
+        }
+
       } else {
         this.tmpMenuList = [...this.productList];
+         for (let item of this.tmpMenuList) {
+          this.menuMap.set(item.productId, item.itemName);
+          this.categoryList.add(item?.foodCategory);
+
+        }
       }
     }
   }
@@ -211,19 +227,19 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
 
   }
 
-  searchInmenu() {
-    if (this.searchByItem) {
-      const searchByItem = this.searchByItem.toLowerCase();
-      this.tmpMenuList = this.productList.filter((item: any) =>
-        item.itemName.toLowerCase().includes(searchByItem)
-      );
+  // searchInmenu() {
+  //   if (this.searchByItem) {
+  //     const searchByItem = this.searchByItem.toLowerCase();
+  //     this.tmpMenuList = this.productList.filter((item: any) =>
+  //       item.itemName.toLowerCase().includes(searchByItem)
+  //     );
 
-    } else {
-      this.tmpMenuList = this.productList
-    }
-    this.changeDetectorRef.detectChanges();
+  //   } else {
+  //     this.tmpMenuList = this.productList
+  //   }
+  //   this.changeDetectorRef.detectChanges();
 
-  }
+  // }
 
   generateCustomUUID(): string {
     const segments = [
@@ -258,6 +274,57 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
   onScroll(event: Event): void {
     const target = event.target as HTMLElement;
     this.showA = target.scrollTop === 0;
+  }
+
+  
+  getImageSrc(image: string | null | undefined): string {
+    return image ? image : 'assets/samosa1.jpg';
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/samosa1.jpg';
+  }
+
+  hasOffer(item: any): boolean {
+
+    if (!item?.offer || !item?.offer?.isActive) {
+      return false;
+    }
+
+
+    const offerExpiry = item?.offer?.expireDate
+    const now = new Date();
+
+    const endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+    const endOfTodayMillis = endOfToday.getTime();
+
+    return offerExpiry > endOfTodayMillis;
+  }
+
+   searchInmenu(category: string) {
+  
+    if(category === 'all'){
+      this.tmpMenuList = this.productList
+      return;
+    }
+    const searchByItem = this.searchByItem?.toLowerCase().trim();
+    const searchByCategory = category?.toLowerCase().trim();
+
+    if (searchByItem || searchByCategory) {
+      this.tmpMenuList = this.productList.filter((item: any) => {
+        const itemName = item.itemName?.toLowerCase();
+        const foodCategory = item.foodCategory?.toLowerCase();
+        return (
+          (searchByItem && itemName.includes(searchByItem)) ||
+          (searchByCategory && foodCategory.includes(searchByCategory))
+        );
+      });
+    } else {
+      this.tmpMenuList = this.productList;
+    }
+
+    this.changeDetectorRef.detectChanges();
+
   }
 
   
