@@ -29,10 +29,10 @@
 </div> -->
 
 <div class="search-catogory">
+  <button class="category-btn" (click)="searchInmenu('all')" >All</button>
   <ng-container  *ngFor="let category of this.categoryList">
 <button class="category-btn" (click)="searchInmenu(category)" >{{category}}</button>
   </ng-container>
-
 </div>
 
 <div style="display: flex; flex-wrap: wrap; height: 62vh; overflow-y: scroll; width: 100vw;">

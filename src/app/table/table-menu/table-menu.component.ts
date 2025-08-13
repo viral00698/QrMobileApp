@@ -219,6 +219,11 @@ export class TableMenuComponent {
 
   searchInmenu(category: string) {
 
+    if(category === 'all'){
+      this.tmpMenuList = this.productList
+      return;
+    }
+
     const searchByItem = this.searchByItem?.toLowerCase().trim();
     const searchByCategory = category?.toLowerCase().trim();
 
@@ -296,4 +301,6 @@ export class TableMenuComponent {
 
     return offerExpiry > endOfTodayMillis;
   }
+
+  
 }
