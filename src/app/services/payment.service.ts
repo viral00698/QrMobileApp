@@ -23,7 +23,7 @@ export class PaymentService {
         order_id: data?.razorpayOrder?.orderId,
         method: {
            // Enable UPI as a payment option
-          card: false, // Enable card payments
+          card: true, // Enable card payments
           wallet: false, // Enable wallets
           emi:false,
           netbanking:false,
