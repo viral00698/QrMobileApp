@@ -232,8 +232,8 @@ export class TablePlaceOrderComponent {
       orderDetail.orderId = null;
       orderDetail.foodCategory = item?.foodCategory;
       orderDetail.offerId = item?.offer?.offerId,
-        orderDetail.offerType = item?.offer?.offerType,
-        orderDetail.OfferApplied = false;
+      orderDetail.offerType = item?.offer?.offerType,
+      orderDetail.OfferApplied = false;
       orderDetail.isDelivered = false
       array.push(orderDetail)
     });

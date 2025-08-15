@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RequestStatus } from '../constent/request-status';
 import { Router } from '@angular/router';
+import { RxStompService } from './rx-stomp.service';
+import { OrderStatus } from '../constent/order-status';
 declare var Razorpay: any;
 
 @Injectable({
@@ -9,9 +11,10 @@ declare var Razorpay: any;
 })
 export class PaymentService {
 
-  constructor(private http:HttpClient , private router: Router) { }
+  constructor(private http:HttpClient , private router: Router , private rxStompService:RxStompService) { }
 
   makePayment(data:any) {
+    debugger
     this.loadRazorpayScript().then(() => {
       const options = {
         key: 'rzp_test_gD5uJZvpUqS4ka', // Replace with Razorpay key
@@ -38,6 +41,8 @@ export class PaymentService {
             this.postVerificationObject(data).subscribe((res:any)=>{
              
               if(res.status === RequestStatus.success && res.data){
+                data.orders.orderStatus = OrderStatus.Ongoing
+                this.rxStompService.publish({ destination: '/app/orderStatus', body: JSON.stringify(data?.orders) })
                 data['paymentStatus'] = true
                 this.router.navigate(['order_success'] ,{ state: { orderData: (res?.data as any) } });
               }else{
