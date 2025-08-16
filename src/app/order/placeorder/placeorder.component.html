@@ -99,9 +99,9 @@
     <div class="card-item">
       <img src="../../../assets/burger.jpg" class="item-image" alt="">
       <div class="btn-group">
-        <button (click)="ororderQtyDec(item)" class="qty-btn"> <i class="pi pi-minus"></i> </button>
-        <input   [min]="0" [(ngModel)]="item.itemQty" [readonly]="true" class="input_qty" type="text"  pInputText />
-        <button (click)="orderQtyInc(item)" class="qty-btn"><i class="pi pi-plus"></i> </button>
+        <button [disabled]="item?.amount < 1" (click)="ororderQtyDec(item)" class="qty-btn"> <i class="pi pi-minus"></i> </button>
+        <input [disabled]="item?.amount < 1"  [min]="0" [(ngModel)]="item.itemQty" [readonly]="true" class="input_qty" type="text"  pInputText />
+        <button [disabled]="item?.amount < 1" (click)="orderQtyInc(item)" class="qty-btn"><i class="pi pi-plus"></i> </button>
       </div>
     </div>
     <div class="card-item card-content">
@@ -113,7 +113,7 @@
         <img src="../../../assets/discount.png" alt="Image">
         <p *ngIf="item?.offer?.offerType === 'FLAT_DISCOUNT'">{{'₹'+item?.offer?.flatDiscount}}  {{item?.offer?.offerType}}</p>
         <p *ngIf="item?.offer?.offerType === 'BOGO'">Buy 1, Get 1 Free</p>
-        <p *ngIf="item?.offer?.offerType === 'BUY_X_GET_Y'">Buy 1, Get Free {{menuMap.get(item?.offer?.freeItem)}}</p>
+        <p *ngIf="item?.offer?.offerType === 'BUY_X_GET_Y'">Buy 1, Get Free {{this.userSelectItems.getItemName(item?.offer?.freeItem)}}</p>
       </div>
 
 

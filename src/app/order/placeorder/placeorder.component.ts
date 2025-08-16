@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppType } from 'src/app/constent/app-type';
 import { OrderStatus } from 'src/app/constent/order-status';
@@ -19,7 +19,7 @@ declare var Razorpay: any;
   templateUrl: './placeorder.component.html',
   styleUrls: ['./placeorder.component.css']
 })
-export class PlaceorderComponent implements OnInit, DoCheck {
+export class PlaceorderComponent implements OnInit, DoCheck, AfterViewInit{
 
 
   cardStyles = {
@@ -44,7 +44,7 @@ export class PlaceorderComponent implements OnInit, DoCheck {
     prefill: { name: string; email: string; contact: string; }; theme: { color: string; };
   };
 
-  constructor(private router: Router, private userSelectItems: DataSharingService,
+  constructor(private router: Router, protected userSelectItems: DataSharingService,
     private localStorageSecureService: SecureLocalStorageService,
     private changeDetectorRef: ChangeDetectorRef,
     private billingService: BillingService,
@@ -52,10 +52,18 @@ export class PlaceorderComponent implements OnInit, DoCheck {
     private placeOrder: PlaceOrderService,
     private paymentService:PaymentService,
   ) { }
+  ngAfterViewInit(): void {
+    let data = this.userSelectItems.getFreeItem();
+      for(let i of data){
+        this.items.push(i);
+      }
+ 
+  }
 
   ngDoCheck() {
     // this.mapStoreOnDestory()
     // this.billGanaretor()
+ 
   }
 
   ngOnInit(): void {
@@ -70,18 +78,18 @@ export class PlaceorderComponent implements OnInit, DoCheck {
     this.vender = JSON.parse(tmp)
   }
 
-  billGanaretor() {
+  async billGanaretor() {
     const listofItems = this.userSelectItems.getItemsArray();
     // this.vender = this.venderService.getVenderObject();
     if (this.vender && listofItems.length > 0) {
       // If vendor is not available, fetch it asynchronously
       // this.venderService.getVenderById().subscribe((res: any) => {
       // this.vender = res.data; // Update vendor
-      this.bilingObject = this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
+      this.bilingObject = await this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
       // });
     } else {
       // If vendor already exists, generate the bill immediately
-      this.bilingObject = this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
+      this.bilingObject = await this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
       // redirect to home ppage
     }
   }

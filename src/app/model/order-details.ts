@@ -11,5 +11,6 @@ export class OrderDetails {
     offerId:any;
     offerType:any;
     OfferApplied:any;
-    isDelivered!:boolean
+    isDelivered!:boolean;
+    itemQty!:number
 }

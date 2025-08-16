@@ -128,7 +128,7 @@
         <p-inplace>
           <ng-template pTemplate="display">
             <div class="additem_btn" *ngIf="!item?.itemQty || item?.itemQty === 0">
-              <button class="primary_btn" (click)="itemAdd(item)"><i class="bi bi-plus-circle"></i></button>
+              <button class="primary_btn" [disabled]="item?.amount < 1" (click)="itemAdd(item)"><i class="bi bi-plus-circle"></i></button>
             </div>
             <div class="additem_btn" *ngIf="item?.itemQty && item?.itemQty > 0">
               <button (click)="ororderQtyDec(item)" class="qty_minus"><i class="pi pi-minus"></i></button>

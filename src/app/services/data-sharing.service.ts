@@ -10,7 +10,7 @@ export class DataSharingService {
 
   constructor(private localStorageSecureService: SecureLocalStorageService) { }
   private map: Map<string, any> = new Map();
-
+  freeOItems: any = new Set<any>()
   private responseData:any;
 
   addItem(item: any) {
@@ -92,5 +92,22 @@ export class DataSharingService {
   getResponse(){
     return this.responseData;
   }
+
+  getItemName(pid:any){
+    const obj = this.map.get(pid)
+    if(obj){
+      return obj.itemName
+    }
+    return ''
+  }
+
+  setFreeItem(item:any){
+    this.freeOItems.add(item);
+  }
+
+  getFreeItem(){
+    return this.freeOItems;
+  }
+
 
 }
