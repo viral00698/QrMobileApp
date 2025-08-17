@@ -1,10 +1,15 @@
 <!-- <div appQrcode [qrData]="qrData"></div> -->
 
 <div #receipt class="main-container">
-
   <div style="display: flex;">
     <div class="titel">
       <p class="main-titel">Order Receipt</p>
+    </div>
+  </div>
+
+  <div style="display: flex;" *ngIf="!this.responseData?.paymentStatus">
+    <div class="titel">
+      <p class="messageNote">*Note:Pay at the counter to complete your order. If not paid in 15 minutes, it will be canceled.</p>
     </div>
   </div>
 
@@ -13,13 +18,13 @@
       <div class="item-a">
         <p style="margin: 0;" class="restaurant-titel">{{this.responseData?.orders?.restroName}}</p>
         <!-- <p class="heading" style="margin: 0;">Gurukul Road, Memnager</p> -->
-      </div> 
-  </div>
+      </div>
+    </div>
   </div>
   <div class="card">
     <div class="flex-card">
       <div class="item-a">
-        <p style="margin: 0;" class="heading" >Order id</p>
+        <p style="margin: 0;" class="heading">Order id</p>
         <p style="margin: 0;" class="content">{{this.responseData?.orders?.orderId | slice:-7}}</p>
       </div>
       <div class="item-a">
@@ -35,22 +40,22 @@
       </div>
       <div class="item-a">
         <p style="margin: 0;" class="heading">Txn No</p>
-        <p style="margin: 0;" class="content">{{this.responseData?.razorpayResponse?.razorpay_payment_id | slice:4 }}</p>
+        <p style="margin: 0;" class="content" *ngIf="!this.responseData?.razorpayResponse?.razorpay_payment_id">-</p>
+        <p style="margin: 0;" class="content" *ngIf="this.responseData?.razorpayResponse?.razorpay_payment_id">{{this.responseData?.razorpayResponse?.razorpay_payment_id | slice:4 }}</p>
       </div>
     </div>
 
     <div class="flex-card">
-        <div class="item-a">
-          <p style="margin: 0;" class="heading">Mobile</p>
-          <p style="margin: 0;" class="content">{{this.responseData?.orders.customerMobileNo}}</p>
-        </div>
-        <div class="item-a">
-          <p style="margin: 0;" class="heading">Payment Status</p>
-          <p style="margin: 0; color: rgb(1, 76, 1);" class="content" *ngIf="this.responseData?.paymentStatus">PAID</p>
-          <p style="margin: 0; color: rgb(1, 76, 1);" class="content" *ngIf="!this.responseData?.paymentStatus">CASH</p>
-        </div>
+      <div class="item-a">
+        <p style="margin: 0;" class="heading">Mobile</p>
+        <p style="margin: 0;" class="content">{{this.responseData?.orders.customerMobileNo}}</p>
+      </div>
+      <div class="item-a">
+        <p style="margin: 0;" class="heading">Payment Status</p>
+        <p style="margin: 0; color: rgb(1, 76, 1);" class="content" *ngIf="this.responseData?.paymentStatus">PAID</p>
+        <p style="margin: 0; color: rgb(1, 76, 1);" class="content" *ngIf="!this.responseData?.paymentStatus">CASH</p>
+      </div>
     </div>
-
   </div>
 
   <div class="card">
@@ -68,20 +73,18 @@
     <div style="place-self: center;">
       <div appQrcode [qrData]="qrData"></div>
     </div>
-    <div  style="place-self: center;">
-        <p class="token">{{this.responseData?.token}}</p>
+    <div style="place-self: center;">
+      <p class="token">{{this.responseData?.token}}</p>
     </div>
     <div style="place-self: center;">
-        <p class="note">*Note: Show this QR code to receive your order.</p>
+      <p class="note">*Note: Show this QR code to receive your order.</p>
     </div>
-  
   </div>
 
   <div class="card ignore-btn">
     <div class="flex-card" style="margin-top: 8%;">
-        <!-- <button class="item-a btn-Order">status</button> -->
-        <button class="item-a btn-download" (click)="downloadReceipt()">Download</button>
-      </div>
+      <!-- <button class="item-a btn-Order">status</button> -->
+      <button class="item-a btn-download" (click)="downloadReceipt()">Download</button>
+    </div>
   </div>
-  
 </div>

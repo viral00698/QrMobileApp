@@ -107,3 +107,10 @@
     /* padding: .6rem; */
 }
 
+
+.messageNote{
+    text-wrap: wrap;
+    text-align: center;
+    font-size: medium;
+    font-weight: 500;
+}

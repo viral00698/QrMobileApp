@@ -11,15 +11,24 @@ import html2canvas from 'html2canvas';
 export class OrderSuccessComponent {
   @ViewChild('receipt', { static: false }) receiptElement!: ElementRef;
 
-  
-  qrData: string = 'http://192.168.81.204:4201/order_success';
-  responseData:any;
 
-  constructor(private router: Router , private dataSharing:DataSharingService) { }
+  qrData: string = 'http://192.168.81.204:4201/order_success';
+  responseData: any;
+  formattedDate!: string;
+
+  constructor(private router: Router, private dataSharing: DataSharingService) { }
 
   ngOnInit() {
-     this.responseData =  this.dataSharing.getResponse();
-     this.qrData = this.responseData?.token
+    this.responseData = this.dataSharing.getResponse();
+    this.qrData = this.responseData?.token
+  
+    const date = new Date();
+
+    const day = String(date.getDate()).padStart(2, '0'); // dd
+    const month = date.toLocaleString('default', { month: 'short' }); // Jan, Feb, Mar ...
+    const year = date.getFullYear(); // yyyy
+
+    this.formattedDate = `${day}/${month}/${year}`;
   }
 
   downloadReceipt() {
@@ -39,11 +48,13 @@ export class OrderSuccessComponent {
       // Create a download link
       const link = document.createElement('a');
       link.href = imgData;
-      link.download = 'order-receipt.png';
+
+
+      link.download = 'order-receipt_'+this.formattedDate+'.png';
       link.click();
     });
 
-       this.router.navigate(['OrderHistory']);
+    this.router.navigate(['OrderHistory']);
   }
 
   @HostListener('window:popstate', ['$event'])
