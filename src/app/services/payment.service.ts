@@ -14,7 +14,7 @@ export class PaymentService {
   constructor(private http:HttpClient , private router: Router , private rxStompService:RxStompService) { }
 
   makePayment(data:any) {
-    debugger
+    
     this.loadRazorpayScript().then(() => {
       const options = {
         key: 'rzp_test_gD5uJZvpUqS4ka', // Replace with Razorpay key

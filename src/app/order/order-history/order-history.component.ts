@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RequestStatus } from 'src/app/constent/request-status';
 import { StorageKey } from 'src/app/constent/storage-key';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -17,7 +18,8 @@ export class OrderHistoryComponent implements OnInit {
   ordersList: any = []
   constructor(private stompService: RxStompService,
     private OrderService: OrdersService,
-    private localStorageSecureService: SecureLocalStorageService,) { }
+    private localStorageSecureService: SecureLocalStorageService,
+    private router: Router) { }
   ngOnInit(): void {
     this.getCurrentOrderStatus()
     this.getHistoryOrderFromDB()
@@ -56,4 +58,14 @@ export class OrderHistoryComponent implements OnInit {
   getCurrentOrderStatus() {
      
   }
+
+goToHome() {
+  let vid =localStorage.getItem(StorageKey.VID);
+  if (!vid) {
+    console.error('VendorId is missing!');
+    return;
+  }
+  this.router.navigate(['menu', vid]);
+}
+
 }

@@ -42,6 +42,8 @@ export class OrderSuccessComponent {
       link.download = 'order-receipt.png';
       link.click();
     });
+
+       this.router.navigate(['OrderHistory']);
   }
 
   @HostListener('window:popstate', ['$event'])

@@ -88,6 +88,8 @@ export class MenuComponent implements OnInit, OnDestroy, DoCheck {
         const venderUUID = params['ugygewncuirhijd']; // Get the dynamic id parameter
         if (venderUUID) {
           this.venderId = venderUUID
+          localStorage.setItem(StorageKey.VID , this.venderId)
+       
         }
       });
     }
