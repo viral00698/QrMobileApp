@@ -7,5 +7,6 @@ export enum OrderStatus {
     Confirmed = 'CONFIRMED', // Order has been confirmed by the restaurant
     ReadyForPickup = 'READY_FOR_PICKUP',
     WaitForApprove = 'WAIT_FOR_APPROVE',
-    Approved='APPROVED'
+    Approved='APPROVED',
+    Complete='COMPLETE'
 }

@@ -50,11 +50,29 @@
         <p class="total-amount">Total Amount: <i class="rupee">{{Order?.totelAmount}}</i></p>
       </div>
 
-      <div class="details-container-item">
+      <div class="card-qrCode" *ngIf="this.selectPaymentUPI">
+        <div class="qrCode" appQrcode [qrData]="upiURL"></div>
+        <div class="qrCode"><p class="scan-pay">Scan & Pay</p></div>
+      </div>
+
+        <div class="card-order" *ngIf="Order?.paymentStatus !=='SUCCESS'">
+        <p class="selectPaymetMethod" id ="paymethod" style="opacity: 0.6;">Select Payment Method:</p>
+        <label class="selectPaymentMethod" for="paymethod" *ngIf="this.onlinePaymentDisbale"> <p-inputSwitch [(ngModel)]="selectPaymentUPI" (onChange)="onPaymentChange('UPI' , Order)"></p-inputSwitch> UPI </label>
+        <i class="selectPaymetMethod"> <p-inputSwitch (onChange)="onPaymentChange('CASH' , null)" [(ngModel)]="selectPaymentCASH" /> CASH</i>
+      </div>
+
+      <div class="details-container-item" *ngIf="Order?.payment_mode ==='ONLINE' || Order?.paymentStatus ==='SUCCESS'">
         <div class="btn-accept">
-          <button class="btn-download" (click)="acceptRequest()">Close Order</button>
+          <button class="btn-download" *ngIf="Order.orderStatus !== 'COMPLETE'" (click)="acceptRequest(Order)">Confirm & Close"</button>
         </div>
       </div>
+
+      <div class="details-container-item" *ngIf="Order?.paymentStatus !=='SUCCESS'">
+        <div class="btn-accept">
+          <button class="btn-download"  [disabled]="!selectedPaymentMethod"  (click)="acceptRequest(Order)">Confirm Payment</button>
+        </div>
+      </div>
+
     </div>
   </ng-container>
 
@@ -73,8 +91,8 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="this.viewOn" >
-    <div class="card-details" >
+  <ng-container *ngIf="this.viewOn">
+    <div class="card-details">
       <div class="details-container">
         <div class="details-container-item">
           <p class="token">{{selectedOrder?.token_no}}</p>
@@ -108,6 +126,8 @@
         <p class="gst-sgst-charge" *ngIf="selectedOrder?.sgst > 0">Gst: <i class="rupee">{{selectedOrder?.sgst}}</i></p>
         <p class="total-amount">Total Amount: <i class="rupee">{{selectedOrder?.totelAmount}}</i></p>
       </div>
+
+    
     </div>
   </ng-container>
 </div>

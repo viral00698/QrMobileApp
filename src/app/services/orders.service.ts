@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrdersService {
+  
 
   constructor(private http:HttpClient) { }
   getOrdersByCustomerId(id:any){
@@ -17,5 +18,13 @@ export class OrdersService {
 
   getOrders(vendorId:string): any {
     return this.http.get('Orders/getLastTwoDayOrder/' + vendorId);
+  }
+
+  QrOrderAcceptOrPaymentConform(data:any){
+    return this.http.post('Orders/qr_conform' , data);
+  }
+
+  closeOrder(order: any) {
+    return this.http.post('Orders/qr_close_order' , order);
   }
 }
