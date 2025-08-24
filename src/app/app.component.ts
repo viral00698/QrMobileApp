@@ -9,12 +9,15 @@ import { LoaderService } from './services/loader.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'MobileQrApp';
+  title = 'Vitts.in';
   protected isLoading = this.loaderService.isLoading;
 
   constructor(private stompService: RxStompService,private stompConfigService: SocketConfigService ,  private loaderService: LoaderService) {
-    this.stompService.configure(this.stompConfigService.getRxStompConfig());
-    this.stompService.activate();
+       // Configure only once
+    this.stompService.configureOnce(this.stompConfigService.getRxStompConfig());
+
+    // Connect only if not already connected
+    this.stompService.connectIfNeeded();
   }
   ngOnInit(): void {
     setTimeout(() => {
