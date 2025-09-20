@@ -85,11 +85,11 @@ export class PlaceorderComponent implements OnInit, DoCheck, AfterViewInit{
       // If vendor is not available, fetch it asynchronously
       // this.venderService.getVenderById().subscribe((res: any) => {
       // this.vender = res.data; // Update vendor
-      this.bilingObject = await this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
+      this.bilingObject = await this.billingService.ganareteBill(listofItems, this.vender , AppType.QR) // Generate bill after fetching vendor
       // });
     } else {
       // If vendor already exists, generate the bill immediately
-      this.bilingObject = await this.billingService.ganareteBill(listofItems, this.vender) // Generate bill after fetching vendor
+      this.bilingObject = await this.billingService.ganareteBill(listofItems, this.vender ,AppType.QR) // Generate bill after fetching vendor
       // redirect to home ppage
     }
   }

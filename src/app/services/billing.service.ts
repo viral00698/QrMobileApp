@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OfferService } from './offer.service';
+import { AppType } from '../constent/app-type';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +16,27 @@ export class BillingService {
     this.venderObject = data;
   }
 
-  async ganareteBill(items: any, vender: any) {
+  async ganareteBill(items: any, vender: any , app:AppType) {
 
     this.venderObject = vender
 
     if (this.venderObject !== null && items.length > 0) {
       this.totalAmount = 0
 
-      let itemsAfterOffer = await this.offerService.applyOffer(items)
+      let itemsAfterOffer = null
+      if(app  === AppType.QR){
+        itemsAfterOffer = await this.offerService.applyOffer(items)
+      }
+     
       // step:1 totalAmount of all items
-      // items.forEach((obj: any) => {
-      //   let xAmt = obj?.amount * obj?.itemQty;
-      //   this.totalAmount = this.totalAmount + xAmt;
-      // })
+
+      if(app === AppType.TABLE){
+        items.forEach((obj: any) => {
+        let xAmt = obj?.amount * obj?.itemQty;
+        this.totalAmount = this.totalAmount + xAmt;
+      })
+      }
+      
 
       // Step 1: Total amount of all items
       itemsAfterOffer.forEach((obj: any) => {
